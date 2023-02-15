@@ -1,0 +1,34 @@
+h2 { text-align: center }
+
+.headerWrapper {
+   display: flex;
+   align-items: baseline;
+   text-align: center;
+   margin-bottom: 20px ;
+   margin: auto;
+   justify-content: space-around;
+}
+
+.headerWrapper div {
+   margin-bottom: 20px;
+   margin: auto;
+}
+
+.headerWrapper h2 {
+   margin-right: auto;
+   margin-left: 20px;
+}
+
+.mainContent {
+   margin: auto;
+   width: 95%;
+   height: 550px;
+   border: 1px solid black;
+   padding: 20px;
+   border-radius: 10px;
+   background-color: rgb(81, 80, 80);
+}
+
+.fieldWrapper {
+   text-align: center;
+}

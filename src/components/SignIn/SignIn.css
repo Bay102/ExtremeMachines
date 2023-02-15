@@ -1,0 +1,22 @@
+.inputsWrapper  {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   border: 2px solid white;
+   border-radius: 10px;
+   background-color: white;
+   width: 225px;
+   margin: auto;
+   padding-bottom: 20px;
+}
+
+.inputsWrapper input{
+   width: 175px;
+   height: 20px;
+   padding: 3px 8px;
+   border-radius: 3px;
+   border: 1px solid black;
+}
+
+
+

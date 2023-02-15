@@ -1,0 +1,9 @@
+0000000000000000000000000000000000000000 b76affa66bc90ff7aca2b5abe9734f69aebafeeb Zak Bay <zacharybay@live.com> 1675800771 -0800	commit (initial): Initialize project using Create React App
+b76affa66bc90ff7aca2b5abe9734f69aebafeeb b76affa66bc90ff7aca2b5abe9734f69aebafeeb Zak Bay <zacharybay@live.com> 1675903821 -0800	Branch: renamed refs/heads/main to refs/heads/master
+b76affa66bc90ff7aca2b5abe9734f69aebafeeb c69c5b5e7826a27a10336c59797c3bb2329ac803 Zak Bay <zacharybay@live.com> 1676074246 -0800	commit: form rendering done
+c69c5b5e7826a27a10336c59797c3bb2329ac803 aa073574dd97d52184039d28a1b8be677ff2d375 Zak Bay <zacharybay@live.com> 1676152089 -0800	commit: radio buttons reforctored dynamically
+aa073574dd97d52184039d28a1b8be677ff2d375 d605bd6dba359577dc58b5c9a53b2987834539dd Zak Bay <zacharybay@live.com> 1676288346 -0800	commit: started validations
+d605bd6dba359577dc58b5c9a53b2987834539dd 629f66ae82229a3ae3a0efb65109d1c89c79623f Zak Bay <zacharybay@live.com> 1676372901 -0800	commit: praticed validations on signIn
+629f66ae82229a3ae3a0efb65109d1c89c79623f f7d381dc8808152346c927d6ec5074c326a06b27 Zak Bay <zacharybay@live.com> 1676438519 -0800	commit: password reveal complete
+f7d381dc8808152346c927d6ec5074c326a06b27 7bf02b4b02f7d2b6ded5347f460f66e0e168d297 Zak Bay <zacharybay@live.com> 1676450252 -0800	commit: signup & signin validations all complete
+7bf02b4b02f7d2b6ded5347f460f66e0e168d297 9d7577ab4d9655acb723693321cb6e1e6bd2c0df Zak Bay <zacharybay@live.com> 1676498595 -0800	commit: need to merege to update laptop

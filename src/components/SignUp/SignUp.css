@@ -1,0 +1,19 @@
+.createAccButton {
+   width: 100px;
+   margin: auto;
+}
+
+.facebook {
+   width: 185px;
+   font-size: 13px;
+   margin: auto;
+   border: 1px solid blue;
+   border-radius: 5px;
+   padding: 10px;
+   font-weight: 900;
+   background-color: lightblue;
+}
+
+.facebook:hover {
+   background-color: rgb(241, 247, 250);
+}
