@@ -3,8 +3,9 @@
    flex-direction: column;
    justify-content: space-evenly;
    align-items: center;
-   width: 225px;
+   width: 230px;
    height: 450px;
+   border: 3px solid black;
    border-radius: 5px;
    background-color: rgba(141, 135, 135, 0.971);
    margin: auto;
@@ -15,6 +16,7 @@
 
 .itemImage {
    width: 97%;
+   height: 125px;
 }
 
 .itemQuantity div {

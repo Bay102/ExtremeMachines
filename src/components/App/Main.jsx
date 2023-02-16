@@ -52,7 +52,7 @@ class Main extends Component {
     return (
       <div>
         <div className="headerWrapper">
-          <h2>Welcome to CarCommerce!</h2>
+          <h2>CarCommerce</h2>
           {radioData.length
             ? radioData.map((radio, index) => (
                 <label
