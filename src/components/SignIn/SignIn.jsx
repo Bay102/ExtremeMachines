@@ -40,15 +40,15 @@ class SignIn extends Component {
           },
         }));
         break;
-      case "userPassword":
-        errorText = passwordLengthError(value);
-        this.setState((prevState) => ({
-          error: {
-            ...prevState.error,
-            userPassword: errorText,
-          },
-        }));
-        break;
+      // case "userPassword":
+      //   errorText = passwordLengthError(value);
+      //   this.setState((prevState) => ({
+      //     error: {
+      //       ...prevState.error,
+      //       userPassword: errorText,
+      //     },
+      //   }));
+      //   break;
       default:
         break;
     }
@@ -57,15 +57,28 @@ class SignIn extends Component {
   // handleBlur is capturing a 'name' and 'value' to be passed onto another function
   handleBlur = (e) => this.handleValidations(e.target.name, e.target.value);
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.props.changePage);
-    this.props.changePage('cart')
-    this.setState({
-      userData: INIT_USER,
+  preSubmit = () => {
+    let errorValue = {};
+    let isError = false;
+    Object.keys(this.state.userData).forEach((val) => {
+      if (!this.state.userData[val].length) {
+        errorValue = { ...errorValue, [`${val}`]: "Required" };
+        isError = true;
+      }
     });
-    
- 
+    this.setState({ error: errorValue });
+    return isError;
+  };
+
+  handleSignIn = (e) => {
+    e.preventDefault();
+    const errorCheck = this.preSubmit();
+    if (!errorCheck) {
+      this.props.changePage('cart')
+      this.setState({
+        userData: INIT_USER,
+      });
+    }
   };
 
   render() {
@@ -87,7 +100,7 @@ class SignIn extends Component {
     ];
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSignIn}>
         <div className="inputsWrapper">
           <h2>Sign In</h2>
           {inputData.length
@@ -117,7 +130,7 @@ class SignIn extends Component {
               ))
             : null}
           <div className="signInSubmit">
-            <button value={'cart'}  type="submit">Sign In</button>
+            <button type="submit">Sign In</button>
           </div>
         </div>
       </form>

@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Cart } from "../Cart/Cart";
 import { Radios } from "../HomeScreenButtons/Radios";
+import Shipping from "../Shipping/Shipping";
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
 import "./Main.css";
@@ -22,23 +23,14 @@ class Main extends Component {
     this.setState({
       displayPage: value
     })
-    // console.log(e.target.value);
   }
-
-
-  // handleChange = ({ target: { name, value } }) => {
-  //   this.setState((prevState) => ({
-  //     ...prevState,
-  //     [name]: value 
-  //   }));
-  // };
 
   // getEmail = (value) => {
   //   this.setState({
   //     email: value,
   //   })
   // }
-
+    
   render() {
     const radioData = [
       {
@@ -57,13 +49,10 @@ class Main extends Component {
       },
     ];
 
-
-
     return (
       <div>
         <div className="headerWrapper">
-          <h2>Welcome to Code Commerce!</h2>
-     
+          <h2>Welcome to CarCommerce!</h2>
           {radioData.length
             ? radioData.map((radio, index) => (
                 <label
@@ -75,7 +64,6 @@ class Main extends Component {
                     id={radio.id}
                     type={radio.type}
                     onChange={this.signInOrUp}
-                    // onChange={this.handleChange}
                     name={radio.name}
                     value={radio.value}
                   />
@@ -86,9 +74,11 @@ class Main extends Component {
         </div>
         <div className="mainContent">
           <div className="fieldWrapper">
-            {this.state.displayPage === 'cart' ? <Cart /> : null}
-            {this.state.displayPage === "signIn" ? <SignIn changePage={this.changePage} /> : null}
-            {this.state.displayPage === "createAccount" ? <SignUp getEmail={this.getEmail} /> : null}
+            {this.state.displayPage === 'cart'  && <Cart changePage={this.changePage} /> }
+            {this.state.displayPage === "signIn" && <SignIn changePage={this.changePage} /> }
+            {this.state.displayPage === "createAccount" && <SignUp changePage={this.changePage}  getEmail={this.getEmail} /> }
+            {this.state.displayPage === 'shipping'  && <Shipping changePage={this.changePage} /> }
+
           </div>
         </div>
       </div>

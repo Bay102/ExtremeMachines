@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 import { Cart } from "../Cart/Cart";
 import { InputBase } from "../InputBase/InputBase";
 import "../SignUp/SignUp.css";
@@ -7,9 +9,12 @@ import {
   passwordLengthError,
   matchingPasswords,
   emailSymbol,
+  onlyNumberValidation,
 } from "../validations";
 
 // Passwords must match | Reveal password with eye icon | Names no numbers
+
+// when new user is created , create a new user object in state
 
 const INIT_NEW_USER = {
   userEmail: "",
@@ -90,6 +95,16 @@ class SignUp extends Component {
           },
         }));
         break;
+        case "zip":
+          errorText = onlyNumberValidation(value)
+          this.setState((prevState) => ({
+            error: {
+              ...prevState.error,
+              zip: errorText,
+            },
+          }));
+        break;
+        // add email already exists validation 
       default:
         break;
     }
@@ -114,6 +129,7 @@ class SignUp extends Component {
     e.preventDefault();
     const errorCheck = this.preSubmit();
     if (!errorCheck) {
+      this.props.changePage('cart')
       this.setState({
         userData: INIT_NEW_USER,
       });
@@ -157,7 +173,7 @@ class SignUp extends Component {
         name: "lastName",
         error: "lastName",
       },
-      { id: 6, type: "number", label: "Zip Code", name: "zip", error: "zip" },
+      { id: 6, type: "text", label: "Zip Code", name: "zip", error: "zip" },
     ];
 
     return (
@@ -186,7 +202,6 @@ class SignUp extends Component {
                         ? this.state.error[input.error]
                         : this.state.error[input.error]
                     }
-                    required={console.log(this.state.error)}
                   />
                 </label>
               ))
@@ -194,6 +209,7 @@ class SignUp extends Component {
           <div className="signInSubmit">
             <button type="submit">Sign Up</button>
           </div>
+            <div className="facebook">Sign Up with Facebook</div>
         </div>
       </form>
     );
