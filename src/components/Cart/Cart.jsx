@@ -69,13 +69,13 @@ export class Cart extends React.Component {
                 ? cartItems.map((item, index) => (
                     <div key={index} className="summaryWrapper">
                       <div>{item.name}</div>
-                      <div className="summaryItemQuantity">{item.quantity}</div>
-                      <div>{item.price}</div>
+                      <div className="summaryItemQuantity">Quantity: {item.quantity}</div>
+                      <div>Total: {item.price}</div>
                     </div>
                   ))
                 : null}
               <div className="totalPrice">
-                Total: {this.state.totalCartPrice}
+               Cart Total: {this.state.totalCartPrice}
               </div>
             </div>
             <button
