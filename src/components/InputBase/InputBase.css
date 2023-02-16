@@ -8,15 +8,16 @@
 
 .error {
    color: red;
-   font-size: 14px;
+   font-size: 12px;
+   margin-top: 5px;
    /* position:absolute; */
    /* top: 45px; */
-
 }
 
 .eye {
    position: absolute;
    top: 6px;
-   right: 20px;
+   right: 35px;
    width: 15px;
+   cursor: pointer;
 }

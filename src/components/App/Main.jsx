@@ -8,7 +8,7 @@ import "./Main.css";
 class Main extends Component {
   state = {
     isLoggedIn: false,
-    chooseLogin: "",
+    chooseLogin: "signIn",
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -68,9 +68,8 @@ class Main extends Component {
         </div>
         <div className="mainContent">
           <div className="fieldWrapper">
-            {this.state.chooseLogin === "signIn" ? <SignIn /> : <Cart /> }
-            {this.state.chooseLogin === "createAccount" ? <SignUp getEmail={this.getEmail} /> : <Cart />}
-           
+            {this.state.chooseLogin === "signIn" ? <SignIn /> : <SignUp />}
+            {/* {this.state.chooseLogin === "createAccount" ? <SignUp getEmail={this.getEmail} /> : <Cart />} */}
           </div>
         </div>
       </div>

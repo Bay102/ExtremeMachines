@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Cart } from "../Cart/Cart";
 import { InputBase } from "../InputBase/InputBase";
 import "../SignUp/SignUp.css";
 import {
@@ -33,15 +34,10 @@ class SignUp extends Component {
       },
     }));
     // passing the userEmail up to main component state
-    if (e.target.name === "userEmail") {
-      this.props.getEmail(e.target.value);
-    }
+    // if (e.target.name === "userEmail") {
+    //   this.props.getEmail(e.target.value);
+    // }
   };
-
-  // Get help with this function, 
-  // matchingPasswords = (passwordState, confirmState) => {
-  //   return confirmState !== passwordState ?  undefined : 'Passwords do not match'
-  // }
 
   handleValidations = (type, value) => {
     let errorText;
@@ -99,10 +95,30 @@ class SignUp extends Component {
     }
   };
 
-  // handleBlur is capturing a 'name' and 'value' to be passed onto another function
   handleBlur = (e) => this.handleValidations(e.target.name, e.target.value);
 
+  preSubmit = () => {
+    let errorValue = {};
+    let isError = false;
+    Object.keys(this.state.userData).forEach((val) => {
+      if (!this.state.userData[val].length) {
+        errorValue = { ...errorValue, [`${val}`]: "Required" };
+        isError = true;
+      }
+    });
+    this.setState({ error: errorValue });
+    return isError;
+  };
 
+  handleSignUp = (e) => {
+    e.preventDefault();
+    const errorCheck = this.preSubmit();
+    if (!errorCheck) {
+      this.setState({
+        userData: INIT_NEW_USER,
+      });
+    }
+  };
 
   render() {
     const inputData = [
@@ -141,11 +157,11 @@ class SignUp extends Component {
         name: "lastName",
         error: "lastName",
       },
-      { id: 6, type: "number", label: "Zip Code", name: "zip" },
+      { id: 6, type: "number", label: "Zip Code", name: "zip", error: "zip" },
     ];
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSignUp}>
         <div className="inputsWrapper">
           <h2>Sign Up</h2>
           {inputData.length
@@ -170,6 +186,7 @@ class SignUp extends Component {
                         ? this.state.error[input.error]
                         : this.state.error[input.error]
                     }
+                    required={console.log(this.state.error)}
                   />
                 </label>
               ))

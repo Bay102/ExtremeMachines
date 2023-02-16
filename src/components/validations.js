@@ -18,14 +18,12 @@ export const passwordLengthError = (value) =>
     : undefined;
 
 export const matchingPasswords = (passwordState, confirmState) => {
-  console.log(confirmState !== passwordState);
-  console.log(confirmState , passwordState);
-  return confirmState !== passwordState ?  'Passwords do not match' : undefined 
-}
+  return confirmState !== passwordState ? "Passwords do not match" : undefined;
+};
 
 export const emailSymbol = (value) => {
   const regex = /@/;
-  if ( regex.test(value)) {
-    return undefined
-  } else return 'Invalid Email Format'
-}
+  if (regex.test(value)) {
+    return undefined;
+  } else return "Invalid Email Format";
+};

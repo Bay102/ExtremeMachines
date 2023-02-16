@@ -24,3 +24,4 @@ export const InputBase = ({ type, errorM, ...props }) => (
     {errorM && <div className="error">{errorM}</div>}
   </div>
 );
+
