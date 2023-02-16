@@ -17,8 +17,8 @@ export const passwordLengthError = (value) =>
     ? "Password must be at least 7 characters"
     : undefined;
 
-export const matchingPasswords = (passwordState, confirmState) => {
-  return confirmState !== passwordState ? "Passwords do not match" : undefined;
+export const matchingPasswords = (passwordState, confirmPasswordState) => {
+  return confirmPasswordState !== passwordState ? "Passwords do not match" : undefined;
 };
 
 export const emailSymbol = (value) => {
@@ -27,3 +27,10 @@ export const emailSymbol = (value) => {
     return undefined;
   } else return "Invalid Email Format";
 };
+
+export const onlyNumberValidation = (value) => {
+  const regex = /^[0-9]+$/
+  if (regex.test(value) && value.length > 0 ) {
+    return undefined;
+  } else return "Numbers Only";
+}

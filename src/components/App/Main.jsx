@@ -22,23 +22,14 @@ class Main extends Component {
     this.setState({
       displayPage: value
     })
-    // console.log(e.target.value);
   }
-
-
-  // handleChange = ({ target: { name, value } }) => {
-  //   this.setState((prevState) => ({
-  //     ...prevState,
-  //     [name]: value 
-  //   }));
-  // };
 
   // getEmail = (value) => {
   //   this.setState({
   //     email: value,
   //   })
   // }
-
+    
   render() {
     const radioData = [
       {
@@ -57,13 +48,10 @@ class Main extends Component {
       },
     ];
 
-
-
     return (
       <div>
         <div className="headerWrapper">
           <h2>Welcome to Code Commerce!</h2>
-     
           {radioData.length
             ? radioData.map((radio, index) => (
                 <label
@@ -75,7 +63,6 @@ class Main extends Component {
                     id={radio.id}
                     type={radio.type}
                     onChange={this.signInOrUp}
-                    // onChange={this.handleChange}
                     name={radio.name}
                     value={radio.value}
                   />
@@ -88,7 +75,7 @@ class Main extends Component {
           <div className="fieldWrapper">
             {this.state.displayPage === 'cart' ? <Cart /> : null}
             {this.state.displayPage === "signIn" ? <SignIn changePage={this.changePage} /> : null}
-            {this.state.displayPage === "createAccount" ? <SignUp getEmail={this.getEmail} /> : null}
+            {this.state.displayPage === "createAccount" ? <SignUp changePage={this.changePage}  getEmail={this.getEmail} /> : null}
           </div>
         </div>
       </div>
