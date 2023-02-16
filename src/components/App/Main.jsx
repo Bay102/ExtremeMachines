@@ -7,16 +7,31 @@ import "./Main.css";
 
 class Main extends Component {
   state = {
+    displayPage: 'cart',
     isLoggedIn: false,
-    chooseLogin: "signIn",
+    // chooseLogin: "signIn",
   };
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState((prevState) => ({
-      ...prevState,
-      [name]: value 
-    }));
-  };
+  signInOrUp = (e) => {
+    this.setState({
+      displayPage: e.target.value
+    })
+  } 
+  
+  changePage = (value) => {
+    this.setState({
+      displayPage: value
+    })
+    // console.log(e.target.value);
+  }
+
+
+  // handleChange = ({ target: { name, value } }) => {
+  //   this.setState((prevState) => ({
+  //     ...prevState,
+  //     [name]: value 
+  //   }));
+  // };
 
   // getEmail = (value) => {
   //   this.setState({
@@ -42,6 +57,8 @@ class Main extends Component {
       },
     ];
 
+
+
     return (
       <div>
         <div className="headerWrapper">
@@ -57,7 +74,8 @@ class Main extends Component {
                   <Radios
                     id={radio.id}
                     type={radio.type}
-                    onChange={this.handleChange}
+                    onChange={this.signInOrUp}
+                    // onChange={this.handleChange}
                     name={radio.name}
                     value={radio.value}
                   />
@@ -68,8 +86,9 @@ class Main extends Component {
         </div>
         <div className="mainContent">
           <div className="fieldWrapper">
-            {this.state.chooseLogin === "signIn" ? <SignIn /> : <SignUp />}
-            {/* {this.state.chooseLogin === "createAccount" ? <SignUp getEmail={this.getEmail} /> : <Cart />} */}
+            {this.state.displayPage === 'cart' ? <Cart /> : null}
+            {this.state.displayPage === "signIn" ? <SignIn changePage={this.changePage} /> : null}
+            {this.state.displayPage === "createAccount" ? <SignUp getEmail={this.getEmail} /> : null}
           </div>
         </div>
       </div>

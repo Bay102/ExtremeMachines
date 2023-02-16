@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+ import React, { Component } from "react";
 import "./SignIn.css";
 import { InputBase } from "../InputBase/InputBase";
 import { passwordLengthError, emailSymbol } from "../validations";
@@ -57,12 +57,16 @@ class SignIn extends Component {
   // handleBlur is capturing a 'name' and 'value' to be passed onto another function
   handleBlur = (e) => this.handleValidations(e.target.name, e.target.value);
 
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     userData: INIT_USER,
-  //   });
-  // };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.props.changePage);
+    this.props.changePage('cart')
+    this.setState({
+      userData: INIT_USER,
+    });
+    
+ 
+  };
 
   render() {
     const inputData = [
@@ -113,7 +117,7 @@ class SignIn extends Component {
               ))
             : null}
           <div className="signInSubmit">
-            <button type="submit">Sign In</button>
+            <button value={'cart'}  type="submit">Sign In</button>
           </div>
         </div>
       </form>
