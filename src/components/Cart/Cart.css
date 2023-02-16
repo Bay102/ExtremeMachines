@@ -4,8 +4,9 @@
    width: 100%;
    height: 550px;
    justify-content: center;
-   gap: 30px;
+   gap: 15px;
    font-family: copperplate;
+   padding: 0 5px;
 }
 
 .cartContainer h2 {
@@ -35,4 +36,16 @@
 
 .itemPrice {
    letter-spacing: 1.5px;
+}
+
+
+.continueToCheckout {
+   width: 250px;
+   height: 90%;
+   margin: auto -6px auto auto;
+   border: 1px solid black;
+   border-top-left-radius: 60px;
+   border-bottom-left-radius: 60px;
+   align-items: center;
+   background-color: azure;
 }

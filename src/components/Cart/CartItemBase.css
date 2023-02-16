@@ -16,3 +16,8 @@
 .itemImage {
    width: 97%;
 }
+
+.itemQuantity div {
+   margin-bottom: 10px;
+}
+

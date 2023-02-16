@@ -1,3 +1,9 @@
+body {
+   background-image: url("https://images.pexels.com/photos/911738/pexels-photo-911738.jpeg?auto=compress&cs=tinysrgb&w=800");
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: 100%;
+}
 h2 { text-align: center }
 
 .headerWrapper {
@@ -21,12 +27,12 @@ h2 { text-align: center }
 
 .mainContent {
    margin: auto;
-   width: 95%;
+   width: 1000px;
    height: max-content;
    border: 1px solid black;
-   padding: 20px;
+   padding: 0 25px;
    border-radius: 10px;
-   background-color: rgb(81, 80, 80);
+   background-color: rgba(81, 80, 80, 0.626);
 }
 
 .fieldWrapper {
