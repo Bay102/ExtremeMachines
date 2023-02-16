@@ -37,6 +37,13 @@ export class Cart extends React.Component {
         image:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFNHNYdQsJW2Rg0EHMoB6mSamxIdkuUvR4jQ&usqp=CAU",
       },
+      {
+        name: "Skyline GTR",
+        price: "$92,490",
+        quantity: "",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNOfQ8_IpVKT6_i63mt3Uzw6HaXNlpfUO_7g&usqp=CAU",
+      },
     ];
 
     return (
@@ -58,6 +65,18 @@ export class Cart extends React.Component {
           <div className="continueToCheckout">
             <div className="cartSummary">
               <div className="boxTitle">Cart Summary</div>
+              {cartItems.length
+                ? cartItems.map((item, index) => (
+                    <div key={index} className="summaryWrapper">
+                      <div>{item.name}</div>
+                      <div className="summaryItemQuantity">{item.quantity}</div>
+                      <div>{item.price}</div>
+                    </div>
+                  ))
+                : null}
+              <div className="totalPrice">
+                Total: {this.state.totalCartPrice}
+              </div>
             </div>
             <button
               onClick={this.continueToShipping}
