@@ -23,14 +23,16 @@ export const matchingPasswords = (passwordState, confirmPasswordState) => {
 
 export const emailSymbol = (value) => {
   const regex = /@/;
-  if (regex.test(value)) {
+  if (value.length > 0 && regex.test(value)) {
     return undefined;
   } else return "Invalid Email Format";
 };
 
 export const onlyNumberValidation = (value) => {
   const regex = /^[0-9]+$/
+  console.log(value);
   if (regex.test(value) && value.length > 0 ) {
+    
     return undefined;
   } else return "Numbers Only";
 }

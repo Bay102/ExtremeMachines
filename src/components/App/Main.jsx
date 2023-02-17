@@ -6,11 +6,11 @@ import SignIn from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
 import "./Main.css";
 
+
 class Main extends Component {
   state = {
     displayPage: 'cart',
-    isLoggedIn: false,
-    // chooseLogin: "signIn",
+    stateData: {},
   };
 
   signInOrUp = (e) => {
@@ -73,14 +73,11 @@ class Main extends Component {
             : null}
         </div>
         <div className="mainContent">
-          <div className="fieldWrapper">
             {this.state.displayPage === 'cart'  && <Cart changePage={this.changePage} /> }
             {this.state.displayPage === "signIn" && <SignIn changePage={this.changePage} /> }
             {this.state.displayPage === "createAccount" && <SignUp changePage={this.changePage}  getEmail={this.getEmail} /> }
             {this.state.displayPage === 'shipping'  && <Shipping changePage={this.changePage} /> }
-
           </div>
-        </div>
       </div>
     );
   }

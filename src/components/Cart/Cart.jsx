@@ -48,7 +48,7 @@ export class Cart extends React.Component {
 
     return (
       <div>
-        <h2>SHOPPING CART</h2>
+        <h2>CART</h2>
         <div className="cartContainer">
           {cartItems.length
             ? cartItems.map((item, index) => (
@@ -62,29 +62,32 @@ export class Cart extends React.Component {
                 </div>
               ))
             : null}
-          <div className="continueToCheckout">
-            <div className="cartSummary">
-              <div className="boxTitle">Cart Summary</div>
-              {cartItems.length
-                ? cartItems.map((item, index) => (
-                    <div key={index} className="summaryWrapper">
-                      <div>{item.name}</div>
-                      <div className="summaryItemQuantity">Quantity: {item.quantity}</div>
-                      <div>Total: {item.price}</div>
+        </div>
+
+        <div className="continueToCheckout">
+          <div className="boxTitle">Cart Summary</div>
+          <div className="cartSummary">
+            {cartItems.length
+              ? cartItems.map((item, index) => (
+                  <div key={index} className="summaryWrapper">
+                    <div>{item.name}</div>
+                    <div className="summaryItemQuantity">
+                      Quantity: {item.quantity}
                     </div>
-                  ))
-                : null}
-              <div className="totalPrice">
-               Cart Total: {this.state.totalCartPrice}
-              </div>
+                    <div>Total: {item.price}</div>
+                  </div>
+                ))
+              : null}
+            <div className="totalPrice">
+              Cart Total: {this.state.totalCartPrice}
+              <button
+                onClick={this.continueToShipping}
+                className="checkoutButton"
+                type="button"
+              >
+                Checkout
+              </button>
             </div>
-            <button
-              onClick={this.continueToShipping}
-              className="checkoutButton"
-              type="button"
-            >
-              Checkout
-            </button>
           </div>
         </div>
       </div>
