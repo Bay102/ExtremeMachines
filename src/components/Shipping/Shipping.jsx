@@ -32,30 +32,30 @@ class Shipping extends React.Component {
     ];
     return (
       <div>
-        {shippingInputs.length
+        {/* {shippingInputs.length
           ? shippingInputs.map((input, index) => (
               <label key={index} htmlFor={input.id}>
                 <InputBase
                   autoComplete="off"
                   id={input.id}
                   value={this.state.shippingInfo && this.state.shippingInfo[input.name]}
-                  // onBlur={this.handleBlur}
-                  // onChange={this.handleInputChange}
+                  onBlur={this.handleBlur}
+                  onChange={this.handleInputChange}
                   placeholder={input.label}
                   type={input.type}
                   label={input.label}
                   name={input.name}
-                  // errorM={
-                  //   this.state.error &&
-                  //   this.state.error[input.error] &&
-                  //   this.state.error[input.error].length > 1
-                  //     ? this.state.error[input.error]
-                  //     : this.state.error[input.error]
-                  // }
+                  errorM={
+                    this.state.error &&
+                    this.state.error[input.error] &&
+                    this.state.error[input.error].length > 1
+                      ? this.state.error[input.error]
+                      : this.state.error[input.error]
+                  }
                 />
               </label>
             ))
-          : null}
+          : null} */}
       </div>
     );
   }

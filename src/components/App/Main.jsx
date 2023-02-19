@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Cart } from "../Cart/Cart";
+import { storeItems } from "../constants";
 import { Radios } from "../HomeScreenButtons/Radios";
 import Shipping from "../Shipping/Shipping";
 import SignIn from "../SignIn/SignIn";
@@ -18,16 +19,11 @@ class Main extends Component {
         userZip: "",
       },
       userAccounts: {
-        account1: "",
-        account2: "",
+        account1: {},
+        account2: {},
       },
-      cartItems: {
-        item1: {
-          quantity: "",
-          perCarPrice: "",
-          total: "",
-        },
-      },
+      userCart: storeItems,
+
       cartSummary: {
         cartTotal: "",
       },
@@ -47,11 +43,22 @@ class Main extends Component {
   };
 
   updateState = (name, newState) => {
-    console.log([name], newState);
+    // console.log([name], newState);
     this.setState({
       [name]: newState,
     });
   };
+
+  updateSubState = (name, sub, state) => {
+    this.setState((prevState) => ({
+      [name]: {
+        ...prevState[name],
+        [sub]: state,
+      },
+    }));
+  };
+
+
 
   render() {
     const radioData = [
@@ -70,6 +77,7 @@ class Main extends Component {
         value: "createAccount",
       },
     ];
+    console.log(this.state.stateData.userCart);
 
     return (
       <div>
@@ -96,7 +104,12 @@ class Main extends Component {
         </div>
         <div className="mainContent">
           {this.state.displayPage === "cart" && (
-            <Cart changePage={this.changePage} updateState={this.updateState} />
+            <Cart
+              updateSubState={this.updateSubState}
+              storeItems={this.state.stateData.userCart}
+              changePage={this.changePage}
+              updateState={this.updateState}
+            />
           )}
           {this.state.displayPage === "signIn" && (
             <SignIn

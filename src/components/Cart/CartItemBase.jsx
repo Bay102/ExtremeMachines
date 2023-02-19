@@ -1,7 +1,10 @@
 import React from "react";
 import './CartItemBase.css'
 
-export const CartItemBase = ({...props}) => (
+
+
+export const CartItemBase = ({ updateQuantity, ...props}) => (
+   
    <div className="cartItemContainer">
       <div className="itemName">{props.name}</div>
       <div className="itemImageWrapper">
@@ -10,7 +13,7 @@ export const CartItemBase = ({...props}) => (
       <div className="itemPrice">Price: {props.price}</div>
       <div className="itemQuantity">
          <div>Quantity</div>
-         <select name={props.name} id="">
+         <select value={''} onChange={() => updateQuantity('')} name={props.name} id="">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
