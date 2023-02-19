@@ -70,14 +70,24 @@ class SignIn extends Component {
     return isError;
   };
 
+  // handleSignIn = (e) => {
+  //   e.preventDefault();
+  //   const errorCheck = this.preSubmit();
+  //   if (!errorCheck) {
+  //     this.props.changePage('cart')
+  //     this.setState({
+  //       userData: INIT_USER,
+  //     });
+  //   }
+  // };
+
+
   handleSignIn = (e) => {
     e.preventDefault();
     const errorCheck = this.preSubmit();
     if (!errorCheck) {
       this.props.changePage('cart')
-      this.setState({
-        userData: INIT_USER,
-      });
+      this.props.updateState('userEmail', this.state.userData.userEmail)
     }
   };
 

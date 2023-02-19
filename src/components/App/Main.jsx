@@ -6,31 +6,53 @@ import SignIn from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
 import "./Main.css";
 
-
 class Main extends Component {
   state = {
-    displayPage: 'cart',
-    stateData: {},
+    displayPage: "cart",
+    stateData: {
+      userData: {
+        userEmail: "",
+        userPassword: "",
+        userFirstName: "",
+        userLastName: "",
+        userZip: "",
+      },
+      userAccounts: {
+        account1: "",
+        account2: "",
+      },
+      cartItems: {
+        item1: {
+          quantity: "",
+          perCarPrice: "",
+          total: "",
+        },
+      },
+      cartSummary: {
+        cartTotal: "",
+      },
+    },
   };
 
   signInOrUp = (e) => {
     this.setState({
-      displayPage: e.target.value
-    })
-  } 
-  
+      displayPage: e.target.value,
+    });
+  };
+
   changePage = (value) => {
     this.setState({
-      displayPage: value
-    })
-  }
+      displayPage: value,
+    });
+  };
 
-  // getEmail = (value) => {
-  //   this.setState({
-  //     email: value,
-  //   })
-  // }
-    
+  updateState = (name, newState) => {
+    console.log([name], newState);
+    this.setState({
+      [name]: newState,
+    });
+  };
+
   render() {
     const radioData = [
       {
@@ -73,11 +95,28 @@ class Main extends Component {
             : null}
         </div>
         <div className="mainContent">
-            {this.state.displayPage === 'cart'  && <Cart changePage={this.changePage} /> }
-            {this.state.displayPage === "signIn" && <SignIn changePage={this.changePage} /> }
-            {this.state.displayPage === "createAccount" && <SignUp changePage={this.changePage}  getEmail={this.getEmail} /> }
-            {this.state.displayPage === 'shipping'  && <Shipping changePage={this.changePage} /> }
-          </div>
+          {this.state.displayPage === "cart" && (
+            <Cart changePage={this.changePage} updateState={this.updateState} />
+          )}
+          {this.state.displayPage === "signIn" && (
+            <SignIn
+              changePage={this.changePage}
+              updateState={this.updateState}
+            />
+          )}
+          {this.state.displayPage === "createAccount" && (
+            <SignUp
+              changePage={this.changePage}
+              updateState={this.updateState}
+            />
+          )}
+          {this.state.displayPage === "shipping" && (
+            <Shipping
+              changePage={this.changePage}
+              updateState={this.updateState}
+            />
+          )}
+        </div>
       </div>
     );
   }

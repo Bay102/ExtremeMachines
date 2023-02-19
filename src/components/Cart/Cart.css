@@ -8,12 +8,12 @@
    padding: 0 5px;
 }
 
-.cartContainer h2 {
+.cartH2 {
    color: white;
-   margin: 0;
-   padding: 10px 0;
-   font-size: 18px;
-   font-family: 'Courier New', Courier, monospace;
+   margin: 10px auto;
+   /* padding: 10px 0; */
+   font-size: 30px;
+   font-family: copperplate;
    margin-bottom:20px ;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .totalPrice {
-   width: 120px;
+   width: 150px;
    height: 100px;
    border: 1px solid black;
    margin: auto;

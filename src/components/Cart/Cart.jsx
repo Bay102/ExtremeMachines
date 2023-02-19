@@ -9,6 +9,9 @@ export class Cart extends React.Component {
     totalCartPrice: "",
   };
 
+  // 
+  // need a quantity function 
+
   continueToShipping = (e) => {
     e.preventDefault();
     this.props.changePage("shipping");
@@ -48,7 +51,7 @@ export class Cart extends React.Component {
 
     return (
       <div>
-        <h2>CART</h2>
+        <h2 className="cartH2">CART</h2>
         <div className="cartContainer">
           {cartItems.length
             ? cartItems.map((item, index) => (

@@ -37,10 +37,6 @@ class SignUp extends Component {
         [e.target.name]: e.target.value,
       },
     }));
-    // passing the userEmail up to main component state
-    // if (e.target.name === "userEmail") {
-    //   this.props.getEmail(e.target.value);
-    // }
   };
 
   handleValidations = (type, value) => {
@@ -129,6 +125,7 @@ class SignUp extends Component {
     const errorCheck = this.preSubmit();
     if (!errorCheck) {
       this.props.changePage('cart')
+      this.props.updateState('userEmail', this.state.userData.userEmail) // ask mike how to clean this up
       this.setState({
         userData: INIT_NEW_USER,
       });
