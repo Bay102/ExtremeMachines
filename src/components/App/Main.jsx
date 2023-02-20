@@ -1,40 +1,20 @@
 import { Component } from "react";
 import { Cart } from "../Cart/Cart";
-import { storeItems } from "../constants";
 import { Radios } from "../HomeScreenButtons/Radios";
+import { stateComponents } from "../loginData";
 import Shipping from "../Shipping/Shipping";
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
 import "./Main.css";
 
 class Main extends Component {
-  state = {
-    displayPage: "cart",
-    stateData: {
-      userData: {
-        userEmail: "",
-        userPassword: "",
-        userFirstName: "",
-        userLastName: "",
-        userZip: "",
-      },
-      userAccounts: {
-        account1: {},
-        account2: {},
-      },
-      userCart: storeItems,
+  state = stateComponents;
 
-      cartSummary: {
-        cartTotal: "",
-      },
-    },
-  };
-
-  signInOrUp = (e) => {
-    this.setState({
-      displayPage: e.target.value,
-    });
-  };
+  // chooseLogin = (e) => {
+  //   this.setState({
+  //     displayPage: e.target.value,
+  //   });
+  // };
 
   changePage = (value) => {
     this.setState({
@@ -50,6 +30,7 @@ class Main extends Component {
   };
 
   updateSubState = (name, sub, state) => {
+    console.log(name, sub, state);
     this.setState((prevState) => ({
       [name]: {
         ...prevState[name],
@@ -58,9 +39,9 @@ class Main extends Component {
     }));
   };
 
-
-
   render() {
+    console.log(this.state.displayPage);
+
     const radioData = [
       {
         title: "Sign In",
@@ -77,7 +58,6 @@ class Main extends Component {
         value: "createAccount",
       },
     ];
-    console.log(this.state.stateData.userCart);
 
     return (
       <div>
@@ -93,7 +73,7 @@ class Main extends Component {
                   <Radios
                     id={radio.id}
                     type={radio.type}
-                    onChange={this.signInOrUp}
+                    onChange={(e) => this.changePage(e.target.value)}
                     name={radio.name}
                     value={radio.value}
                   />
@@ -106,7 +86,7 @@ class Main extends Component {
           {this.state.displayPage === "cart" && (
             <Cart
               updateSubState={this.updateSubState}
-              storeItems={this.state.stateData.userCart}
+              storeItems={this.state.storeItems}
               changePage={this.changePage}
               updateState={this.updateState}
             />

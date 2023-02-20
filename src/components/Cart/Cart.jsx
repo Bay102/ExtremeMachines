@@ -14,9 +14,12 @@ export class Cart extends React.Component {
     this.props.changePage("shipping");
   };
 
+  updateItemQuantity = (name,sub,state) => this.props.updateSubState('', '', ) 
+
   render() {
     // mapping through state of storeItems to display state
-    const { storeItems, updateQuantity } = this.props;
+    const { storeItems } = this.props;
+    
     
     return (
       <div>
@@ -26,7 +29,7 @@ export class Cart extends React.Component {
             ? Object.values(storeItems).map((item, index) => (
                 <div key={index} className="itemWrapper">
                   <CartItemBase
-                    updateQuantity={updateQuantity}
+                    updateItemQuantity={this.updateItemQuantity}
                     name={item.name}
                     price={item.price}
                     quantity={item.quantity}
