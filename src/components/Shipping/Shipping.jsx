@@ -7,7 +7,7 @@
 // There should be a Next or "Payment" button to go to next screen
 
 import React from "react";
-import { InputBase } from "../InputBase/InputBase";
+// import { InputBase } from "../InputBase/InputBase";
 
 class Shipping extends React.Component {
   state = {
@@ -22,14 +22,14 @@ class Shipping extends React.Component {
   };
 
   render() {
-    const shippingInputs = [
-      { id: "", type: "text", label: "Address Title", name: "addressTitle" },
-      { id: "", type: "text", label: "Name", name: "name" },
-      { id: "", type: "text", label: "Address", name: "address" },
-      { id: "", type: "text", label: "Zip", name: "zip" },
-      { id: "", type: "text", label: "Home Phone", name: "homePhone" },
-      { id: "", type: "text", label: "Cell Phone", name: "cellPhone" },
-    ];
+    // const shippingInputs = [
+    //   { id: "", type: "text", label: "Address Title", name: "addressTitle" },
+    //   { id: "", type: "text", label: "Name", name: "name" },
+    //   { id: "", type: "text", label: "Address", name: "address" },
+    //   { id: "", type: "text", label: "Zip", name: "zip" },
+    //   { id: "", type: "text", label: "Home Phone", name: "homePhone" },
+    //   { id: "", type: "text", label: "Cell Phone", name: "cellPhone" },
+    // ];
     return (
       <div>
         {/* {shippingInputs.length

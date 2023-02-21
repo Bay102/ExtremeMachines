@@ -1,20 +1,14 @@
-import { Component } from "react";
-import { Cart } from "../Cart/Cart";
-import { Radios } from "../HomeScreenButtons/Radios";
-import { stateComponents } from "../loginData";
-import Shipping from "../Shipping/Shipping";
-import SignIn from "../SignIn/SignIn";
-import SignUp from "../SignUp/SignUp";
-import "./Main.css";
+import { Component } from 'react';
+import { Cart } from '../Cart/Cart';
+import { stateComponents } from '../stateData';
+import Shipping from '../Shipping/Shipping';
+import SignIn from '../SignIn/SignIn';
+import SignUp from '../SignUp/SignUp';
+import './Main.css';
+import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 
 class Main extends Component {
   state = stateComponents;
-
-  // chooseLogin = (e) => {
-  //   this.setState({
-  //     displayPage: e.target.value,
-  //   });
-  // };
 
   changePage = (value) => {
     this.setState({
@@ -30,7 +24,6 @@ class Main extends Component {
   };
 
   updateSubState = (name, sub, state) => {
-    console.log(name, sub, state);
     this.setState((prevState) => ({
       [name]: {
         ...prevState[name],
@@ -40,50 +33,14 @@ class Main extends Component {
   };
 
   render() {
-    console.log(this.state.displayPage);
-
-    const radioData = [
-      {
-        title: "Sign In",
-        id: "signIn",
-        type: "radio",
-        name: "chooseLogin",
-        value: "signIn",
-      },
-      {
-        title: "Create Account",
-        id: "createAccount",
-        type: "radio",
-        name: "chooseLogin",
-        value: "createAccount",
-      },
-    ];
-
     return (
       <div>
         <div className="headerWrapper">
           <h2>CarCommerce</h2>
-          {radioData.length
-            ? radioData.map((radio, index) => (
-                <label
-                  style={{ marginRight: "20px" }}
-                  htmlFor={radio.id}
-                  key={index}
-                >
-                  <Radios
-                    id={radio.id}
-                    type={radio.type}
-                    onChange={(e) => this.changePage(e.target.value)}
-                    name={radio.name}
-                    value={radio.value}
-                  />
-                  {radio.title}
-                </label>
-              ))
-            : null}
+          <BuildRadios changePage={this.changePage} />
         </div>
         <div className="mainContent">
-          {this.state.displayPage === "cart" && (
+          {this.state.displayPage === 'cart' && (
             <Cart
               updateSubState={this.updateSubState}
               storeItems={this.state.storeItems}
@@ -91,23 +48,14 @@ class Main extends Component {
               updateState={this.updateState}
             />
           )}
-          {this.state.displayPage === "signIn" && (
-            <SignIn
-              changePage={this.changePage}
-              updateState={this.updateState}
-            />
+          {this.state.displayPage === 'signIn' && (
+            <SignIn changePage={this.changePage} updateState={this.updateState} updateSubState={this.updateSubState} />
           )}
-          {this.state.displayPage === "createAccount" && (
-            <SignUp
-              changePage={this.changePage}
-              updateState={this.updateState}
-            />
+          {this.state.displayPage === 'createAccount' && (
+            <SignUp changePage={this.changePage} updateState={this.updateState} />
           )}
-          {this.state.displayPage === "shipping" && (
-            <Shipping
-              changePage={this.changePage}
-              updateState={this.updateState}
-            />
+          {this.state.displayPage === 'shipping' && (
+            <Shipping changePage={this.changePage} updateState={this.updateState} />
           )}
         </div>
       </div>

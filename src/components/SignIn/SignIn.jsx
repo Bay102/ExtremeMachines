@@ -1,38 +1,38 @@
- import React, { Component } from "react";
+import React, { Component } from "react";
 import "./SignIn.css";
 import { InputBase } from "../InputBase/InputBase";
-import { passwordLengthError, emailSymbol } from "../validations";
-
+import { emailSymbol } from "../validations";
+import { USER_DATA } from "../stateData";
 
 // User can sign in | if password in incorrect prompt error |
 // Eye Icon on Password | if successful render Cart
 
-const INIT_USER = {
-  userEmail: "",
-  userPassword: "",
-};
-
 class SignIn extends Component {
   state = {
-    isLoggedIn: false,
+    credentials: {     
+      userEmail: '',
+      userPassword: '',
+    },
     error: {},
-    userData: INIT_USER,
   };
 
   handleInputChange = (e) => {
     this.setState((prevState) => ({
-      userData: {
-        ...prevState.userData,
-        [e.target.name]: e.target.value,
-      },
+      credentials: {
+        ...prevState.credentials,
+          [e.target.name]: e.target.value,
+        },
     }));
+    if (e.target.name === 'userEmail') {
+
+    }
   };
 
   handleValidations = (type, value) => {
     let errorText;
     switch (type) {
       case "userEmail":
-        errorText = emailSymbol(value) 
+        errorText = emailSymbol(value);
         this.setState((prevState) => ({
           error: {
             ...prevState.error,
@@ -60,8 +60,8 @@ class SignIn extends Component {
   preSubmit = () => {
     let errorValue = {};
     let isError = false;
-    Object.keys(this.state.userData).forEach((val) => {
-      if (!this.state.userData[val].length) {
+    Object.keys(this.state.credentials).forEach((val) => {
+      if (!this.state.credentials[val].length)  {
         errorValue = { ...errorValue, [`${val}`]: "Required" };
         isError = true;
       }
@@ -70,24 +70,12 @@ class SignIn extends Component {
     return isError;
   };
 
-  // handleSignIn = (e) => {
-  //   e.preventDefault();
-  //   const errorCheck = this.preSubmit();
-  //   if (!errorCheck) {
-  //     this.props.changePage('cart')
-  //     this.setState({
-  //       userData: INIT_USER,
-  //     });
-  //   }
-  // };
-
-
   handleSignIn = (e) => {
     e.preventDefault();
     const errorCheck = this.preSubmit();
     if (!errorCheck) {
-      this.props.changePage('cart')
-      this.props.updateState('userEmail', this.state.userData.userEmail)
+      this.props.changePage("cart");
+      // this.props.updateState("userEmail", this.state.userData.userEmail);
     }
   };
 
@@ -109,6 +97,7 @@ class SignIn extends Component {
       },
     ];
 
+  
     return (
       <form onSubmit={this.handleSignIn}>
         <div className="inputsWrapper">
@@ -119,9 +108,7 @@ class SignIn extends Component {
                   <InputBase
                     autoComplete="off"
                     id={input.id}
-                    value={
-                      this.state.userData && this.state.userData[input.name]
-                    }
+                    value={this.state.credentials[input.name] || ''}
                     onBlur={this.handleBlur}
                     onChange={this.handleInputChange}
                     placeholder={input.label}
@@ -138,7 +125,7 @@ class SignIn extends Component {
                   />
                 </label>
               ))
-            : null}
+            : null} 
           <div className="signInSubmit">
             <button type="submit">Sign In</button>
           </div>
