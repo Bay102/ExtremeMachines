@@ -40,13 +40,13 @@ const inputData = [
    { id: 6, 
      type: "text", 
      label: "Zip Code", 
-     name: "zip", 
-     error: "zip", 
+     name: "userZip", 
+     error: "userZip", 
    },
  ];  
 
  export const SignUpInputs = (props) => {
-   const { state, handleBlur, handleInputChange } = props
+   const { state, handleBlur, handleInputChange } = props;
    return (
       inputData.length
          ? inputData.map((input, index) => (

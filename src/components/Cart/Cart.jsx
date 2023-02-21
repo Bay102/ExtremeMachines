@@ -1,26 +1,34 @@
 import React from "react";
+import { stateComponents } from "../stateData";
 import "./Cart.css";
 import { CartItemBase } from "./CartItemBase";
 
 // items can be removed items from cart | total sum of all items calculated | if 0 items in cart checkout disabled
 
 export class Cart extends React.Component {
-  state = {
-    totalCartPrice: "",
-  };
+  state = stateComponents; // MIKE :   will this work ?
 
   continueToShipping = (e) => {
     e.preventDefault();
     this.props.changePage("shipping");
   };
 
-  updateItemQuantity = (name,sub,state) => this.props.updateSubState('', '', ) 
+  handleQuantityChange = (e) => {
+    console.log(stateComponents);
+    this.setState((prevState) => ({
+      storeItems: {
+        ...prevState.storeItems,
+        [e.target.name]: {
+          ...prevState.storeItems[e.target.name],
+          quantity: e.target.value,
+        },
+      },
+    }));
+  };
 
   render() {
-    // mapping through state of storeItems to display state
     const { storeItems } = this.props;
-    
-    
+
     return (
       <div>
         <h2 className="cartH2">CART</h2>
@@ -29,7 +37,8 @@ export class Cart extends React.Component {
             ? Object.values(storeItems).map((item, index) => (
                 <div key={index} className="itemWrapper">
                   <CartItemBase
-                    updateItemQuantity={this.updateItemQuantity}
+                    state={this.state}
+                    handleQuantityChange={this.handleQuantityChange}
                     name={item.name}
                     price={item.price}
                     quantity={item.quantity}

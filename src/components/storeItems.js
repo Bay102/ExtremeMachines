@@ -1,8 +1,7 @@
 export const storeItems = {
   // map through state to create cart items
   Gladiator: {
-    id: '1',
-    value: '',
+
     name: "Gladiator",
     price: "$109,255",
     quantity: 1,
@@ -10,8 +9,7 @@ export const storeItems = {
       "https://images.unsplash.com/photo-1609044761425-dac671e75597?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8amVlcCUyMGdsYWRpYXRvcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   },
   NSX: {
-    id: '2',
-    value: '',
+   
     name: "NSX",
     price: "$179,500",
     quantity: 1,
@@ -19,8 +17,7 @@ export const storeItems = {
       "https://images.unsplash.com/photo-1560361586-8242b1fc06c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bnN4fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
   },
   Delorian: {
-    id: '3',
-    value: '',
+  
     name: "Delorian",
     price: "$249,999",
     quantity: 1,
@@ -28,9 +25,7 @@ export const storeItems = {
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFNHNYdQsJW2Rg0EHMoB6mSamxIdkuUvR4jQ&usqp=CAU",
   },
   Skyline: {
-    id: '4',
-    value: '',
-    name: "Skyline GTR",
+    name: "Skyline",
     price: "$92,490",
     quantity: 1,
     image:

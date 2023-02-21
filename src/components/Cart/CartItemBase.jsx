@@ -1,23 +1,22 @@
 import React from "react";
 import './CartItemBase.css'
 
-export const CartItemBase = ({ updateItemQuantity, ...props}) => (
-   
+export const CartItemBase = ({  state, handleQuantityChange, name, image, price, ...props}) => (
    <div className="cartItemContainer">
-      <div className="itemName">{props.name}</div>
+      <div className="itemName">{name}</div>
       <div className="itemImageWrapper">
-         <img className="itemImage" src={props.image} alt={props.name} />
+         <img className="itemImage" src={image} alt={name} />
       </div>
-      <div className="itemPrice">Price: {props.price}</div>
+      <div className="itemPrice">Price: {price}</div>
       <div className="itemQuantity">
          <div>Quantity</div>
-         {/* <select value={''} onChange={() => updateItemQuantity} name={props.name} id="">
+         <select name={name} id={name} value={state.storeItems.quantity} onChange={handleQuantityChange} >
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
-         </select> */}
+         </select>
       </div>
       <button className="removeFromCart">Remove</button>
    </div> 

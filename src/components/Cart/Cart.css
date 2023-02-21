@@ -38,7 +38,7 @@
 }
 
 .continueToCheckout {
-   width: 60%;
+   width: fit-content;
    /* height: 150px; */
    margin: 20px auto;
    border: 3px solid rgba(255, 132, 31, 0.876);
