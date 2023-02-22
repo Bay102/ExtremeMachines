@@ -1,48 +1,46 @@
 import React from "react";
-import { stateComponents } from "../stateData";
 import "./Cart.css";
 import { CartItemBase } from "./CartItemBase";
 
 // items can be removed items from cart | total sum of all items calculated | if 0 items in cart checkout disabled
 
 export class Cart extends React.Component {
-  state = stateComponents; 
+  
 
   continueToShipping = (e) => {
     e.preventDefault();
     this.props.changePage("shipping");
   };
 
-  handleQuantityChange = (e) => {
-    this.setState((prevState) => ({
-      ...prevState.stateComponents,
-      storeItems: {
-        ...prevState.storeItems,
-        [e.target.name]: {
-          ...prevState.storeItems[e.target.name],
-          quantity: e.target.value,
-        },
-      },
-    }));
-  };
+  // handleQuantityChange = (e) => {
+  //   this.setState((prevState) => ({
+    
+  //       ...prevState.storeItems,
+  //       [e.target.name]: {
+  //         ...prevState.storeItems[e.target.name],
+  //         quantity: e.target.value,
+  //       },
+      
+  //   }));
+  // };
 
   render() {
-    const { storeItems } = this.props;
+    const {state, handleQuantityChange, storeItems } = this.props;
 
     return (
       <div>
         <h2 className="cartH2">CART</h2>
         <div className="cartContainer">
           {Object.values(storeItems).length
-            ? Object.values(storeItems).map((item, index) => (
-                <div key={index} className="itemWrapper">
+            ? Object.entries(storeItems).map(([key, value]) => (
+                <div key={key} className="itemWrapper">
                   <CartItemBase
-                    state={this.state}
-                    handleQuantityChange={this.handleQuantityChange}
-                    name={item.name}
-                    price={item.price}
-                    quantity={item.quantity}
-                    image={item.image}
+                    state={state}
+                    handleQuantityChange={handleQuantityChange}
+                    name={`${key}`}
+                    price={`${value.price}`}
+                    quantity={`${value.quantity}`}
+                    image={`${value.image}`}
                   />
                 </div>
               ))
@@ -64,7 +62,7 @@ export class Cart extends React.Component {
                 ))
               : null}
             <div className="totalPrice">
-              Cart Total: {this.state.totalCartPrice}
+              Cart Total: {state.totalCartPrice}
               <button
                 onClick={this.continueToShipping}
                 className="checkoutButton"

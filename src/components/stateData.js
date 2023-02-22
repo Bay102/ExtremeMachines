@@ -12,7 +12,7 @@ export const NEW_USER_DATA = {
   payment: undefined,
 };
 
-const fakeUser = {
+export const fakeUser = {
   email: "fake@devslopes.com",
   password: "Devslopes0!",
   cart: "",
@@ -22,12 +22,12 @@ const fakeUser = {
   lastName: "",
   postCode: "",
 };
-// create new user function will add new user data too state of users
-export const stateComponents = {
-  displayPage: "cart",
-  currentUser: {},
-  users: {
-    fakeUser,
-  },
-  storeItems,
-};
+
+// export const stateComponents = {
+//   displayPage: "cart",
+//   currentUser: {},
+//   users: {
+//     fakeUser,
+//   },
+//   storeItems,
+// };

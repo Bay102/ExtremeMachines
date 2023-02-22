@@ -121,7 +121,7 @@ class SignUp extends Component {
     const errorCheck = this.preSubmit();
     // Create a new user (add new user to Users State)
     if (!errorCheck ) {
-      this.props.createNewUser('users', 'newUser', this.state.credentials) // ask if this is correct
+      this.props.createNewUser('users', 'newUser', this.state.credentials) 
       this.props.changePage("cart");
     }
   };

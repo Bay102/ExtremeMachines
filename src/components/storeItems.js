@@ -1,7 +1,6 @@
 export const storeItems = {
   // map through state to create cart items
   Gladiator: {
-
     name: "Gladiator",
     price: "$109,255",
     quantity: 1,
@@ -9,7 +8,6 @@ export const storeItems = {
       "https://images.unsplash.com/photo-1609044761425-dac671e75597?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8amVlcCUyMGdsYWRpYXRvcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   },
   NSX: {
-   
     name: "NSX",
     price: "$179,500",
     quantity: 1,
@@ -17,7 +15,6 @@ export const storeItems = {
       "https://images.unsplash.com/photo-1560361586-8242b1fc06c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bnN4fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
   },
   Delorian: {
-  
     name: "Delorian",
     price: "$249,999",
     quantity: 1,

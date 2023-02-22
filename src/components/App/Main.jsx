@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Cart } from "../Cart/Cart";
-import { stateComponents } from "../stateData";
+import { fakeUser } from "../stateData";
+import { storeItems } from "../storeItems";
 import Shipping from "../Shipping/Shipping";
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
@@ -9,9 +10,14 @@ import { BuildRadios } from "../HomeScreenButtons/BuildRadios";
 
 class Main extends Component {
   // list all state here
-  /// state objects should be arrays 
-  
-  state = stateComponents;
+  /// state objects should be arrays
+
+  state = {
+    displayPage: "cart",
+    currentUser: [],
+    users: [fakeUser],
+    storeItems,
+  };
 
   changePage = (value) => {
     this.setState({
@@ -27,6 +33,7 @@ class Main extends Component {
   };
 
   updateSubState = (name, sub, newState) => {
+    // console.log(name,sub, newState);
     this.setState((prevState) => ({
       [name]: {
         ...prevState[name],
@@ -35,8 +42,26 @@ class Main extends Component {
     }));
   };
 
+  updateSubSubState = (parent, name, sub, newState) => {
+    console.log(parent, name, sub, newState);
+    this.setState((prev) => ({
+      [parent]: {
+        ...prev[parent],
+        [name]: {
+          ...prev[parent][name],
+          [sub]: newState
+        }
+      }
+    }))
+  };
+
   createNewUser = (name, sub, newState) =>
     this.updateSubState(name, sub, newState);
+
+  handleQuantityChange = (parent, name, sub, newState) =>
+    this.updateSubSubState(parent, name, sub, newState);
+
+  // this.updateSubState(('storeItems', 'quantity', e.target.value));
 
   render() {
     return (
@@ -48,7 +73,8 @@ class Main extends Component {
         <div className="mainContent">
           {this.state.displayPage === "cart" && (
             <Cart
-              updateSubState={this.updateSubState}
+              state={this.state}
+              handleQuantityChange={this.handleQuantityChange}
               storeItems={this.state.storeItems}
               changePage={this.changePage}
               updateState={this.updateState}
