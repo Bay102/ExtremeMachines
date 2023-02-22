@@ -6,7 +6,7 @@ import { CartItemBase } from "./CartItemBase";
 // items can be removed items from cart | total sum of all items calculated | if 0 items in cart checkout disabled
 
 export class Cart extends React.Component {
-  state = stateComponents; // MIKE :   will this work ?
+  state = stateComponents; 
 
   continueToShipping = (e) => {
     e.preventDefault();
@@ -14,8 +14,8 @@ export class Cart extends React.Component {
   };
 
   handleQuantityChange = (e) => {
-    console.log(stateComponents);
     this.setState((prevState) => ({
+      ...prevState.stateComponents,
       storeItems: {
         ...prevState.storeItems,
         [e.target.name]: {

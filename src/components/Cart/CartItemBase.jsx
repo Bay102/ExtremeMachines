@@ -1,7 +1,7 @@
 import React from "react";
 import './CartItemBase.css'
 
-export const CartItemBase = ({  state, handleQuantityChange, name, image, price, ...props}) => (
+export const CartItemBase = ({ handleQuantityChange, name, image, price, ...props}) => (
    <div className="cartItemContainer">
       <div className="itemName">{name}</div>
       <div className="itemImageWrapper">
@@ -10,7 +10,7 @@ export const CartItemBase = ({  state, handleQuantityChange, name, image, price,
       <div className="itemPrice">Price: {price}</div>
       <div className="itemQuantity">
          <div>Quantity</div>
-         <select name={name} id={name} value={state.storeItems.quantity} onChange={handleQuantityChange} >
+         <select name={name} id={name} value={props.state.storeItems.quantity} onChange={handleQuantityChange} >
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

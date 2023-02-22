@@ -8,6 +8,9 @@ import "./Main.css";
 import { BuildRadios } from "../HomeScreenButtons/BuildRadios";
 
 class Main extends Component {
+  // list all state here
+  /// state objects should be arrays 
+  
   state = stateComponents;
 
   changePage = (value) => {
@@ -17,11 +20,10 @@ class Main extends Component {
   };
 
   updateState = (name, newState) => {
-    console.log([name], newState);
     this.setState((prevState) => ({
       ...prevState[name],
-        [name]: newState
-    }))
+      [name]: newState,
+    }));
   };
 
   updateSubState = (name, sub, newState) => {
@@ -33,9 +35,8 @@ class Main extends Component {
     }));
   };
 
-  
-
-  updateUsers = (name, newState) => this.updateState(name, newState )
+  createNewUser = (name, sub, newState) =>
+    this.updateSubState(name, sub, newState);
 
   render() {
     return (
@@ -64,8 +65,7 @@ class Main extends Component {
             <SignUp
               changePage={this.changePage}
               updateState={this.updateState}
-              updateUsers={this.updateUsers}
-
+              createNewUser={this.createNewUser}
             />
           )}
           {this.state.displayPage === "shipping" && (

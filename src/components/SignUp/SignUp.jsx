@@ -19,12 +19,11 @@ import { SignUpInputs } from "./SignUpInputs";
 
 class SignUp extends Component {
   state = {
-    credentials: NEW_USER_DATA, // is this mutating the original NEW_USER_DATA??
+    credentials: NEW_USER_DATA, 
     error: {},
   };
 
   handleInputChange = (e) => {
-    console.log(this.state.credentials);
     this.setState((prevState) => ({
       credentials: {
         ...prevState.credentials,
@@ -122,7 +121,7 @@ class SignUp extends Component {
     const errorCheck = this.preSubmit();
     // Create a new user (add new user to Users State)
     if (!errorCheck ) {
-      this.props.updateUsers('users', this.state.credentials) // ask if this is correct
+      this.props.createNewUser('users', 'newUser', this.state.credentials) // ask if this is correct
       this.props.changePage("cart");
     }
   };
