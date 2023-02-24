@@ -1,10 +1,8 @@
-
 export const checkIfEmailExists = (users, email) => {
   if (  users.some(user => user.userEmail === email)) {
     return 'Email already exists'
   } else return false
 }
-
 
 export const onlyTextValidation = (value) => {
   if (value) {

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../SignUp/SignUp.css";
-import { InputBase } from "../InputBase/InputBase";
 import { NEW_USER_DATA } from "../stateData";
 import {
   onlyTextValidation,
@@ -13,8 +12,6 @@ import {
 import { SignUpInputs } from "./SignUpInputs";
 
 // Passwords must match | Reveal password with eye icon | Names no numbers
-
-// when new user is created , create a new user object in state
 
 class SignUp extends Component {
   state = {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./SignIn.css";
-import { BuildSignInInputs, InputBase } from "../InputBase/InputBase";
 import { emailContains, passwordLengthError } from "../validations";
+import { BuildSignInInputs } from "./BuildSignInInputs";
 
 // User can sign in | if password in incorrect prompt error |
 // Eye Icon on Password | if successful render Cart
@@ -53,7 +53,6 @@ class SignIn extends Component {
     }
   };
 
-  // handleBlur is capturing a 'name' and 'value' to be passed onto another function
   handleBlur = (e) => this.handleValidations(e.target.name, e.target.value);
 
   preSubmit = () => {
@@ -71,31 +70,16 @@ class SignIn extends Component {
 
   handleSignIn = (e) => {
     e.preventDefault();
-    const errorCheck = this.preSubmit();
-    if (!errorCheck) {
+    const requiredFieldErrorCheck = this.preSubmit();
+    const emailContainsSymbolsRequirement = emailContains(this.state.credentials.userEmail) 
+    console.log(emailContainsSymbolsRequirement);
+    if (!requiredFieldErrorCheck && !emailContainsSymbolsRequirement) {
       this.props.updateCurrentUser(this.state.credentials);
       this.props.changePage("cart");
     }
   };
 
   render() {
-    // const inputData = [
-    //   {
-    //     id: 1,
-    //     type: "text",
-    //     label: "email",
-    //     name: "userEmail",
-    //     error: "userEmail",
-    //   },
-    //   {
-    //     id: 2,
-    //     type: "password",
-    //     label: "password",
-    //     name: "userPassword",
-    //     error: "userPassword",
-    //   },
-    // ];
-
     return (
       <form onSubmit={this.handleSignIn}>
         <BuildSignInInputs
@@ -103,36 +87,6 @@ class SignIn extends Component {
           handleInputChange={this.handleInputChange}
           handleBlur={this.handleBlur}
         />
-        {/* <div className="inputsWrapper">
-          <h2>Sign In</h2>
-          {inputData.length
-            ? inputData.map((input, index) => (
-                <label key={index} htmlFor={input.id}>
-                  <InputBase
-                    autoComplete="off"
-                    id={input.id}
-                    value={this.state.credentials[input.name] || ""}
-                    onBlur={this.handleBlur}
-                    onChange={this.handleInputChange}
-                    placeholder={input.label}
-                    type={input.type}
-                    label={input.label}
-                    name={input.name}
-                    errorM={
-                      this.state.error &&
-                      this.state.error[input.error] &&
-                      this.state.error[input.error].length > 1
-                        ? this.state.error[input.error]
-                        : this.state.error[input.error]
-                    }
-                  />
-                </label>
-              ))
-            : null} 
-           <div className="signInSubmit">
-            <button type="submit">Sign In</button>
-          </div> 
-         </div> */}
       </form>
     );
   }

@@ -1,4 +1,3 @@
-import { faKey } from "@fortawesome/free-solid-svg-icons";
 
 export const NEW_USER_DATA = {
   userEmail: "",

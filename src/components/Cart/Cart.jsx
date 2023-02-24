@@ -10,8 +10,21 @@ export class Cart extends React.Component {
     this.props.changePage("shipping");
   };
 
+  // updateItemPrice = (itemPrice, itemQuantity) => itemPrice.replace(/[$,]/g, '') * itemQuantity ;
+
+  updateItemPrice = (itemPrice, itemQuantity) => {
+    const priceString = itemPrice.replace(/[$,]/g, ""); // remove dollar sign and commas
+    const doMath = parseInt(priceString) * itemQuantity
+    const formattedPrice = doMath.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+    return formattedPrice ;
+  };
+
   render() {
     const { state, handleQuantityChange, storeItems } = this.props;
+    console.log(this.updateItemPrice);
 
     return (
       <div>
@@ -23,7 +36,7 @@ export class Cart extends React.Component {
                   <CartItemBase
                     state={state}
                     handleQuantityChange={handleQuantityChange}
-                    name={`${key}`} 
+                    name={`${key}`}
                     quantity={`${value.quantity}`}
                     price={`${value.price}`}
                     image={`${value.image}`}
@@ -43,7 +56,10 @@ export class Cart extends React.Component {
                     <div className="summaryItemQuantity">
                       Quantity: {item.quantity}
                     </div>
-                    <div>Total: {item.price}</div>
+                    {/* <div>Total: {item.price}</div> */}
+                    <div>
+                      Total: {this.updateItemPrice(item.price, item.quantity)}
+                    </div>
                   </div>
                 ))
               : null}

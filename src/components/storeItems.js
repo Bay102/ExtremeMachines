@@ -28,6 +28,7 @@ export const storeItems = {
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNOfQ8_IpVKT6_i63mt3Uzw6HaXNlpfUO_7g&usqp=CAU",
   },
+  
 };
 
 
