@@ -1,4 +1,10 @@
-// ?? Does user have to be able to sign in with created account credentials ??
+
+export const checkIfEmailExists = (users, email) => {
+  if (  users.some(user => user.userEmail === email)) {
+    return 'Email already exists'
+  } else return false
+}
+
 
 export const onlyTextValidation = (value) => {
   if (value) {
@@ -23,8 +29,9 @@ export const matchingPasswords = (passwordState, confirmPasswordState) => {
     : undefined;
 };
 
-export const emailSymbol = (value) => {
-  const regex = /@/;
+export const emailContains = (value) => {
+  // const regex = /@/;
+  const regex = /@.*\.com$/;
   if (value.length > 0) {
     if (regex.test(value)) {
       return undefined;

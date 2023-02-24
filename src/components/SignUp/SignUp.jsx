@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-
-import { InputBase } from "../InputBase/InputBase";
 import "../SignUp/SignUp.css";
+import { InputBase } from "../InputBase/InputBase";
 import { NEW_USER_DATA } from "../stateData";
-
 import {
   onlyTextValidation,
   passwordLengthError,
   matchingPasswords,
-  emailSymbol,
   onlyNumberValidation,
+  emailContains,
+  checkIfEmailExists,
 } from "../validations";
 import { SignUpInputs } from "./SignUpInputs";
 
@@ -19,7 +18,7 @@ import { SignUpInputs } from "./SignUpInputs";
 
 class SignUp extends Component {
   state = {
-    credentials: NEW_USER_DATA, 
+    credentials: NEW_USER_DATA,
     error: {},
   };
 
@@ -33,10 +32,13 @@ class SignUp extends Component {
   };
 
   handleValidations = (type, value) => {
+    const { userEmail } = this.state.credentials;
+    const { users } = this.props.state;
     let errorText;
     switch (type) {
       case "userEmail":
-        errorText = emailSymbol(value);
+        errorText =
+          emailContains(value) || checkIfEmailExists(users, userEmail);
         this.setState((prevState) => ({
           error: {
             ...prevState.error,
@@ -106,6 +108,7 @@ class SignUp extends Component {
     Object.keys(this.state.credentials)
       .slice(0, 6)
       .forEach((val) => {
+        //ask how to make other validations required
         if (!this.state.credentials[val].length) {
           errorValue = { ...errorValue, [`${val}`]: "Required" };
           isError = true;
@@ -118,10 +121,12 @@ class SignUp extends Component {
 
   handleSignUp = (e) => {
     e.preventDefault();
+    const { userEmail } = this.state.credentials;
+    const { users } = this.props.state;
     const errorCheck = this.preSubmit();
-    // Create a new user (add new user to Users State)
-    if (!errorCheck ) {
-      this.props.createNewUser('users', 'newUser', this.state.credentials) 
+    const userAlreadyExists = checkIfEmailExists(users, userEmail);
+    if (!errorCheck && !userAlreadyExists) {
+      this.props.createNewUser(this.state.credentials); // why is index now user
       this.props.changePage("cart");
     }
   };

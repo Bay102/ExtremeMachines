@@ -1,4 +1,4 @@
-import { storeItems } from "./storeItems";
+import { faKey } from "@fortawesome/free-solid-svg-icons";
 
 export const NEW_USER_DATA = {
   userEmail: "",
@@ -12,8 +12,10 @@ export const NEW_USER_DATA = {
   payment: undefined,
 };
 
-export const fakeUser = {
-  email: "fake@devslopes.com",
+export const allUsers = [
+ {
+  user: 'fake',
+  userEmail: "fake@devslopes.com",
   password: "Devslopes0!",
   cart: "",
   shipping: "",
@@ -21,13 +23,7 @@ export const fakeUser = {
   firstName: "",
   lastName: "",
   postCode: "",
-};
+ }
+ 
+];
 
-// export const stateComponents = {
-//   displayPage: "cart",
-//   currentUser: {},
-//   users: {
-//     fakeUser,
-//   },
-//   storeItems,
-// };

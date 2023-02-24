@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import "./SignIn.css";
 import { InputBase } from "../InputBase/InputBase";
-import { emailSymbol } from "../validations";
+import {
+  checkIfUserExists,
+  emailContains,
+  passwordLengthError,
+} from "../validations";
 import { USER_DATA } from "../stateData";
 
 // User can sign in | if password in incorrect prompt error |
@@ -9,9 +13,9 @@ import { USER_DATA } from "../stateData";
 
 class SignIn extends Component {
   state = {
-    credentials: {     
-      userEmail: '',
-      userPassword: '',
+    credentials: {
+      userEmail: "",
+      userPassword: "",
     },
     error: {},
   };
@@ -20,11 +24,10 @@ class SignIn extends Component {
     this.setState((prevState) => ({
       credentials: {
         ...prevState.credentials,
-          [e.target.name]: e.target.value,
-        },
+        [e.target.name]: e.target.value,
+      },
     }));
-    if (e.target.name === 'userEmail') {
-
+    if (e.target.name === "userEmail") {
     }
   };
 
@@ -32,7 +35,7 @@ class SignIn extends Component {
     let errorText;
     switch (type) {
       case "userEmail":
-        errorText = emailSymbol(value);
+        errorText = emailContains(value);
         this.setState((prevState) => ({
           error: {
             ...prevState.error,
@@ -40,15 +43,16 @@ class SignIn extends Component {
           },
         }));
         break;
-      // case "userPassword":
-      //   errorText = passwordLengthError(value);
-      //   this.setState((prevState) => ({
-      //     error: {
-      //       ...prevState.error,
-      //       userPassword: errorText,
-      //     },
-      //   }));
-      //   break;
+      // add check if user exists here
+      case "userPassword":
+        errorText = passwordLengthError(value);
+        this.setState((prevState) => ({
+          error: {
+            ...prevState.error,
+            userPassword: errorText,
+          },
+        }));
+        break;
       default:
         break;
     }
@@ -61,7 +65,7 @@ class SignIn extends Component {
     let errorValue = {};
     let isError = false;
     Object.keys(this.state.credentials).forEach((val) => {
-      if (!this.state.credentials[val].length)  {
+      if (!this.state.credentials[val].length) {
         errorValue = { ...errorValue, [`${val}`]: "Required" };
         isError = true;
       }
@@ -74,8 +78,9 @@ class SignIn extends Component {
     e.preventDefault();
     const errorCheck = this.preSubmit();
     if (!errorCheck) {
+      // this.props.updateCurrentUser('currentUser', this.state.credentials);
       this.props.changePage("cart");
-      // this.props.updateState("userEmail", this.state.userData.userEmail);
+      this.handleLogin();
     }
   };
 
@@ -97,7 +102,6 @@ class SignIn extends Component {
       },
     ];
 
-  
     return (
       <form onSubmit={this.handleSignIn}>
         <div className="inputsWrapper">
@@ -108,7 +112,7 @@ class SignIn extends Component {
                   <InputBase
                     autoComplete="off"
                     id={input.id}
-                    value={this.state.credentials[input.name] || ''}
+                    value={this.state.credentials[input.name] || ""}
                     onBlur={this.handleBlur}
                     onChange={this.handleInputChange}
                     placeholder={input.label}
@@ -125,7 +129,7 @@ class SignIn extends Component {
                   />
                 </label>
               ))
-            : null} 
+            : null}
           <div className="signInSubmit">
             <button type="submit">Sign In</button>
           </div>

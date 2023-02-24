@@ -1,21 +1,22 @@
 import { Component } from "react";
 import { Cart } from "../Cart/Cart";
-import { fakeUser } from "../stateData";
+// import { fakeUser } from "../stateData";
 import { storeItems } from "../storeItems";
 import Shipping from "../Shipping/Shipping";
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
 import "./Main.css";
 import { BuildRadios } from "../HomeScreenButtons/BuildRadios";
+import { allUsers } from "../stateData";
 
 class Main extends Component {
   // list all state here
   /// state objects should be arrays
 
   state = {
-    displayPage: "cart",
+    displayPage: "signIn",
     currentUser: [],
-    users: [fakeUser],
+    users: allUsers,
     storeItems,
   };
 
@@ -33,7 +34,6 @@ class Main extends Component {
   };
 
   updateSubState = (name, sub, newState) => {
-    // console.log(name,sub, newState);
     this.setState((prevState) => ({
       [name]: {
         ...prevState[name],
@@ -42,26 +42,41 @@ class Main extends Component {
     }));
   };
 
-  updateSubSubState = (parent, name, sub, newState) => {
-    console.log(parent, name, sub, newState);
-    this.setState((prev) => ({
-      [parent]: {
-        ...prev[parent],
-        [name]: {
-          ...prev[parent][name],
-          [sub]: newState
-        }
-      }
-    }))
+  updateSubSubState = (parent, name, sub, newState, callBack) => {
+    this.setState(
+      (prev) => ({
+        [parent]: {
+          ...prev[parent],
+          [name]: {
+            ...prev[parent][name],
+            [sub]: newState,
+          },
+        },
+      }),
+      callBack
+    );
   };
 
-  createNewUser = (name, sub, newState) =>
-    this.updateSubState(name, sub, newState);
+ 
+  // need an update currentUser function
+
+  // need a remove from cart function
+  
+
+  updateCurrentUser = (name, newState) => 
+  this.updateState(name, newState);
+  
+  // need a add to users function 
+  createNewUser = (newUser) => {
+    this.setState({users: [...this.state.users, newUser]})
+  }
 
   handleQuantityChange = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
 
-  // this.updateSubState(('storeItems', 'quantity', e.target.value));
+// need a update cart price function
+  updateItemPrice = (parent, name, sub, newState) =>
+    this.updateSubSubState(parent, name, sub, newState);
 
   render() {
     return (
@@ -82,20 +97,26 @@ class Main extends Component {
           )}
           {this.state.displayPage === "signIn" && (
             <SignIn
+              mainState={this.state}
               changePage={this.changePage}
+              checkIfEmailExists={this.checkIfEmailExists}
+              updateCurrentUser={this.updateCurrentUser}
               updateState={this.updateState}
               updateSubState={this.updateSubState}
             />
           )}
           {this.state.displayPage === "createAccount" && (
             <SignUp
+              state={this.state}
               changePage={this.changePage}
+              checkIfEmailExists={this.checkIfEmailExists}
               updateState={this.updateState}
               createNewUser={this.createNewUser}
             />
           )}
           {this.state.displayPage === "shipping" && (
             <Shipping
+              state={this.state}
               changePage={this.changePage}
               updateState={this.updateState}
             />

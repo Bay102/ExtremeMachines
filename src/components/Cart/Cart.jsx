@@ -12,18 +12,6 @@ export class Cart extends React.Component {
     this.props.changePage("shipping");
   };
 
-  // handleQuantityChange = (e) => {
-  //   this.setState((prevState) => ({
-    
-  //       ...prevState.storeItems,
-  //       [e.target.name]: {
-  //         ...prevState.storeItems[e.target.name],
-  //         quantity: e.target.value,
-  //       },
-      
-  //   }));
-  // };
-
   render() {
     const {state, handleQuantityChange, storeItems } = this.props;
 
