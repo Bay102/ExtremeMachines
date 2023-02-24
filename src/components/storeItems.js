@@ -2,7 +2,7 @@ export const storeItems = {
   // map through state to create cart items
   Gladiator: {
     name: "Gladiator",
-    price: "$109,255",
+    price: '$109,255',
     quantity: 1,
     image:
       "https://images.unsplash.com/photo-1609044761425-dac671e75597?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8amVlcCUyMGdsYWRpYXRvcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
@@ -29,3 +29,6 @@ export const storeItems = {
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNOfQ8_IpVKT6_i63mt3Uzw6HaXNlpfUO_7g&usqp=CAU",
   },
 };
+
+
+

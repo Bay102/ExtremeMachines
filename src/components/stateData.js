@@ -17,12 +17,12 @@ export const allUsers = [
   user: 'fake',
   userEmail: "fake@devslopes.com",
   password: "Devslopes0!",
-  cart: "",
-  shipping: "",
-  payment: "",
-  firstName: "",
-  lastName: "",
-  postCode: "",
+  cart: undefined,
+  shipping: undefined,
+  payment: undefined,
+  firstName: "faker",
+  lastName: "dummy",
+  postCode: "48170",
  }
  
 ];

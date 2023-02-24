@@ -127,7 +127,7 @@ class SignUp extends Component {
     const userAlreadyExists = checkIfEmailExists(users, userEmail);
     if (!errorCheck && !userAlreadyExists) {
       this.props.createNewUser(this.state.credentials); // why is index now user
-      this.props.changePage("cart");
+      this.props.changePage("signIn");
     }
   };
 

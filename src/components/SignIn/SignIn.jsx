@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import "./SignIn.css";
-import { InputBase } from "../InputBase/InputBase";
-import {
-  checkIfUserExists,
-  emailContains,
-  passwordLengthError,
-} from "../validations";
-import { USER_DATA } from "../stateData";
+import { BuildSignInInputs, InputBase } from "../InputBase/InputBase";
+import { emailContains, passwordLengthError } from "../validations";
 
 // User can sign in | if password in incorrect prompt error |
 // Eye Icon on Password | if successful render Cart
@@ -78,33 +73,37 @@ class SignIn extends Component {
     e.preventDefault();
     const errorCheck = this.preSubmit();
     if (!errorCheck) {
-      // this.props.updateCurrentUser('currentUser', this.state.credentials);
+      this.props.updateCurrentUser(this.state.credentials);
       this.props.changePage("cart");
-      this.handleLogin();
     }
   };
 
   render() {
-    const inputData = [
-      {
-        id: 1,
-        type: "text",
-        label: "email",
-        name: "userEmail",
-        error: "userEmail",
-      },
-      {
-        id: 2,
-        type: "password",
-        label: "password",
-        name: "userPassword",
-        error: "userPassword",
-      },
-    ];
+    // const inputData = [
+    //   {
+    //     id: 1,
+    //     type: "text",
+    //     label: "email",
+    //     name: "userEmail",
+    //     error: "userEmail",
+    //   },
+    //   {
+    //     id: 2,
+    //     type: "password",
+    //     label: "password",
+    //     name: "userPassword",
+    //     error: "userPassword",
+    //   },
+    // ];
 
     return (
       <form onSubmit={this.handleSignIn}>
-        <div className="inputsWrapper">
+        <BuildSignInInputs
+          signInState={this.state}
+          handleInputChange={this.handleInputChange}
+          handleBlur={this.handleBlur}
+        />
+        {/* <div className="inputsWrapper">
           <h2>Sign In</h2>
           {inputData.length
             ? inputData.map((input, index) => (
@@ -129,11 +128,11 @@ class SignIn extends Component {
                   />
                 </label>
               ))
-            : null}
-          <div className="signInSubmit">
+            : null} 
+           <div className="signInSubmit">
             <button type="submit">Sign In</button>
-          </div>
-        </div>
+          </div> 
+         </div> */}
       </form>
     );
   }

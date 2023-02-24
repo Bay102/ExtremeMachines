@@ -20,7 +20,7 @@ export const CartItemBase = ({
         name={name}
         id={name}
         value={props.state.storeItems.quantity}
-        onChange={(e) => handleQuantityChange('storeItems', name, 'quantity' , e.target.value)}
+        onChange={(e) => handleQuantityChange('storeItems', name ,'quantity' , e.target.value)}
          >
         <option value="1">1</option>
         <option value="2">2</option>

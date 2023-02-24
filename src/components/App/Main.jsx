@@ -10,9 +10,7 @@ import { BuildRadios } from "../HomeScreenButtons/BuildRadios";
 import { allUsers } from "../stateData";
 
 class Main extends Component {
-  // list all state here
-  /// state objects should be arrays
-
+  /// state objects should be arrays(in most cases)
   state = {
     displayPage: "signIn",
     currentUser: [],
@@ -34,6 +32,7 @@ class Main extends Component {
   };
 
   updateSubState = (name, sub, newState) => {
+    console.log(name, sub, newState);
     this.setState((prevState) => ({
       [name]: {
         ...prevState[name],
@@ -42,39 +41,37 @@ class Main extends Component {
     }));
   };
 
-  updateSubSubState = (parent, name, sub, newState, callBack) => {
-    this.setState(
-      (prev) => ({
-        [parent]: {
-          ...prev[parent],
-          [name]: {
-            ...prev[parent][name],
-            [sub]: newState,
-          },
+  updateSubSubState = (parent, name, sub, newState) => {
+    console.log(parent, name, sub, newState);
+    this.setState((prev) => ({
+      [parent]: {
+        ...prev[parent],
+        [name]: {
+          ...prev[parent][name],
+          [sub]: newState,
         },
-      }),
-      callBack
-    );
+      },
+    }));
   };
 
- 
-  // need an update currentUser function
+
+  //need a Sign In Existing User function 
+  //if any of the sign in credentials matches any of the all users login keys, se state of current user to that matching object 
 
   // need a remove from cart function
-  
 
-  updateCurrentUser = (name, newState) => 
-  this.updateState(name, newState);
-  
-  // need a add to users function 
+  updateCurrentUser = (user) => {
+    this.setState({ currentUser: user });
+  };
+
   createNewUser = (newUser) => {
-    this.setState({users: [...this.state.users, newUser]})
-  }
+    this.setState({ users: [...this.state.users, newUser] });
+  };
 
   handleQuantityChange = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
 
-// need a update cart price function
+  // need a update cart price function
   updateItemPrice = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
 
