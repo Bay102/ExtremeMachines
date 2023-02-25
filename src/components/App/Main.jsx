@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { Cart } from "../Cart/Cart";
-// import { fakeUser } from "../stateData";
 import { storeItems } from "../storeItems";
 import Shipping from "../Shipping/Shipping";
 import SignIn from "../SignIn/SignIn";
@@ -12,8 +11,8 @@ import { allUsers } from "../stateData";
 class Main extends Component {
   /// state objects should be arrays(in most cases)
   state = {
-    displayPage: "cart",
-    currentUser: [],
+    displayPage: "signIn",
+    currentUser: '',
     users: allUsers,
     storeItems,  // ask mike if theres a better place for this, 
   };
@@ -26,7 +25,7 @@ class Main extends Component {
 
   updateState = (name, newState) => {
     this.setState((prevState) => ({
-      ...prevState[name],
+      // ...prevState[name],
       [name]: newState,
     }));
   };
@@ -42,7 +41,6 @@ class Main extends Component {
   };
 
   updateSubSubState = (parent, name, sub, newState) => {
-    console.log(parent, name, sub, newState);
     this.setState((prev) => ({
       [parent]: {
         ...prev[parent],
@@ -59,7 +57,8 @@ class Main extends Component {
 
   // need a remove from cart function
 
-  updateCurrentUser = (user) => {
+
+ updateCurrentUser = (user) => {
     this.setState({ currentUser: user });
   };
 
@@ -70,7 +69,7 @@ class Main extends Component {
   handleQuantityChange = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
 
-  // need a update cart price function
+
   updateItemPrice = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
 
@@ -97,7 +96,6 @@ class Main extends Component {
               changePage={this.changePage}
               checkIfEmailExists={this.checkIfEmailExists}
               updateCurrentUser={this.updateCurrentUser}
-              updateState={this.updateState}
               updateSubState={this.updateSubState}
             />
           )}

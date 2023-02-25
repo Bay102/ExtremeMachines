@@ -1,4 +1,5 @@
 import React from "react";
+import { storeItems } from "../storeItems";
 import "./Cart.css";
 import { CartItemBase } from "./CartItemBase";
 
@@ -14,17 +15,29 @@ export class Cart extends React.Component {
 
   updateItemPrice = (itemPrice, itemQuantity) => {
     const priceString = itemPrice.replace(/[$,]/g, ""); // remove dollar sign and commas
-    const doMath = parseInt(priceString) * itemQuantity
+    const doMath = parseInt(priceString) * itemQuantity;
     const formattedPrice = doMath.toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
     });
-    return formattedPrice ;
+    return formattedPrice;
+  };
+
+  totalCartPrice = (cart) => {
+    let totalPrice = 0;
+    for (const item of Object.values(cart)) {
+      const priceString = item.price.replace(/[$,]/g, ""); // remove dollar sign and commas
+      let quantityPrices = parseInt(priceString * item.quantity);
+      totalPrice = totalPrice += quantityPrices;
+    }
+    return totalPrice.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
   };
 
   render() {
     const { state, handleQuantityChange, storeItems } = this.props;
-    console.log(this.updateItemPrice);
 
     return (
       <div>
@@ -56,15 +69,14 @@ export class Cart extends React.Component {
                     <div className="summaryItemQuantity">
                       Quantity: {item.quantity}
                     </div>
-                    {/* <div>Total: {item.price}</div> */}
-                    <div>
+                    <div className="totalPrice">
                       Total: {this.updateItemPrice(item.price, item.quantity)}
                     </div>
                   </div>
                 ))
               : null}
-            <div className="totalPrice">
-              Cart Total: {state.totalCartPrice}
+            <div className="totalCartPrice">
+              Cart Total: <br /> {this.totalCartPrice(state.storeItems)}
               <button
                 onClick={this.continueToShipping}
                 className="checkoutButton"

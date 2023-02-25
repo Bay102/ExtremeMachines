@@ -7,7 +7,7 @@ import {
   matchingPasswords,
   onlyNumberValidation,
   emailContains,
-  checkIfEmailExists,
+  checkIfEmailAlreadyExists,
 } from "../validations";
 import { SignUpInputs } from "./SignUpInputs";
 
@@ -35,7 +35,7 @@ class SignUp extends Component {
     switch (type) {
       case "userEmail":
         errorText =
-          emailContains(value) || checkIfEmailExists(users, userEmail);
+          emailContains(value) || checkIfEmailAlreadyExists(users, userEmail);
         this.setState((prevState) => ({
           error: {
             ...prevState.error,
@@ -121,7 +121,7 @@ class SignUp extends Component {
     const { userEmail } = this.state.credentials;
     const { users } = this.props.state;
     const errorCheck = this.preSubmit();
-    const userAlreadyExists = checkIfEmailExists(users, userEmail);
+    const userAlreadyExists = checkIfEmailAlreadyExists(users, userEmail);
     if (!errorCheck && !userAlreadyExists) {
       this.props.createNewUser(this.state.credentials); // why is index now user
       this.props.changePage("signIn");

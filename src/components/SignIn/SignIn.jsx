@@ -55,7 +55,7 @@ class SignIn extends Component {
 
   handleBlur = (e) => this.handleValidations(e.target.name, e.target.value);
 
-  preSubmit = () => {
+  errorCheck = () => {
     let errorValue = {};
     let isError = false;
     Object.keys(this.state.credentials).forEach((val) => {
@@ -68,14 +68,28 @@ class SignIn extends Component {
     return isError;
   };
 
+  findExistingUser = (users, email, password) => {
+    for (let i = 0; i < users.length; i++) {
+      if (email === users[i].userEmail && password === users[i].password) {
+        this.props.updateCurrentUser(users[i]);
+      }
+    }
+  };
+
   handleSignIn = (e) => {
     e.preventDefault();
-    const requiredFieldErrorCheck = this.preSubmit();
-    const emailContainsSymbolsRequirement = emailContains(this.state.credentials.userEmail) 
-    console.log(emailContainsSymbolsRequirement);
+    const requiredFieldErrorCheck = this.errorCheck();
+    const emailContainsSymbolsRequirement = emailContains(
+      this.state.credentials.userEmail
+    );
     if (!requiredFieldErrorCheck && !emailContainsSymbolsRequirement) {
-      this.props.updateCurrentUser(this.state.credentials);
+      // this.props.updateCurrentUser(this.state.credentials);
       this.props.changePage("cart");
+      this.findExistingUser(
+        this.props.mainState.users,
+        this.state.credentials.userEmail,
+        this.state.credentials.userPassword
+      );
     }
   };
 

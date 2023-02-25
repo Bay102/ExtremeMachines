@@ -3,18 +3,19 @@
    flex-direction: column;
    justify-content: space-evenly;
    align-items: center;
-   width: 230px;
-   height: 350px;
+   width: 275px;
+   height: 400px;
    border: 3px solid black;
    border-radius: 5px;
    background-color: rgb(255 175 91 / 97%);
    margin: auto;
    text-align: center;
+   box-shadow: rgb(241, 139, 29) 0px 10px 25px -10px;
 }
 
 .itemImage {
    width: 97%;
-   height: 125px;
+   height: 175px;
 }
 
 .itemQuantity div {
@@ -28,4 +29,5 @@
 .summaryWrapper {
    border: 1px solid black;
    padding: 10px;
+   width: 110px;
 }

@@ -38,9 +38,9 @@
 }
 
 .continueToCheckout {
-   width: fit-content;
-   /* height: 150px; */
+   width: 65%;
    margin: 20px auto;
+   padding: 15px;
    border: 3px solid rgba(255, 132, 31, 0.876);
    align-items: center;
    background-color: azure;
@@ -54,10 +54,7 @@
 }
 
 .totalPrice {
-   width: 150px;
-   height: 100px;
-   border: 1px solid black;
-   margin: auto;
+   font-weight: 600;
 }
 
 .summaryItemQuantity {
@@ -74,4 +71,13 @@
 
 .checkoutButton {
 text-align: center;
+width: 100px;
+align-items: baseline;
+}
+
+.totalCartPrice { 
+   display:flex ;
+   flex-direction: column;
+   justify-content: space-around;
+   font-weight: 500;
 }

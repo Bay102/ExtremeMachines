@@ -11,6 +11,7 @@ export const NEW_USER_DATA = {
   payment: undefined,
 };
 
+// new users get added to this array
 export const allUsers = [
  {
   user: 'fake',
