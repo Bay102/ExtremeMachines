@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import "./SignIn.css";
-import { emailContains, passwordLengthError } from "../validations";
+import {
+  emailContains,
+  findUserToLogIn,
+  passwordLengthError,
+  userValidation,
+  userValidationError,
+} from "../validations";
 import { BuildSignInInputs } from "./BuildSignInInputs";
 
-// User can sign in | if password in incorrect prompt error |
+// User can sign in | if password is incorrect prompt error |
 // Eye Icon on Password | if successful render Cart
 
 class SignIn extends Component {
@@ -22,8 +28,6 @@ class SignIn extends Component {
         [e.target.name]: e.target.value,
       },
     }));
-    if (e.target.name === "userEmail") {
-    }
   };
 
   handleValidations = (type, value) => {
@@ -40,7 +44,13 @@ class SignIn extends Component {
         break;
       // add check if user exists here
       case "userPassword":
-        errorText = passwordLengthError(value);
+        errorText =
+          passwordLengthError(value) ||
+          userValidationError(
+            this.props.mainState.users,
+            this.state.credentials.userEmail,
+            this.state.credentials.userPassword
+          );
         this.setState((prevState) => ({
           error: {
             ...prevState.error,
@@ -68,12 +78,14 @@ class SignIn extends Component {
     return isError;
   };
 
-  findExistingUser = (users, email, password) => {
+  findUserToLogIn = (users, email) => {
+    let user;
     for (let i = 0; i < users.length; i++) {
-      if (email === users[i].userEmail && password === users[i].password) {
-        this.props.updateCurrentUser(users[i]);
+      if (email === users[i].userEmail) {
+        user = users[i];
       }
     }
+    return user;
   };
 
   handleSignIn = (e) => {
@@ -82,14 +94,24 @@ class SignIn extends Component {
     const emailContainsSymbolsRequirement = emailContains(
       this.state.credentials.userEmail
     );
-    if (!requiredFieldErrorCheck && !emailContainsSymbolsRequirement) {
-      // this.props.updateCurrentUser(this.state.credentials);
-      this.props.changePage("cart");
-      this.findExistingUser(
-        this.props.mainState.users,
-        this.state.credentials.userEmail,
-        this.state.credentials.userPassword
+    const validateCredentials = userValidation(
+      this.props.mainState.users,
+      this.state.credentials.userEmail,
+      this.state.credentials.userPassword
+    );
+    if (
+      !requiredFieldErrorCheck &&
+      !emailContainsSymbolsRequirement &&
+      validateCredentials
+    ) {
+      const user = this.props.updateCurrentUser(
+        this.findUserToLogIn(
+          this.props.mainState.users,
+          this.state.credentials.userEmail
+        )
       );
+      console.log(user);
+      this.props.changePage("cart");
     }
   };
 

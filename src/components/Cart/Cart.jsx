@@ -1,9 +1,9 @@
 import React from "react";
-import { storeItems } from "../storeItems";
 import "./Cart.css";
 import { CartItemBase } from "./CartItemBase";
 
-// items can be removed items from cart | total sum of all items calculated | if 0 items in cart checkout disabled
+// items can be removed items from cart | total sum of all items calculated 
+//  | if 0 items in cart checkout disabled
 
 export class Cart extends React.Component {
   continueToShipping = (e) => {

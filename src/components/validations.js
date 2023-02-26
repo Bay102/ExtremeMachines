@@ -1,12 +1,35 @@
-// export const logInUserIfExists = (users, email) => {
-
-// }
 
 export const checkIfEmailAlreadyExists = (users, email) => {
-  if (  users.some(user => user.userEmail === email)) {
-    return 'Email already exists'
-  } else return false
-}
+  if (users.some((user) => user.userEmail === email)) {
+    return "Email already exists";
+  } else return false;
+};
+
+export const findExistingUser = (users, email) => {
+  let user;
+  for (let i = 0; i < users.length; i++) {
+    if (email === users[i].userEmail) {
+      user = users[i];
+    }
+  }
+  return user;
+};
+
+export const userValidationError = (users, email, password) => {
+  const user = findExistingUser(users, email);
+  const values = Object.values(user);
+  if (password === values[2]) {
+    return true;
+  } else return 'Incorrect Password';
+};
+
+export const userValidation = (users, email, password) => {
+  const user = findExistingUser(users, email);
+  const values = Object.values(user);
+  if (password === values[2]) {
+    return true;
+  } else return false ;
+};
 
 export const onlyTextValidation = (value) => {
   if (value) {

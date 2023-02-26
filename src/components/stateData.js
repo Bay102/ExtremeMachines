@@ -24,6 +24,5 @@ export const allUsers = [
   lastName: "dummy",
   postCode: "48170",
  }
- 
 ];
 

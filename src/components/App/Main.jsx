@@ -14,7 +14,7 @@ class Main extends Component {
     displayPage: "signIn",
     currentUser: '',
     users: allUsers,
-    storeItems,  // ask mike if theres a better place for this, 
+    storeItems,  
   };
 
   changePage = (value) => {
@@ -25,7 +25,7 @@ class Main extends Component {
 
   updateState = (name, newState) => {
     this.setState((prevState) => ({
-      // ...prevState[name],
+      ...prevState[name],
       [name]: newState,
     }));
   };
