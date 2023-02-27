@@ -1,5 +1,4 @@
 export const storeItems = {
-  // map through state to create cart items
   Gladiator: {
     name: "Gladiator",
     price: '$109,255',

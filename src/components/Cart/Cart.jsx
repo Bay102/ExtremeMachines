@@ -53,6 +53,7 @@ export class Cart extends React.Component {
                     quantity={`${value.quantity}`}
                     price={`${value.price}`}
                     image={`${value.image}`}
+                    removeItem={this.props.removeItem}
                   />
                 </div>
               ))

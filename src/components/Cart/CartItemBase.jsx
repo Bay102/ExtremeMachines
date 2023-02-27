@@ -6,6 +6,7 @@ export const CartItemBase = ({
   name,
   image,
   price,
+removeItem,
   ...props
 }) => (
   <div className="cartItemContainer">
@@ -34,7 +35,7 @@ export const CartItemBase = ({
         <option value="10">10</option>
       </select>
     </div>
-    <button className="removeFromCart">Remove</button>
+    <button id={name} onClick={() => removeItem(name)} className="removeFromCart">Remove</button>
   </div>
 );
 

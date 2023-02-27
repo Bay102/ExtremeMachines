@@ -9,9 +9,8 @@ import { BuildRadios } from "../HomeScreenButtons/BuildRadios";
 import { allUsers } from "../stateData";
 
 class Main extends Component {
-  /// state objects should be arrays(in most cases)
   state = {
-    displayPage: "signIn",
+    displayPage: "cart",
     currentUser: '',
     users: allUsers,
     storeItems,  
@@ -52,11 +51,6 @@ class Main extends Component {
     }));
   };
 
-  //need a Sign In Existing User function
-  //if any of the sign in credentials matches any of the all users login keys, se state of current user to that matching object
-
-  // need a remove from cart function
-
 
  updateCurrentUser = (user) => {
     this.setState({ currentUser: user });
@@ -73,6 +67,12 @@ class Main extends Component {
   updateItemPrice = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
 
+  removeItemFromCart = (itemName) => {
+    const storeItemsCopy = {...this.state.storeItems};
+    delete storeItemsCopy[itemName];
+    this.setState({storeItems: storeItemsCopy});
+  }
+
   render() {
     return (
       <div>
@@ -86,6 +86,7 @@ class Main extends Component {
               state={this.state}
               handleQuantityChange={this.handleQuantityChange}
               storeItems={this.state.storeItems}
+              removeItem={this.removeItemFromCart}
               changePage={this.changePage}
               updateState={this.updateState}
             />
