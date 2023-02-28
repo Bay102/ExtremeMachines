@@ -2,16 +2,13 @@ import React from "react";
 import "./Cart.css";
 import { CartItemBase } from "./CartItemBase";
 
-// items can be removed items from cart | total sum of all items calculated 
-//  | if 0 items in cart checkout disabled
+// if 0 items in cart checkout disabled
 
 export class Cart extends React.Component {
   continueToShipping = (e) => {
     e.preventDefault();
     this.props.changePage("shipping");
   };
-
-  // updateItemPrice = (itemPrice, itemQuantity) => itemPrice.replace(/[$,]/g, '') * itemQuantity ;
 
   updateItemPrice = (itemPrice, itemQuantity) => {
     const priceString = itemPrice.replace(/[$,]/g, ""); // remove dollar sign and commas
@@ -37,8 +34,7 @@ export class Cart extends React.Component {
   };
 
   render() {
-    const { state, handleQuantityChange, storeItems } = this.props;
-
+    const { state, handleQuantityChange, storeItems, removeItem } = this.props;
     return (
       <div>
         <h2 className="cartH2">CART</h2>
@@ -53,7 +49,7 @@ export class Cart extends React.Component {
                     quantity={`${value.quantity}`}
                     price={`${value.price}`}
                     image={`${value.image}`}
-                    removeItem={this.props.removeItem}
+                    removeItem={removeItem}
                   />
                 </div>
               ))

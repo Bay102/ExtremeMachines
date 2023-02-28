@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./SignIn.css";
 import {
   emailContains,
-  findUserToLogIn,
+  // findUserToLogIn,
   passwordLengthError,
   userValidation,
   userValidationError,

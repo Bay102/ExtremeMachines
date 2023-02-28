@@ -36,7 +36,7 @@ export const onlyTextValidation = (value) => {
     if (/^[a-zA-Z ]*$/i.test(value)) {
       return undefined;
     } else {
-      return " Alphabetical letters only";
+      return "Alphabetical letters only";
     }
   } else {
     return undefined;

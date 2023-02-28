@@ -10,7 +10,7 @@ import { allUsers } from "../stateData";
 
 class Main extends Component {
   state = {
-    displayPage: "cart",
+    displayPage: "shipping",
     currentUser: '',
     users: allUsers,
     storeItems,  
@@ -61,16 +61,21 @@ class Main extends Component {
   };
 
   handleQuantityChange = (parent, name, sub, newState) =>
-    this.updateSubSubState(parent, name, sub, newState);
-
+  this.updateSubSubState(parent, name, sub, newState);
 
   updateItemPrice = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
+
 
   removeItemFromCart = (itemName) => {
     const storeItemsCopy = {...this.state.storeItems};
     delete storeItemsCopy[itemName];
     this.setState({storeItems: storeItemsCopy});
+  }
+
+  updateUserCart = (users, buttonId) => {
+    const findUser = users.find(user => user.user === buttonId);
+    console.log(findUser);
   }
 
   render() {
@@ -87,6 +92,7 @@ class Main extends Component {
               handleQuantityChange={this.handleQuantityChange}
               storeItems={this.state.storeItems}
               removeItem={this.removeItemFromCart}
+              updateUserCart={this.updateUserCart}
               changePage={this.changePage}
               updateState={this.updateState}
             />

@@ -15,8 +15,8 @@ export const NEW_USER_DATA = {
 export const allUsers = [
  {
   user: 'fake',
-  userEmail: "fake@devslopes.com",
-  password: "Devslopes0!",
+  userEmail: "fake@dev.com",
+  password: "fake000",
   cart: undefined,
   shipping: undefined,
   payment: undefined,
