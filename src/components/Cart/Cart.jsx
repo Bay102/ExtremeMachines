@@ -1,6 +1,7 @@
 import React from "react";
 import "./Cart.css";
 import { CartItemBase } from "./CartItemBase";
+import { CartSummary } from "./CartSummary";
 
 // if 0 items in cart checkout disabled
 
@@ -59,7 +60,8 @@ export class Cart extends React.Component {
         <div className="continueToCheckout">
           <div className="boxTitle">Cart Summary</div>
           <div className="cartSummary">
-            {Object.values(storeItems).length
+                <CartSummary storeItems={storeItems} updateItemPrice={this.updateItemPrice}/>
+            {/* {Object.values(storeItems).length
               ? Object.values(storeItems).map((item, index) => (
                   <div key={index} className="summaryWrapper">
                     <div>{item.name}</div>
@@ -71,7 +73,7 @@ export class Cart extends React.Component {
                     </div>
                   </div>
                 ))
-              : null}
+              : null} */}
             <div className="totalCartPrice">
               Cart Total: <br /> {this.totalCartPrice(state.storeItems)}
               <button

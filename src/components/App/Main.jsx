@@ -10,7 +10,7 @@ import { allUsers } from "../stateData";
 
 class Main extends Component {
   state = {
-    displayPage: "shipping",
+    displayPage: "cart",
     currentUser: '',
     users: allUsers,
     storeItems,  
