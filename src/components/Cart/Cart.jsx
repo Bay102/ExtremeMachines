@@ -60,20 +60,10 @@ export class Cart extends React.Component {
         <div className="continueToCheckout">
           <div className="boxTitle">Cart Summary</div>
           <div className="cartSummary">
-                <CartSummary storeItems={storeItems} updateItemPrice={this.updateItemPrice}/>
-            {/* {Object.values(storeItems).length
-              ? Object.values(storeItems).map((item, index) => (
-                  <div key={index} className="summaryWrapper">
-                    <div>{item.name}</div>
-                    <div className="summaryItemQuantity">
-                      Quantity: {item.quantity}
-                    </div>
-                    <div className="totalPrice">
-                      Total: {this.updateItemPrice(item.price, item.quantity)}
-                    </div>
-                  </div>
-                ))
-              : null} */}
+            <CartSummary
+              storeItems={storeItems}
+              updateItemPrice={this.updateItemPrice}
+            />
             <div className="totalCartPrice">
               Cart Total: <br /> {this.totalCartPrice(state.storeItems)}
               <button

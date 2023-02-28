@@ -6,6 +6,7 @@
 // Back to cart button should go back to cart
 // There should be a Next or "Payment" button to go to next screen
 import React from "react";
+import { CartSummary } from "../Cart/CartSummary";
 import { BuildShippingInputs } from "./BuildShippingInputs";
 
 class Shipping extends React.Component {
@@ -18,7 +19,7 @@ class Shipping extends React.Component {
       homePhone: "",
       cellPhone: "",
     },
-    error: {}
+    error: {},
   };
 
   handleInputChange = (e) => {
@@ -31,7 +32,7 @@ class Shipping extends React.Component {
   };
 
   // handleValidations = (type, value) => {
-  
+
   //   let errorText;
   //   switch (type) {
   //     case "userEmail":
@@ -117,20 +118,20 @@ class Shipping extends React.Component {
   //   return isError;
   // };
 
-
   render() {
     return (
       <div>
         <form className="inputsWrapper" action="">
           <h3>Shipping</h3>
-        <BuildShippingInputs
-          state={this.state}
-          changePage={this.changePage}
-          updateState={this.updateState}
-          handleInputChange={this.handleInputChange}
-        /> 
-        <button onClick={''}>Pay Now</button>
+          <BuildShippingInputs
+            state={this.state}
+            changePage={this.changePage}
+            updateState={this.updateState}
+            handleInputChange={this.handleInputChange}
+          />
+          <button onClick={""}>Pay Now</button>
         </form>
+        {/* <CartSummary /> */}
       </div>
     );
   }

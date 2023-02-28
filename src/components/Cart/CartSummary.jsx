@@ -1,7 +1,4 @@
-// ASK WHY THIS QUANTITY IS NOT UPDATING 
 import React from "react";
-
-
 
 export const CartSummary = (props) => {
    const {updateItemPrice , storeItems} = props; 
