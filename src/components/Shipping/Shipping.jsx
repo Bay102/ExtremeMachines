@@ -8,6 +8,7 @@
 import React from "react";
 import { CartSummary } from "../Cart/CartSummary";
 import { BuildShippingInputs } from "./BuildShippingInputs";
+import './Shipping.css'
 
 class Shipping extends React.Component {
   state = {
@@ -119,6 +120,7 @@ class Shipping extends React.Component {
   // };
 
   render() {
+    const { mainState }  = this.props
     return (
       <div>
         <form className="inputsWrapper" action="">
@@ -126,12 +128,11 @@ class Shipping extends React.Component {
           <BuildShippingInputs
             state={this.state}
             changePage={this.changePage}
-            updateState={this.updateState}
             handleInputChange={this.handleInputChange}
           />
-          <button onClick={""}>Pay Now</button>
+          <button className="PayNowButton" onClick={""}>Pay Now</button>
         </form>
-        {/* <CartSummary /> */}
+        {/* <CartSummary mainState={mainState} /> */}
       </div>
     );
   }

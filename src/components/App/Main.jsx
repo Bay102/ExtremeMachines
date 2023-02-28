@@ -117,7 +117,7 @@ class Main extends Component {
           )}
           {this.state.displayPage === "shipping" && (
             <Shipping
-              state={this.state}
+              mainState={this.state}
               changePage={this.changePage}
               updateState={this.updateState}
             />

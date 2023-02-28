@@ -9,9 +9,10 @@ h2 { text-align: center }
    margin-bottom: 20px ;
    margin: auto;
    justify-content: space-around;
-   background-color: rgba(255, 132, 31, 0.876);
+   background-color: rgb(128 127 127);
    font-family: copperplate;
    width: 100vw;
+   color: #e77c26;
 
 }
 
