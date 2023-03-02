@@ -1,46 +1,42 @@
 .shippingForm {
-   display: flex;
-   justify-content: space-evenly;
+   display: flex; 
+   flex-direction: row; 
+   /* width: 800px; */
 }
 
 .shippingInputsWrapper {
    display: flex;
-   flex-direction: column;
+   /* flex-direction: column; */
    gap: 10px;
    border: 2px solid white;
    border-radius: 10px;
    background-color: white;
-   width: 40%;
    height: max-content;
-   margin: 80px auto;
-   padding-bottom: 20px;
+   margin: 20px auto;
+   padding: 20px;
    text-align: center;
 }
 
-.shippingInputsWrapper input {
+.shipInputs input {
    height: 35px;
    width: 250px;
    text-align: center;
-   margin: 5px 0;
+   margin: 10px 0;
 }
 
 .shippingSummaryContainer {
+   font-size: 12px;
    display: flex;
    flex-direction: column;
    width: 250px;
    height: max-content;
    justify-content: center;
    border-radius: 10px;
-   margin: 20px auto;
+   margin: auto;
    padding: 10px;
    background: whitesmoke;
 }
 
-.chooseShipping {
-   width: 125px;
-   height: 125px;
-   background-color: rgb(141, 138, 138);
-}
 
 .summaryTitle {
    color: black;
@@ -48,6 +44,7 @@
    height: 50px;
    text-align: center;
    margin: auto;   
+   font-size: 18px;
 }
 
 .summaryWrapper {
@@ -62,21 +59,19 @@
    padding: 10px 15px;
 }
 
-
-
-.summaryBox {
-   width: 95%;
-   height: 100px;
-   padding: 10px;
-   background-color: aquamarine;
-   border-radius: 10px;
-}
-
 .summaryButtons {
    display: flex;
 }
 
-.shippingInputsContainer {
+.shippingRadiosContainer {
    display: flex;
    flex-direction: column;
+}
+
+.totalAfterShipping {
+   height: 50px;
+}
+
+.totalAfterShipping div {
+   margin: 10px auto;
 }

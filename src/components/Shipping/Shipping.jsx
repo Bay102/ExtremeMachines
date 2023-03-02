@@ -21,13 +21,14 @@ class Shipping extends React.Component {
       homePhone: '',
       cellPhone: '',
     },
+    finalPrice: '',
     error: {},
   };
 
   backToCart = (e) => {
     e.preventDefault();
-    this.props.changePage('cart')
-  }
+    this.props.changePage('cart');
+  };
 
   handleInputChange = (e) => {
     this.setState((prevState) => ({
@@ -41,7 +42,7 @@ class Shipping extends React.Component {
   handleValidations = (type, value) => {
     let errorText;
     switch (type) {
-      case "name":
+      case 'name':
         errorText = onlyTextValidation(value);
         this.setState((prevState) => ({
           error: {
@@ -50,7 +51,7 @@ class Shipping extends React.Component {
           },
         }));
         break;
-    case "zip":
+      case 'zip':
         errorText = onlyNumberValidation(value);
         this.setState((prevState) => ({
           error: {
@@ -59,7 +60,7 @@ class Shipping extends React.Component {
           },
         }));
         break;
-      case "homePhone":
+      case 'homePhone':
         errorText = onlyNumberValidation(value);
         this.setState((prevState) => ({
           error: {
@@ -68,14 +69,14 @@ class Shipping extends React.Component {
           },
         }));
         break;
-        case "cellPhone":
-           errorText =  errorText = onlyNumberValidation(value);
-            this.setState((prevState) => ({
-              error: {
-                ...prevState.error,
-                cellPhone: errorText,
-              },
-            }));
+      case 'cellPhone':
+        errorText = errorText = onlyNumberValidation(value);
+        this.setState((prevState) => ({
+          error: {
+            ...prevState.error,
+            cellPhone: errorText,
+          },
+        }));
         break;
       default:
         break;
@@ -92,7 +93,7 @@ class Shipping extends React.Component {
       .forEach((val) => {
         //ask how to make other validations required
         if (!this.state.shippingInfo[val].length) {
-          errorValue = { ...errorValue, [`${val}`]: "Required" };
+          errorValue = { ...errorValue, [`${val}`]: 'Required' };
           isError = true;
         }
       });
@@ -104,50 +105,56 @@ class Shipping extends React.Component {
     e.preventDefault();
     const requiredFieldErrorCheck = this.errorCheck();
     if (!requiredFieldErrorCheck) {
-      this.props.changePage('payments')
+      this.props.changePage('payments');
     }
-  }
+  };
 
   render() {
-    const { storeItems, updateItemPrice, } = this.props;
+    const { storeItems, updateItemPrice } = this.props;
     return (
       <div>
         <form className="shippingForm" onSubmit={this.handleSubmit} action="">
           <div className="shippingInputsWrapper">
-            <h3>Shipping</h3>
-            <BuildShippingInputs
-              state={this.state}
-              changePage={this.changePage}
-              handleInputChange={this.handleInputChange} 
-              handleBlur={this.handleBlur}
-            />
-          </div>
-          <div className="shippingSummaryContainer">
-            <h3 className="summaryTitle">Summary</h3>
+            <div className="shipInputs">
+              <h3>Shipping</h3>
+              <BuildShippingInputs
+                state={this.state}
+                changePage={this.changePage}
+                handleInputChange={this.handleInputChange}
+                handleBlur={this.handleBlur}
+              />
+            </div>
 
-            <CartSummary storeItems={storeItems} updateItemPrice={updateItemPrice} />
-            <div className="summaryBox">
-              <h4>Shipping Method</h4>
-              <div className="shippingInputsContainer">
-                <label htmlFor="back">
-                  {' '}
-                  Standard
-                  <input type="radio" value="" name="back" id="back"  />
-                </label>
-                <label htmlFor="pay">
-                  {' '}
-                  Express
-                  <input type="radio" value="" name="pay" id="pay"  />
-                </label>
+            <div className="shippingSummaryContainer">
+              <h3 className="summaryTitle">Summary</h3>
+              <div className="itemPrices">
+                <CartSummary storeItems={storeItems} updateItemPrice={updateItemPrice} />
+              </div>
+              <div className="summaryBox">
+                <h4>Shipping Method</h4>
+                <div className="shippingRadiosContainer">
+                  <label htmlFor="back">
+                    <input type="radio" value="" name="back" id="back" />
+                    Standard - Free
+                  </label>
+                  <label htmlFor="pay">
+                    <input type="radio" value="" name="pay" id="pay" />
+                    Express - $1500
+                  </label>
+                </div>
+              </div>
+              <div className="totalAfterShipping">
+                <div>Cart Subtotal: </div>
+                <div>Final Price: </div>
+              </div>
+              <div className="summaryButtons">
+                <button className="PayNowButton" onClick={this.backToCart}>
+                  Back To Cart
+                </button>
+                <button className="PayNowButton">Pay Now</button>
               </div>
             </div>
-
-            <div className="summaryButtons">
-              <button className="PayNowButton" onClick={this.backToCart}>Back To Cart</button>
-              <button className="PayNowButton">Pay Now</button> 
-            </div>
           </div>
-          {/* <div className="chooseShipping"></div> */}
         </form>
       </div>
     );

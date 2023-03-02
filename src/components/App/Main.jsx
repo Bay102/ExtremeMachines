@@ -11,7 +11,7 @@ import Payments from "../Payment/Payments";
 
 class Main extends React.Component {
   state = {
-    displayPage: "shipping",
+    displayPage: "signIn",
     currentUser: '',
     users: allUsers,
     storeItems,  
