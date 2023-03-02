@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React from "react";
 import { Cart } from "../Cart/Cart";
 import { storeItems } from "../storeItems";
 import Shipping from "../Shipping/Shipping";
@@ -7,10 +7,11 @@ import SignUp from "../SignUp/SignUp";
 import "./Main.css";
 import { BuildRadios } from "../HomeScreenButtons/BuildRadios";
 import { allUsers } from "../stateData";
+import Payments from "../Payment/Payments";
 
-class Main extends Component {
+class Main extends React.Component {
   state = {
-    displayPage: "cart",
+    displayPage: "shipping",
     currentUser: '',
     users: allUsers,
     storeItems,  
@@ -63,8 +64,19 @@ class Main extends Component {
   handleQuantityChange = (parent, name, sub, newState) =>
   this.updateSubSubState(parent, name, sub, newState);
 
-  updateItemPrice = (parent, name, sub, newState) =>
-    this.updateSubSubState(parent, name, sub, newState);
+  updateItemPrice = (itemPrice, itemQuantity) => {
+    const priceString = itemPrice.replace(/[$,]/g, ""); // remove dollar sign and commas
+    const doMath = parseInt(priceString) * itemQuantity;
+    const formattedPrice = doMath.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+    return formattedPrice;
+  };
+
+
+  // updateItemPrice = (parent, name, sub, newState) =>
+  //   this.updateSubSubState(parent, name, sub, newState);
 
 
   removeItemFromCart = (itemName) => {
@@ -95,6 +107,7 @@ class Main extends Component {
               updateUserCart={this.updateUserCart}
               changePage={this.changePage}
               updateState={this.updateState}
+              updateItemPrice={this.updateItemPrice}
             />
           )}
           {this.state.displayPage === "signIn" && (
@@ -120,7 +133,12 @@ class Main extends Component {
               mainState={this.state}
               changePage={this.changePage}
               updateState={this.updateState}
+              storeItems={this.state.storeItems}
+              updateItemPrice={this.updateItemPrice}
             />
+          )}
+          {this.state.displayPage === "payments" && (
+            <Payments />
           )}
         </div>
       </div>

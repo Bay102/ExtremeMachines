@@ -13,19 +13,19 @@ export const storeItems = {
     image:
       "https://images.unsplash.com/photo-1560361586-8242b1fc06c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bnN4fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
   },
-  Delorian: {
-    name: "Delorian",
+  McLaren: {
+    name: "McLaren",
     price: "$249,999",
     quantity: 1,
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFNHNYdQsJW2Rg0EHMoB6mSamxIdkuUvR4jQ&usqp=CAU",
+      "https://images.unsplash.com/photo-1615394695852-da39a8df9bf1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
   },
-  Skyline: {
-    name: "Skyline",
+  Challenger: {
+    name: "Dodge Challenger",
     price: "$92,490",
     quantity: 1,
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNOfQ8_IpVKT6_i63mt3Uzw6HaXNlpfUO_7g&usqp=CAU",
+      "https://images.unsplash.com/photo-1632686341382-15b4237345b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
   },
   
 };

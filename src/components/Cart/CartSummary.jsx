@@ -1,7 +1,7 @@
 import React from "react";
 
 export const CartSummary = (props) => {
-   const {updateItemPrice , storeItems} = props; 
+   const {updateItemPrice , storeItems } = props; 
    return (
       Object.values(storeItems).length
       ? Object.values(storeItems).map((item, index) => (

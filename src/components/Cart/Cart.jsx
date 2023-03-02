@@ -35,7 +35,7 @@ export class Cart extends React.Component {
   };
 
   render() {
-    const { state, handleQuantityChange, storeItems, removeItem } = this.props;
+    const { state, handleQuantityChange, storeItems, removeItem , updateItemPrice} = this.props;
     return (
       <div>
         <h2 className="cartH2">CART</h2>
@@ -62,7 +62,7 @@ export class Cart extends React.Component {
           <div className="cartSummary">
             <CartSummary
               storeItems={storeItems}
-              updateItemPrice={this.updateItemPrice}
+              updateItemPrice={updateItemPrice}
             />
             <div className="totalCartPrice">
               Cart Total: <br /> {this.totalCartPrice(state.storeItems)}

@@ -21,6 +21,10 @@ h2 { text-align: center }
    margin: auto;
 }
 
+.headerWrapper label {
+   font-size: 20px;
+}
+
 .headerWrapper h2 {
    margin-right: auto;
    margin-left: 20px;

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "../SignUp/SignUp.css";
 import { NEW_USER_DATA } from "../stateData";
 import {
@@ -13,7 +13,7 @@ import { SignUpInputs } from "./SignUpInputs";
 
 // Passwords must match | Reveal password with eye icon | Names no numbers
 
-class SignUp extends Component {
+class SignUp extends React.Component {
   state = {
     credentials: NEW_USER_DATA,
     error: {},

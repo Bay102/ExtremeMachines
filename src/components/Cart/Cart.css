@@ -37,10 +37,16 @@
    letter-spacing: 1.5px;
 }
 
+.removeFromCart {
+   color: red;
+   border-radius: 5px;
+   background: black;
+}
+
 .continueToCheckout {
    width: max-content;
    margin: 20px auto;
-   padding: 15px;
+   padding: 0px 15px;
    border: 3px solid rgba(255, 132, 31, 0.876);
    align-items: center;
    background-color: #3d4040;
@@ -49,7 +55,7 @@
 
 .boxTitle {
    margin-bottom: 20px;
-   margin-top: 20px;
+   margin-top: 10px;
    text-decoration: underline;
    color: wheat;
    font-size: 20px;

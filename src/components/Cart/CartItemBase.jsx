@@ -35,7 +35,7 @@ removeItem,
         <option value="10">10</option>
       </select>
     </div>
-    <button id={name} onClick={() => removeItem(name)} className="removeFromCart">Remove</button>
+    <button id={name} onClick={() => removeItem(name)} className="removeFromCart">X</button>
   </div>
 );
 
