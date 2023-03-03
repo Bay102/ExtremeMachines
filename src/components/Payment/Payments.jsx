@@ -126,7 +126,6 @@ class Payments extends React.Component {
   };
 
   render() {
-    const { mainState } = this.props;
     const { cardData, error, cardType, maxLength } = this.state;
 
     const paymentInputs = [

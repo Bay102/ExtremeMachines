@@ -16,7 +16,9 @@ class Main extends React.Component {
     currentUser: '',
     users: allUsers,
     storeItems,
+    cartSubtotal: '',
     shippingOption: 'standard',
+    cartFinalPrice: '', 
   };
 
   changePage = (value) => {
@@ -83,6 +85,10 @@ class Main extends React.Component {
     return formattedPrice;
   };
 
+  getSubtotal = (value) => {
+    this.setState({cartSubtotal: value})
+  }
+
   removeItemFromCart = (itemName) => {
     const storeItemsCopy = { ...this.state.storeItems };
     delete storeItemsCopy[itemName];
@@ -127,7 +133,7 @@ class Main extends React.Component {
           )}
           {this.state.displayPage === 'cart' && (
             <Cart
-              state={this.state}
+              mainState={this.state}
               handleQuantityChange={this.handleQuantityChange}
               storeItems={this.state.storeItems}
               removeItem={this.removeItemFromCart}
@@ -136,6 +142,7 @@ class Main extends React.Component {
               updateState={this.updateState}
               updateItemPrice={this.updateItemPrice}
               totalCartPrice={this.totalCartPrice}
+              getSubtotal={this.getSubtotal}
             />
           )}
           {this.state.displayPage === 'shipping' && (

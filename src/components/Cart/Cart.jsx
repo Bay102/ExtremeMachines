@@ -12,13 +12,13 @@ export class Cart extends React.Component {
 
   continueToShipping = (e) => {
     e.preventDefault();
-    
+    this.props.getSubtotal(this.props.totalCartPrice(this.props.mainState.storeItems))
     this.props.changePage("shipping");
     // this.props.updateSubTotal(this.props.state)
     
   };
   render() {
-    const { state, handleQuantityChange, storeItems, removeItem , updateItemPrice ,totalCartPrice} = this.props;
+    const { mainState, handleQuantityChange, storeItems, removeItem , updateItemPrice ,totalCartPrice} = this.props;
     return (
       <div>
         <h2 className="cartH2">CART</h2>
@@ -27,7 +27,7 @@ export class Cart extends React.Component {
             ? Object.entries(storeItems).map(([key, value]) => (
                 <div key={key} className="itemWrapper">
                   <CartItemBase
-                    state={state}
+                    state={mainState}
                     handleQuantityChange={handleQuantityChange}
                     name={`${key}`}
                     quantity={`${value.quantity}`}
@@ -48,7 +48,7 @@ export class Cart extends React.Component {
               updateItemPrice={updateItemPrice}
             />
             <div className="totalCartPrice">
-              Cart Total: <br /> {totalCartPrice(state.storeItems)}
+              Cart Total: <br /> {totalCartPrice(mainState.storeItems)}
               <button
                 onClick={this.continueToShipping}
                 className="checkoutButton"

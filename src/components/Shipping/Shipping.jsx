@@ -21,9 +21,6 @@ class Shipping extends React.Component {
       homePhone: '',
       cellPhone: '',
     },
-    shippingOption: '',
-    finalPrice: '',
-    subTotal: '',
     error: {},
   };
 
@@ -159,8 +156,8 @@ class Shipping extends React.Component {
                 </div>
               </div>
               <div className="totalAfterShipping">
-                <div>Cart Subtotal: {totalCartPrice(mainState.storeItems)} </div>
-                <div>Final Price: </div>
+                <div>Cart Subtotal:{mainState.cartSubtotal} </div>
+                <div>Final Price: {totalCartPrice(mainState.storeItems)} </div>
               </div>
               <div className="summaryButtons">
                 <button className="PayNowButton" onClick={this.backToCart}>
