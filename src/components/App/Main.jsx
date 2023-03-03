@@ -5,7 +5,7 @@ import Shipping from '../Shipping/Shipping';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import './Main.css';
-import logo from "../images/IMG_3558.jpeg"
+import logo from '../images/IMG_3558.jpeg';
 import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
@@ -16,8 +16,7 @@ class Main extends React.Component {
     currentUser: '',
     users: allUsers,
     storeItems,
-    subTotal: '',
-    finalPrice: '',
+    shippingOption: 'standard',
   };
 
   changePage = (value) => {
@@ -30,16 +29,6 @@ class Main extends React.Component {
     this.setState((prevState) => ({
       ...prevState[name],
       [name]: newState,
-    }));
-  };
-
-  updateSubState = (name, sub, newState) => {
-    console.log(name, sub, newState);
-    this.setState((prevState) => ({
-      [name]: {
-        ...prevState[name],
-        [sub]: newState,
-      },
     }));
   };
 
@@ -67,7 +56,7 @@ class Main extends React.Component {
     this.updateSubSubState(parent, name, sub, newState);
 
   updateItemPrice = (itemPrice, itemQuantity) => {
-    const priceString = itemPrice.replace(/[$,]/g, ''); // remove dollar sign and commas
+    const priceString = itemPrice.replace(/[$,]/g, '');
     const doMath = parseInt(priceString) * itemQuantity;
     const formattedPrice = doMath.toLocaleString('en-US', {
       style: 'currency',
@@ -83,10 +72,15 @@ class Main extends React.Component {
       let quantityPrices = parseInt(priceString * item.quantity);
       totalPrice = totalPrice += quantityPrices;
     }
-    return totalPrice.toLocaleString('en-US', {
+    if (this.state.shippingOption === 'express') {
+      totalPrice += 1500;
+    }
+    const formattedPrice = totalPrice.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
     });
+
+    return formattedPrice;
   };
 
   removeItemFromCart = (itemName) => {
@@ -100,12 +94,17 @@ class Main extends React.Component {
     console.log(findUser);
   };
 
+  handleShippingChange = (event) => {
+    this.setState({
+      shippingOption: event.target.value,
+    });
+  };
+
   render() {
     return (
       <div>
         <div className="headerWrapper">
-          <img style={{width: '120px'}} src={logo} alt="" />
-          {/* <h2>CarCommerce</h2> */}
+          <img style={{ width: '120px' }} src={logo} alt="" />
           <BuildRadios changePage={this.changePage} />
         </div>
         <div className="mainContent">
@@ -115,7 +114,6 @@ class Main extends React.Component {
               changePage={this.changePage}
               checkIfEmailExists={this.checkIfEmailExists}
               updateCurrentUser={this.updateCurrentUser}
-              updateSubState={this.updateSubState}
             />
           )}
           {this.state.displayPage === 'createAccount' && (
@@ -146,12 +144,14 @@ class Main extends React.Component {
               changePage={this.changePage}
               updateState={this.updateState}
               storeItems={this.state.storeItems}
+              updatePriceAfterShipping={this.updatePriceAfterShipping}
               updateItemPrice={this.updateItemPrice}
               totalCartPrice={this.totalCartPrice}
+              handleShippingChange={this.handleShippingChange}
             />
           )}
           {this.state.displayPage === 'payments' && (
-          <Payments mainState={this.state}/>
+            <Payments mainState={this.state} changePage={this.changePage} />
           )}
         </div>
       </div>

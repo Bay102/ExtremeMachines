@@ -10,25 +10,15 @@ export class Cart extends React.Component {
     subTotal: '',
   }
 
-  // totalCartPrice = (cart) => {
-  //   let totalPrice = 0;
-  //   for (const item of Object.values(cart)) {
-  //     const priceString = item.price.replace(/[$,]/g, "");
-  //     let quantityPrices = parseInt(priceString * item.quantity);
-  //     totalPrice = totalPrice += quantityPrices;
-  //   }
-  //   return totalPrice.toLocaleString("en-US", {
-  //     style: "currency",
-  //     currency: "USD",
-  //   });
-  // };
-
   continueToShipping = (e) => {
     e.preventDefault();
+    
     this.props.changePage("shipping");
+    // this.props.updateSubTotal(this.props.state)
+    
   };
   render() {
-    const { state, handleQuantityChange, storeItems, removeItem , updateItemPrice, totalCartPrice} = this.props;
+    const { state, handleQuantityChange, storeItems, removeItem , updateItemPrice ,totalCartPrice} = this.props;
     return (
       <div>
         <h2 className="cartH2">CART</h2>

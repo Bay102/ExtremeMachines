@@ -3,7 +3,6 @@ import { InputBase } from '../InputBase/InputBase';
 import { BuildPaymentInputs } from './BuildPaymentInputs';
 import { OTHERCARDS } from './paymentData';
 import {
-//   cardExpireValidation,
   cardNumberValidation,
   expiryInputs,
   onlyTextValidation,
@@ -13,7 +12,6 @@ import {
 const INIT_CARD = {
   card: '',
   cardHolder: '',
-  expiry: '',
   securityCode: '',
 };
 
@@ -43,7 +41,6 @@ class Payments extends React.Component {
     switch (type) {
       case 'card':
         errorText = cardNumberValidation(value);
-        // find card type  // setState cardType, error
         this.setState((prevState) => ({
           cardType: this.findDebitCardType(value),
           error: {
@@ -53,25 +50,12 @@ class Payments extends React.Component {
         }));
         break;
       case 'cardHolder':
-        // checks for spaces and numbers
-        // setState error
         errorText = onlyTextValidation(value);
         this.setState((prevState) => ({
           error: { ...prevState.error, cardHolderError: errorText },
         }));
         break;
-      // case 'expiry':
-      //   // check date format
-      //   // setState error
-      //   errorText = cardExpireValidation(value);
-      //   console.log(value);
-      //   this.setState((prevState) => ({
-      //     error: { ...prevState.error, expiryError: errorText },
-      //   }));
-      //   break;
       case 'securityCode':
-        // check min length
-        // setState error
         errorText = securityCodeValidation(3, value);
         this.setState((prevState) => ({
           error: { ...prevState.error, securityCodeError: errorText },
@@ -85,7 +69,6 @@ class Payments extends React.Component {
   handleBlur = ({ target: { name, value } }) => this.handleValidations(name, value);
 
   handleInputData = ({ target: { name, value } }) => {
-    /// get this function explained
     if (name === 'card') {
       let mask = value.split(' ').join('');
       if (mask.length) {
@@ -132,11 +115,13 @@ class Payments extends React.Component {
   handleAddCard = (e) => {
     e.preventDefault();
     const errorCheck = this.checkErrorBeforeSave();
+    console.log(errorCheck);
     if (!errorCheck) {
       this.setState({
         cardData: INIT_CARD,
         cardType: null,
       });
+      this.props.changePage('signIn')
     }
   };
 
@@ -150,17 +135,22 @@ class Payments extends React.Component {
         type: 'text',
         label: 'Card Holder Name',
         name: 'cardHolder',
-        error: 'cardHolder',
+        error: 'cardHolderError',
       },
       {
         id: '2',
         type: 'text',
         label: 'Card Number',
         name: 'card',
-        error: 'cardNumber',
+        error: 'cardError',
       },
-      // { id: '3', type: 'select', label: 'Exp.Date', name: 'expiry', error: 'expiryError' },
-      { id: '4', type: 'text', label: 'CVV', name: 'securityCode', error: 'securityCodeError' },
+      {
+        id: '4',
+        type: 'text',
+        label: 'CVV',
+        name: 'securityCode',
+        error: 'securityCodeError',
+      },
     ];
     return (
       <div className=" inputsWrapper paymentsContainer">
@@ -188,11 +178,12 @@ class Payments extends React.Component {
               />
             ))
           : null}
-            <div style={{display: 'flex', margin: 'auto', gap: '5px'}}>Expiry:
-            <div>{expiryInputs}</div>
-            </div>
+        <div style={{ display: 'flex', margin: 'auto', gap: '5px' }}>
+          Expiry:
+          <div>{expiryInputs}</div>
+        </div>
         <div className="payNowButton">
-          <button type="button">PayNow</button>
+          <button onClick={this.handleAddCard} type="button">PayNow{''}</button>
         </div>
       </div>
     );

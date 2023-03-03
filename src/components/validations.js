@@ -25,7 +25,7 @@ export const userValidationError = (users, email, password) => {
 
 export const userValidation = (users, email, password) => {
   const user = findExistingUser(users, email);
-  const values = Object.values(user);
+  const values = user ? Object.values(user): undefined;
   if (password === values[2]) {
     return true;
   } else return false ;

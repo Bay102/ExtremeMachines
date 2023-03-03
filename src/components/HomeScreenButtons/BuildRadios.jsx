@@ -31,6 +31,7 @@ export const BuildRadios = (props) => {
                onChange={(e) => changePage(e.target.value)}
                name={radio.name}
                value={radio.value}
+              
              />
              {radio.title}
            </label>

@@ -55,12 +55,13 @@
 
 .PayNowButton { 
    width: max-content;
-   margin: 10px auto;
+   margin: 0px auto;
    padding: 10px 15px;
 }
 
 .summaryButtons {
    display: flex;
+   margin-top: 25px;
 }
 
 .shippingRadiosContainer {
@@ -70,6 +71,7 @@
 
 .totalAfterShipping {
    height: 50px;
+   text-align: left;
 }
 
 .totalAfterShipping div {

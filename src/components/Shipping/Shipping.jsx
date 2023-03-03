@@ -21,7 +21,9 @@ class Shipping extends React.Component {
       homePhone: '',
       cellPhone: '',
     },
+    shippingOption: '',
     finalPrice: '',
+    subTotal: '',
     error: {},
   };
 
@@ -91,7 +93,6 @@ class Shipping extends React.Component {
     Object.keys(this.state.shippingInfo)
       .slice(0, 6)
       .forEach((val) => {
-        //ask how to make other validations required
         if (!this.state.shippingInfo[val].length) {
           errorValue = { ...errorValue, [`${val}`]: 'Required' };
           isError = true;
@@ -110,7 +111,7 @@ class Shipping extends React.Component {
   };
 
   render() {
-    const { storeItems, updateItemPrice, totalCartPrice, mainState } = this.props;
+    const { storeItems, updateItemPrice, totalCartPrice, mainState , handleShippingChange} = this.props;
     return (
       <div>
         <form className="shippingForm" onSubmit={this.handleSubmit} action="">
@@ -131,21 +132,35 @@ class Shipping extends React.Component {
                 <CartSummary storeItems={storeItems} updateItemPrice={updateItemPrice} />
               </div>
               <div className="summaryBox">
-                <h4>Shipping Method</h4>
+                <h4><u>Shipping Method</u></h4>
                 <div className="shippingRadiosContainer">
-                  <label htmlFor="back">
-                    <input type="radio" value="back" name="back" id="back" />
+                  <label htmlFor="standard">
+                    <input
+                      type="radio"
+                      value="standard"
+                      name="shippingOption"
+                      id="back"
+                      onChange={handleShippingChange}
+                      checked={this.props.mainState.shippingOption === 'standard'}
+                    />
                     Standard - Free
                   </label>
-                  <label htmlFor="pay">
-                    <input type="radio" value="pay" name="pay" id="pay" />
+                  <label htmlFor="express">
+                    <input
+                      type="radio"
+                      value="express"
+                      name="shippingOption"
+                      id="express"
+                      onChange={handleShippingChange}
+                      checked={this.props.mainState.shippingOption === 'express'}
+                    />
                     Express - $1500
                   </label>
                 </div>
               </div>
               <div className="totalAfterShipping">
                 <div>Cart Subtotal: {totalCartPrice(mainState.storeItems)} </div>
-                <div>Final Price:  </div>
+                <div>Final Price: </div>
               </div>
               <div className="summaryButtons">
                 <button className="PayNowButton" onClick={this.backToCart}>
