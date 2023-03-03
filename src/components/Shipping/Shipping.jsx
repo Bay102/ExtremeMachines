@@ -110,7 +110,7 @@ class Shipping extends React.Component {
   };
 
   render() {
-    const { storeItems, updateItemPrice } = this.props;
+    const { storeItems, updateItemPrice, totalCartPrice, mainState } = this.props;
     return (
       <div>
         <form className="shippingForm" onSubmit={this.handleSubmit} action="">
@@ -134,18 +134,18 @@ class Shipping extends React.Component {
                 <h4>Shipping Method</h4>
                 <div className="shippingRadiosContainer">
                   <label htmlFor="back">
-                    <input type="radio" value="" name="back" id="back" />
+                    <input type="radio" value="back" name="back" id="back" />
                     Standard - Free
                   </label>
                   <label htmlFor="pay">
-                    <input type="radio" value="" name="pay" id="pay" />
+                    <input type="radio" value="pay" name="pay" id="pay" />
                     Express - $1500
                   </label>
                 </div>
               </div>
               <div className="totalAfterShipping">
-                <div>Cart Subtotal: </div>
-                <div>Final Price: </div>
+                <div>Cart Subtotal: {totalCartPrice(mainState.storeItems)} </div>
+                <div>Final Price:  </div>
               </div>
               <div className="summaryButtons">
                 <button className="PayNowButton" onClick={this.backToCart}>

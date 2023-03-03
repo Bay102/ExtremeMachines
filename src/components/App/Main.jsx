@@ -1,20 +1,22 @@
-import React from "react";
-import { Cart } from "../Cart/Cart";
-import { storeItems } from "../storeItems";
-import Shipping from "../Shipping/Shipping";
-import SignIn from "../SignIn/SignIn";
-import SignUp from "../SignUp/SignUp";
-import "./Main.css";
-import { BuildRadios } from "../HomeScreenButtons/BuildRadios";
-import { allUsers } from "../stateData";
-import Payments from "../Payment/Payments";
+import React from 'react';
+import { Cart } from '../Cart/Cart';
+import { storeItems } from '../storeItems';
+import Shipping from '../Shipping/Shipping';
+import SignIn from '../SignIn/SignIn';
+import SignUp from '../SignUp/SignUp';
+import './Main.css';
+import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
+import { allUsers } from '../stateData';
+import Payments from '../Payment/Payments';
 
 class Main extends React.Component {
   state = {
-    displayPage: "signIn",
+    displayPage: 'payments',
     currentUser: '',
     users: allUsers,
-    storeItems,  
+    storeItems,
+    subTotal: '',
+    finalPrice: '',
   };
 
   changePage = (value) => {
@@ -52,8 +54,7 @@ class Main extends React.Component {
     }));
   };
 
-
- updateCurrentUser = (user) => {
+  updateCurrentUser = (user) => {
     this.setState({ currentUser: user });
   };
 
@@ -62,33 +63,41 @@ class Main extends React.Component {
   };
 
   handleQuantityChange = (parent, name, sub, newState) =>
-  this.updateSubSubState(parent, name, sub, newState);
+    this.updateSubSubState(parent, name, sub, newState);
 
   updateItemPrice = (itemPrice, itemQuantity) => {
-    const priceString = itemPrice.replace(/[$,]/g, ""); // remove dollar sign and commas
+    const priceString = itemPrice.replace(/[$,]/g, ''); // remove dollar sign and commas
     const doMath = parseInt(priceString) * itemQuantity;
-    const formattedPrice = doMath.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
+    const formattedPrice = doMath.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
     });
     return formattedPrice;
   };
 
-
-  // updateItemPrice = (parent, name, sub, newState) =>
-  //   this.updateSubSubState(parent, name, sub, newState);
-
+  totalCartPrice = (cart) => {
+    let totalPrice = 0;
+    for (const item of Object.values(cart)) {
+      const priceString = item.price.replace(/[$,]/g, '');
+      let quantityPrices = parseInt(priceString * item.quantity);
+      totalPrice = totalPrice += quantityPrices;
+    }
+    return totalPrice.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+  };
 
   removeItemFromCart = (itemName) => {
-    const storeItemsCopy = {...this.state.storeItems};
+    const storeItemsCopy = { ...this.state.storeItems };
     delete storeItemsCopy[itemName];
-    this.setState({storeItems: storeItemsCopy});
-  }
+    this.setState({ storeItems: storeItemsCopy });
+  };
 
   updateUserCart = (users, buttonId) => {
-    const findUser = users.find(user => user.user === buttonId);
+    const findUser = users.find((user) => user.user === buttonId);
     console.log(findUser);
-  }
+  };
 
   render() {
     return (
@@ -98,7 +107,25 @@ class Main extends React.Component {
           <BuildRadios changePage={this.changePage} />
         </div>
         <div className="mainContent">
-          {this.state.displayPage === "cart" && (
+          {this.state.displayPage === 'signIn' && (
+            <SignIn
+              mainState={this.state}
+              changePage={this.changePage}
+              checkIfEmailExists={this.checkIfEmailExists}
+              updateCurrentUser={this.updateCurrentUser}
+              updateSubState={this.updateSubState}
+            />
+          )}
+          {this.state.displayPage === 'createAccount' && (
+            <SignUp
+              state={this.state}
+              changePage={this.changePage}
+              checkIfEmailExists={this.checkIfEmailExists}
+              updateState={this.updateState}
+              createNewUser={this.createNewUser}
+            />
+          )}
+          {this.state.displayPage === 'cart' && (
             <Cart
               state={this.state}
               handleQuantityChange={this.handleQuantityChange}
@@ -108,37 +135,21 @@ class Main extends React.Component {
               changePage={this.changePage}
               updateState={this.updateState}
               updateItemPrice={this.updateItemPrice}
+              totalCartPrice={this.totalCartPrice}
             />
           )}
-          {this.state.displayPage === "signIn" && (
-            <SignIn
-              mainState={this.state}
-              changePage={this.changePage}
-              checkIfEmailExists={this.checkIfEmailExists}
-              updateCurrentUser={this.updateCurrentUser}
-              updateSubState={this.updateSubState}
-            />
-          )}
-          {this.state.displayPage === "createAccount" && (
-            <SignUp
-              state={this.state}
-              changePage={this.changePage}
-              checkIfEmailExists={this.checkIfEmailExists}
-              updateState={this.updateState}
-              createNewUser={this.createNewUser}
-            />
-          )}
-          {this.state.displayPage === "shipping" && (
+          {this.state.displayPage === 'shipping' && (
             <Shipping
               mainState={this.state}
               changePage={this.changePage}
               updateState={this.updateState}
               storeItems={this.state.storeItems}
               updateItemPrice={this.updateItemPrice}
+              totalCartPrice={this.totalCartPrice}
             />
           )}
-          {this.state.displayPage === "payments" && (
-            <Payments />
+          {this.state.displayPage === 'payments' && (
+          <Payments mainState={this.state}/>
           )}
         </div>
       </div>

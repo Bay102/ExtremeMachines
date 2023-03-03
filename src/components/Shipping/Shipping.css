@@ -65,7 +65,7 @@
 
 .shippingRadiosContainer {
    display: flex;
-   flex-direction: column;
+   justify-content: space-around;
 }
 
 .totalAfterShipping {
@@ -73,5 +73,6 @@
 }
 
 .totalAfterShipping div {
-   margin: 10px auto;
+   margin: 15px auto;
+   font-weight: 600;
 }

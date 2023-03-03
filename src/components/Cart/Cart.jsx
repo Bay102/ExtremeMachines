@@ -6,36 +6,29 @@ import { CartSummary } from "./CartSummary";
 // if 0 items in cart checkout disabled
 
 export class Cart extends React.Component {
+  state = {
+    subTotal: '',
+  }
+
+  // totalCartPrice = (cart) => {
+  //   let totalPrice = 0;
+  //   for (const item of Object.values(cart)) {
+  //     const priceString = item.price.replace(/[$,]/g, "");
+  //     let quantityPrices = parseInt(priceString * item.quantity);
+  //     totalPrice = totalPrice += quantityPrices;
+  //   }
+  //   return totalPrice.toLocaleString("en-US", {
+  //     style: "currency",
+  //     currency: "USD",
+  //   });
+  // };
+
   continueToShipping = (e) => {
     e.preventDefault();
     this.props.changePage("shipping");
   };
-
-  updateItemPrice = (itemPrice, itemQuantity) => {
-    const priceString = itemPrice.replace(/[$,]/g, ""); // remove dollar sign and commas
-    const doMath = parseInt(priceString) * itemQuantity;
-    const formattedPrice = doMath.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-    return formattedPrice;
-  };
-
-  totalCartPrice = (cart) => {
-    let totalPrice = 0;
-    for (const item of Object.values(cart)) {
-      const priceString = item.price.replace(/[$,]/g, ""); // remove dollar sign and commas
-      let quantityPrices = parseInt(priceString * item.quantity);
-      totalPrice = totalPrice += quantityPrices;
-    }
-    return totalPrice.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-  };
-
   render() {
-    const { state, handleQuantityChange, storeItems, removeItem , updateItemPrice} = this.props;
+    const { state, handleQuantityChange, storeItems, removeItem , updateItemPrice, totalCartPrice} = this.props;
     return (
       <div>
         <h2 className="cartH2">CART</h2>
@@ -65,7 +58,7 @@ export class Cart extends React.Component {
               updateItemPrice={updateItemPrice}
             />
             <div className="totalCartPrice">
-              Cart Total: <br /> {this.totalCartPrice(state.storeItems)}
+              Cart Total: <br /> {totalCartPrice(state.storeItems)}
               <button
                 onClick={this.continueToShipping}
                 className="checkoutButton"

@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import "./SignIn.css";
 import {
   emailContains,
-  // findUserToLogIn,
   passwordLengthError,
   userValidation,
   userValidationError,
@@ -12,7 +11,7 @@ import { BuildSignInInputs } from "./BuildSignInInputs";
 // User can sign in | if password is incorrect prompt error |
 // Eye Icon on Password | if successful render Cart
 
-class SignIn extends Component {
+class SignIn extends React.Component {
   state = {
     credentials: {
       userEmail: "",
