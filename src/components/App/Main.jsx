@@ -5,13 +5,14 @@ import Shipping from '../Shipping/Shipping';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import './Main.css';
+import logo from "../images/IMG_3558.jpeg"
 import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'payments',
+    displayPage: 'signIn',
     currentUser: '',
     users: allUsers,
     storeItems,
@@ -103,7 +104,8 @@ class Main extends React.Component {
     return (
       <div>
         <div className="headerWrapper">
-          <h2>CarCommerce</h2>
+          <img style={{width: '120px'}} src={logo} alt="" />
+          {/* <h2>CarCommerce</h2> */}
           <BuildRadios changePage={this.changePage} />
         </div>
         <div className="mainContent">

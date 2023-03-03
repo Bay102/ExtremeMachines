@@ -2,7 +2,8 @@ import React from 'react';
 import { InputBase } from '../InputBase/InputBase';
 
 export const BuildPaymentInputs = (props) => {
-  const paymentInputs = [
+  
+   const paymentInputs = [
     {
       id: '1',
       type: 'text',
