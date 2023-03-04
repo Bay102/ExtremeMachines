@@ -12,13 +12,14 @@ import Payments from '../Payment/Payments';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'signIn',
+    displayPage: 'cart',
     currentUser: '',
     users: allUsers,
     storeItems,
     cartSubtotal: '',
     shippingOption: 'standard',
-    cartFinalPrice: '', 
+    cartFinalPrice: '',
+    checkoutDisabled: false,
   };
 
   changePage = (value) => {
@@ -86,12 +87,20 @@ class Main extends React.Component {
   };
 
   getSubtotal = (value) => {
-    this.setState({cartSubtotal: value})
-  }
+    this.setState({ cartSubtotal: value });
+  };
+
+  enableCheckout = () => {
+    console.log(Object.entries(this.state.storeItems));
+    if (Object.entries(this.state.storeItems).length <= 1) {
+      this.setState({ checkoutDisabled: true });
+    }
+  };
 
   removeItemFromCart = (itemName) => {
     const storeItemsCopy = { ...this.state.storeItems };
     delete storeItemsCopy[itemName];
+    this.enableCheckout();
     this.setState({ storeItems: storeItemsCopy });
   };
 
@@ -110,7 +119,7 @@ class Main extends React.Component {
     return (
       <div>
         <div className="headerWrapper">
-          <img style={{ width: '120px' }} src={logo} alt="" />
+          <img style={{ width: '150px' }} src={logo} alt="" />
           <BuildRadios changePage={this.changePage} />
         </div>
         <div className="mainContent">
@@ -143,6 +152,7 @@ class Main extends React.Component {
               updateItemPrice={this.updateItemPrice}
               totalCartPrice={this.totalCartPrice}
               getSubtotal={this.getSubtotal}
+              // checkoutDisabled={this.checkoutDisabled}
             />
           )}
           {this.state.displayPage === 'shipping' && (

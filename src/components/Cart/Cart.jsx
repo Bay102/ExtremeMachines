@@ -8,15 +8,25 @@ import { CartSummary } from "./CartSummary";
 export class Cart extends React.Component {
   state = {
     subTotal: '',
+    checkoutDisabled: true,
   }
 
   continueToShipping = (e) => {
     e.preventDefault();
-    this.props.getSubtotal(this.props.totalCartPrice(this.props.mainState.storeItems))
+    this.props.getSubtotal(this.props.totalCartPrice(this.props.mainState.storeItems));
     this.props.changePage("shipping");
     // this.props.updateSubTotal(this.props.state)
+    };
     
-  };
+    
+    // enableCheckout = () => {
+    //   if (this.props.mainState.storeItems.length === 0) {
+    //     this.setState({ checkoutDisabled: true})
+    //   } else this.setState({checkoutDisabled: false})
+    // }
+    
+
+
   render() {
     const { mainState, handleQuantityChange, storeItems, removeItem , updateItemPrice ,totalCartPrice} = this.props;
     return (
@@ -50,8 +60,10 @@ export class Cart extends React.Component {
             <div className="totalCartPrice">
               Cart Total: <br /> {totalCartPrice(mainState.storeItems)}
               <button
-                onClick={this.continueToShipping}
+                disabled={mainState.checkoutDisabled}
+                // disabled={this.state.checkoutDisabled}
                 className="checkoutButton"
+                onClick={this.continueToShipping}
                 type="button"
               >
                 Checkout
