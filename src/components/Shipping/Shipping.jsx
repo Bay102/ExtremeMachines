@@ -106,6 +106,7 @@ class Shipping extends React.Component {
     if (!requiredFieldErrorCheck) {
       this.props.changePage('payments');
       this.props.changeCurrentStep(2)
+      this.props.getCartFinalPrice(this.props.mainState.storeItems)
     }
   };
 

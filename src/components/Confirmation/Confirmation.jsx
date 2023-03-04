@@ -1,24 +1,33 @@
-import React from "react";
-import { ProgressBar } from "../ProgressBar /ProgressBar";
-import './Confirmation.css'
+import React from 'react';
+import { ProgressBar } from '../ProgressBar /ProgressBar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
+import './Confirmation.css';
+import 'animate.css';
 
 export class Confirmation extends React.Component {
-   state= { 
+  state = {};
 
-   }
-
-   render() {
-      const { changePage, mainState } = this.props
-      return (
-         <div>
-            <ProgressBar mainState={mainState}/>
-            <div className="confirmationContainer">
-               hello
+  render() {
+    const { mainState } = this.props;
+    return (
+      <div>
+        <ProgressBar mainState={mainState} />
+        <div className="confirmationContainer">
+          <h3>Order Placed!</h3>
+          <div className="checkIcon">
+            <FontAwesomeIcon
+              className="animate__animated animate__backInUp orderPlaced"
+              icon={faClipboardCheck}
+            />
             </div>
-         </div>
-      )
-   }
-
-
-
+            <div className="confirmationInfo">
+              <div className="amountPaid">Paid: {mainState.cartFinalPrice}</div>
+              <div className="cardNum">Payment Method:</div>
+            </div>
+          
+        </div>
+      </div>
+    );
+  }
 }

@@ -3,8 +3,6 @@ import './Cart.css';
 import { CartItemBase } from './CartItemBase';
 import { CartSummary } from './CartSummary';
 
-// if 0 items in cart checkout disabled
-
 export class Cart extends React.Component {
   state = {
     subTotal: '',
@@ -15,7 +13,6 @@ export class Cart extends React.Component {
     e.preventDefault();
     this.props.getSubtotal(this.props.totalCartPrice(this.props.mainState.storeItems));
     this.props.changePage('shipping');
-    // this.props.updateSubTotal(this.props.state)
   };
 
   render() {

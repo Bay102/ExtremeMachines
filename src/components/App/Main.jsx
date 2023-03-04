@@ -92,6 +92,26 @@ class Main extends React.Component {
     this.setState({ cartSubtotal: value });
   };
 
+  // ask how i can do this in the total cart price
+  getCartFinalPrice = (cart) => {
+    let totalPrice = 0;
+    for (const item of Object.values(cart)) {
+      const priceString = item.price.replace(/[$,]/g, '');
+      let quantityPrices = parseInt(priceString * item.quantity);
+      totalPrice = totalPrice += quantityPrices;
+    }
+    let formattedPrice;
+    if (this.state.shippingOption === 'express') {
+      formattedPrice = totalPrice + 1500;
+    } else formattedPrice = totalPrice;
+
+    const addSymbols = formattedPrice.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+    this.setState({ cartFinalPrice: addSymbols });
+  };
+
   enableCheckout = () => {
     console.log(Object.entries(this.state.storeItems));
     if (Object.entries(this.state.storeItems).length <= 1) {
@@ -171,6 +191,7 @@ class Main extends React.Component {
               totalCartPrice={this.totalCartPrice}
               handleShippingChange={this.handleShippingChange}
               changeCurrentStep={this.changeCurrentStep}
+              getCartFinalPrice={this.getCartFinalPrice}
             />
           )}
           {this.state.displayPage === 'payments' && (

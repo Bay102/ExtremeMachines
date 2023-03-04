@@ -1,0 +1,42 @@
+
+
+.confirmationContainer {
+   width: 415px;
+   height: 500px;
+   margin: auto;
+   border: 2px solid black;
+   border-radius: 15px;
+   background: white;
+}
+
+.confirmationContainer h3 {
+   text-align: center;
+   font-size: 25px;
+   font-family: copperplate;
+}
+
+.orderPlaced {
+   font-size: 270px;
+   text-align: center;
+}
+
+.checkIcon {
+   text-align: center;
+   margin: auto;
+   color: rgb(49, 192, 49);
+}
+
+.confirmationInfo {
+   width: 75%;
+   height: max-content;
+   border: 1px solid black;
+   border-radius: 15px;
+   background-color: lightgray;
+   margin: 35px auto;
+}
+
+.confirmationInfo div {
+   text-align: center;
+   margin: 15px auto;
+   font-weight: 600;
+}
