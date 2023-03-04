@@ -1,10 +1,3 @@
-// Show all shipping fields as depicted in the screenshot below
-// Have standard and express shipping options -- the shipping & handling/checkout prices should adjust accordingly
-// Ensure phone fields cannot take text (only numbers)
-// Ensure postal code cannot take text (only numbers)
-// Make sure all fields are completed or prevent the user from moving forward. Show appropriate error messages
-// Back to cart button should go back to cart
-// There should be a Next or "Payment" button to go to next screen
 import React from 'react';
 import { CartSummary } from '../Cart/CartSummary';
 import { ProgressBar } from '../ProgressBar /ProgressBar';
@@ -105,6 +98,7 @@ class Shipping extends React.Component {
     const requiredFieldErrorCheck = this.errorCheck();
     if (!requiredFieldErrorCheck) {
       this.props.changePage('payments');
+      this.props.changeCurrentStep(2)
     }
   };
 
@@ -112,7 +106,7 @@ class Shipping extends React.Component {
     const { storeItems, updateItemPrice, totalCartPrice, mainState , handleShippingChange} = this.props;
     return (
       <div>
-          <ProgressBar />
+          <ProgressBar mainState={mainState} />
         <form className="shippingForm" onSubmit={this.handleSubmit} action="">
           <div className="shippingInputsWrapper">
             <div className="shipInputs">
@@ -169,7 +163,6 @@ class Shipping extends React.Component {
               </div>
             </div>
           </div>
-        {/* <ProgressBar /> */}
         </form>
       </div>
     );

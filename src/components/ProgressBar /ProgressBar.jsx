@@ -9,22 +9,29 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+
+
 export class ProgressBar extends React.Component {
+  state = {
+    currentStep: 1,
+  };
+
   render() {
+   const {mainState} = this.props  // ask how to destructure this better
     return (
       <div className="progressContainer">
         <div className="circle">
           <FontAwesomeIcon icon={faCartShopping} />
         </div>
-        <div className="line"></div>
+        <div id="cart" className={`line ${mainState.currentStep >= 1 ? 'active' : ''}`}></div>
         <div className="circle">
           <FontAwesomeIcon icon={faTruckFast} />
         </div>
-        <div className="line"></div>
+        <div id="ship" className={`line ${mainState.currentStep >= 2 ? 'active' : ''}`}></div>
         <div className="circle">
           <FontAwesomeIcon icon={faCreditCard} />
         </div>
-        <div className="line"></div>
+        <div id="payment" className={`line ${mainState.currentStep >= 3 ? 'active' : ''}`}></div>
         <div className="circle">
           <FontAwesomeIcon icon={faCircleCheck} />
         </div>

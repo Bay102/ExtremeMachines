@@ -9,11 +9,11 @@ import logo from '../images/IMG_3558.jpeg';
 import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
-import { Confirmation } from '../Confirmation/Confirmatin';
+import { Confirmation } from '../Confirmation/Confirmation';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'payments',
+    displayPage: 'cart',
     currentUser: '',
     users: allUsers,
     storeItems,
@@ -21,6 +21,7 @@ class Main extends React.Component {
     shippingOption: 'standard',
     cartFinalPrice: '',
     checkoutDisabled: false,
+    currentStep: 1,
   };
 
   changePage = (value) => {
@@ -116,6 +117,10 @@ class Main extends React.Component {
     });
   };
 
+  changeCurrentStep = (value) => {
+    this.setState({ currentStep: value });
+  };
+
   render() {
     return (
       <div>
@@ -165,13 +170,22 @@ class Main extends React.Component {
               updateItemPrice={this.updateItemPrice}
               totalCartPrice={this.totalCartPrice}
               handleShippingChange={this.handleShippingChange}
+              changeCurrentStep={this.changeCurrentStep}
             />
           )}
           {this.state.displayPage === 'payments' && (
-            <Payments mainState={this.state} changePage={this.changePage} />
+            <Payments
+              mainState={this.state}
+              changePage={this.changePage}
+              changeCurrentStep={this.changeCurrentStep}
+            />
           )}
           {this.state.displayPage === 'confirmation' && (
-            <Confirmation mainState={this.state} changePage={this.changePage} />
+            <Confirmation
+              mainState={this.state}
+              changePage={this.changePage}
+              changeCurrentStep={this.changeCurrentStep}
+            />
           )}
         </div>
       </div>

@@ -123,12 +123,13 @@ class Payments extends React.Component {
         cardType: null,
       });
       this.props.changePage('signIn');
+      this.props.changeCurrentStep(3)
     }
   };
 
   render() {
     const { cardData, error, cardType, maxLength } = this.state;
-
+    const { mainState } = this.props
     const paymentInputs = [
       {
         id: '1',
@@ -153,8 +154,9 @@ class Payments extends React.Component {
       },
     ];
     return (
+   
       <div>
-        <ProgressBar />
+        <ProgressBar mainState={mainState}/>
         <div className=" inputsWrapper paymentsContainer">
           <h2>Payment</h2>
           {paymentInputs.length
