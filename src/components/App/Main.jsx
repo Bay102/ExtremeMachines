@@ -9,10 +9,11 @@ import logo from '../images/IMG_3558.jpeg';
 import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
+import { Confirmation } from '../Confirmation/Confirmatin';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'signIn',
+    displayPage: 'payments',
     currentUser: '',
     users: allUsers,
     storeItems,
@@ -119,7 +120,7 @@ class Main extends React.Component {
     return (
       <div>
         <div className="headerWrapper">
-          <img style={{ width: '130px' }} src={logo} alt="" />
+          <img style={{ width: '100px' }} src={logo} alt="" />
           <BuildRadios changePage={this.changePage} />
         </div>
         <div className="mainContent">
@@ -152,7 +153,6 @@ class Main extends React.Component {
               updateItemPrice={this.updateItemPrice}
               totalCartPrice={this.totalCartPrice}
               getSubtotal={this.getSubtotal}
-              // checkoutDisabled={this.checkoutDisabled}
             />
           )}
           {this.state.displayPage === 'shipping' && (
@@ -169,6 +169,9 @@ class Main extends React.Component {
           )}
           {this.state.displayPage === 'payments' && (
             <Payments mainState={this.state} changePage={this.changePage} />
+          )}
+          {this.state.displayPage === 'confirmation' && (
+            <Confirmation mainState={this.state} changePage={this.changePage} />
           )}
         </div>
       </div>

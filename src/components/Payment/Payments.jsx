@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputBase } from '../InputBase/InputBase';
+import { ProgressBar } from '../ProgressBar /ProgressBar';
 // import { BuildPaymentInputs } from './BuildPaymentInputs';
 import { OTHERCARDS } from './paymentData';
 import {
@@ -121,7 +122,7 @@ class Payments extends React.Component {
         cardData: INIT_CARD,
         cardType: null,
       });
-      this.props.changePage('signIn')
+      this.props.changePage('signIn');
     }
   };
 
@@ -152,37 +153,42 @@ class Payments extends React.Component {
       },
     ];
     return (
-      <div className=" inputsWrapper paymentsContainer">
-        <h2>Payment</h2>
-        {paymentInputs.length
-          ? paymentInputs.map((item, index) => (
-              <InputBase
-                key={index}
-                placeholder={item.label}
-                type={item.type}
-                value={cardData && cardData[item.name]}
-                onChange={this.handleInputData}
-                autoComplete="off"
-                maxLength={maxLength}
-                name={item.name}
-                onBlur={this.handleBlur}
-                error={error}
-                cardType={cardType}
-                isCard={item.name === 'card'}
-                errorM={
-                  error && error[item.error] && error[item.error].length > 1
-                    ? error[item.error]
-                    : null
-                }
-              />
-            ))
-          : null}
-        <div style={{ display: 'flex', margin: 'auto', gap: '5px' }}>
-          Expiry:
-          <div>{expiryInputs}</div>
-        </div>
-        <div className="payNowButton">
-          <button onClick={this.handleAddCard} type="button">PayNow{''}</button>
+      <div>
+        <ProgressBar />
+        <div className=" inputsWrapper paymentsContainer">
+          <h2>Payment</h2>
+          {paymentInputs.length
+            ? paymentInputs.map((item, index) => (
+                <InputBase
+                  key={index}
+                  placeholder={item.label}
+                  type={item.type}
+                  value={cardData && cardData[item.name]}
+                  onChange={this.handleInputData}
+                  autoComplete="off"
+                  maxLength={maxLength}
+                  name={item.name}
+                  onBlur={this.handleBlur}
+                  error={error}
+                  cardType={cardType}
+                  isCard={item.name === 'card'}
+                  errorM={
+                    error && error[item.error] && error[item.error].length > 1
+                      ? error[item.error]
+                      : null
+                  }
+                />
+              ))
+            : null}
+          <div style={{ display: 'flex', margin: 'auto', gap: '5px' }}>
+            Expiry:
+            <div>{expiryInputs}</div>
+          </div>
+          <div className="payNowButton">
+            <button onClick={this.handleAddCard} type="button">
+              PayNow{''}
+            </button>
+          </div>
         </div>
       </div>
     );
