@@ -31,9 +31,9 @@ export class ProgressBar extends React.Component {
         <div className="circle">
           <FontAwesomeIcon icon={faCreditCard} />
         </div>
-        <div id="payment" className={`line ${mainState.currentStep >= 3 ? 'active' : ''}`}></div>
-        <div className="circle">
-          <FontAwesomeIcon icon={faCircleCheck} />
+        <div id="payment" className={`line ${mainState.currentStep >= 3 ? 'confirmed' : ''}`}></div>
+        <div className={`circle ${mainState.currentStep >= 3 ? 'confirmed' : ''}`}>
+          <FontAwesomeIcon icon={faCircleCheck}  />
         </div>
       </div>
     );

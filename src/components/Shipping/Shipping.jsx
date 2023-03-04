@@ -15,6 +15,7 @@ class Shipping extends React.Component {
       homePhone: '',
       cellPhone: '',
     },
+    disabled: true,
     error: {},
   };
 
@@ -23,13 +24,19 @@ class Shipping extends React.Component {
     this.props.changePage('cart');
   };
 
+  enablePayButton = () => {
+    const { shippingInfo } = this.state;
+    const hasEmptyField = Object.values(shippingInfo).some(field => field === '');
+    this.setState({ disabled: hasEmptyField });
+  }
+
   handleInputChange = (e) => {
     this.setState((prevState) => ({
       shippingInfo: {
         ...prevState.shippingInfo,
         [e.target.name]: e.target.value,
       },
-    }));
+    }), this.enablePayButton);
   };
 
   handleValidations = (type, value) => {
@@ -159,7 +166,7 @@ class Shipping extends React.Component {
                 <button className="PayNowButton" onClick={this.backToCart}>
                   Back To Cart
                 </button>
-                <button className="PayNowButton">Pay Now</button>
+                <button disabled={this.state.disabled} className="PayNowButton">Pay Now</button>
               </div>
             </div>
           </div>

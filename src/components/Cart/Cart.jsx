@@ -55,7 +55,6 @@ export class Cart extends React.Component {
               Cart Total: <br /> {totalCartPrice(mainState.storeItems)}
               <button
                 disabled={mainState.checkoutDisabled}
-                // disabled={this.state.checkoutDisabled}
                 className="checkoutButton"
                 onClick={this.continueToShipping}
                 type="button"

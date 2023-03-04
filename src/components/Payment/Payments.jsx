@@ -122,7 +122,7 @@ class Payments extends React.Component {
         cardData: INIT_CARD,
         cardType: null,
       });
-      this.props.changePage('signIn');
+      this.props.changePage('confirmation');
       this.props.changeCurrentStep(3)
     }
   };

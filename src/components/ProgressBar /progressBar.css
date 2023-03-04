@@ -31,3 +31,7 @@
 .active {
    background-color: orange;
 }
+
+.confirmed {  
+   background-color: green;
+}
