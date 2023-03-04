@@ -1,7 +1,7 @@
-import React from "react";
-import "./Cart.css";
-import { CartItemBase } from "./CartItemBase";
-import { CartSummary } from "./CartSummary";
+import React from 'react';
+import './Cart.css';
+import { CartItemBase } from './CartItemBase';
+import { CartSummary } from './CartSummary';
 
 // if 0 items in cart checkout disabled
 
@@ -9,26 +9,24 @@ export class Cart extends React.Component {
   state = {
     subTotal: '',
     checkoutDisabled: true,
-  }
+  };
 
   continueToShipping = (e) => {
     e.preventDefault();
     this.props.getSubtotal(this.props.totalCartPrice(this.props.mainState.storeItems));
-    this.props.changePage("shipping");
+    this.props.changePage('shipping');
     // this.props.updateSubTotal(this.props.state)
-    };
-    
-    
-    // enableCheckout = () => {
-    //   if (this.props.mainState.storeItems.length === 0) {
-    //     this.setState({ checkoutDisabled: true})
-    //   } else this.setState({checkoutDisabled: false})
-    // }
-    
-
+  };
 
   render() {
-    const { mainState, handleQuantityChange, storeItems, removeItem , updateItemPrice ,totalCartPrice} = this.props;
+    const {
+      mainState,
+      handleQuantityChange,
+      storeItems,
+      removeItem,
+      updateItemPrice,
+      totalCartPrice,
+    } = this.props;
     return (
       <div>
         <h2 className="cartH2">CART</h2>
@@ -49,14 +47,10 @@ export class Cart extends React.Component {
               ))
             : null}
         </div>
-
         <div className="continueToCheckout">
           <div className="boxTitle">Cart Summary</div>
           <div className="cartSummary">
-            <CartSummary
-              storeItems={storeItems}
-              updateItemPrice={updateItemPrice}
-            />
+            <CartSummary storeItems={storeItems} updateItemPrice={updateItemPrice} />
             <div className="totalCartPrice">
               Cart Total: <br /> {totalCartPrice(mainState.storeItems)}
               <button

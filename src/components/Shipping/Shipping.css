@@ -12,7 +12,7 @@
    border-radius: 10px;
    background-color: white;
    height: max-content;
-   margin: 20px auto;
+   margin: 5px auto;
    padding: 20px;
    text-align: center;
 }
@@ -48,7 +48,7 @@
 }
 
 .summaryWrapper {
-   width: 175px;
+   width: 160px;
    margin: auto;
 }
 

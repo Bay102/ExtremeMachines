@@ -1,0 +1,25 @@
+.progressContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  display: flex;
+  width: 35px;
+  height: 35px;
+  border: 1px solid black;
+  border-radius: 180px;
+  margin-left: -10px;
+  background: black;
+  z-index: 1;
+}
+
+.line {
+  display: flex;
+  flex-direction: column;
+  width: 125px;
+  height: 30px;
+  margin-left: -10px;
+  border: 1px solid white;  
+}

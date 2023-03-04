@@ -7,6 +7,7 @@
 // There should be a Next or "Payment" button to go to next screen
 import React from 'react';
 import { CartSummary } from '../Cart/CartSummary';
+import { ProgressBar } from '../ProgressBar /ProgressBar';
 import { onlyNumberValidation, onlyTextValidation } from '../validations';
 import { BuildShippingInputs } from './BuildShippingInputs';
 import './Shipping.css';
@@ -111,6 +112,7 @@ class Shipping extends React.Component {
     const { storeItems, updateItemPrice, totalCartPrice, mainState , handleShippingChange} = this.props;
     return (
       <div>
+          <ProgressBar />
         <form className="shippingForm" onSubmit={this.handleSubmit} action="">
           <div className="shippingInputsWrapper">
             <div className="shipInputs">
@@ -156,7 +158,7 @@ class Shipping extends React.Component {
                 </div>
               </div>
               <div className="totalAfterShipping">
-                <div>Cart Subtotal:{mainState.cartSubtotal} </div>
+                <div>Cart Subtotal: {mainState.cartSubtotal} </div>
                 <div>Final Price: {totalCartPrice(mainState.storeItems)} </div>
               </div>
               <div className="summaryButtons">
@@ -167,6 +169,7 @@ class Shipping extends React.Component {
               </div>
             </div>
           </div>
+        {/* <ProgressBar /> */}
         </form>
       </div>
     );

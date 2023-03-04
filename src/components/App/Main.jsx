@@ -12,7 +12,7 @@ import Payments from '../Payment/Payments';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'cart',
+    displayPage: 'signIn',
     currentUser: '',
     users: allUsers,
     storeItems,
@@ -119,7 +119,7 @@ class Main extends React.Component {
     return (
       <div>
         <div className="headerWrapper">
-          <img style={{ width: '150px' }} src={logo} alt="" />
+          <img style={{ width: '130px' }} src={logo} alt="" />
           <BuildRadios changePage={this.changePage} />
         </div>
         <div className="mainContent">

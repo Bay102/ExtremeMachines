@@ -1,6 +1,6 @@
 import React from 'react';
 import { InputBase } from '../InputBase/InputBase';
-import { BuildPaymentInputs } from './BuildPaymentInputs';
+// import { BuildPaymentInputs } from './BuildPaymentInputs';
 import { OTHERCARDS } from './paymentData';
 import {
   cardNumberValidation,
