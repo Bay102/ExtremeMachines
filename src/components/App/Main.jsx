@@ -10,10 +10,10 @@ import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
 import { Confirmation } from '../Confirmation/Confirmation';
-
+///
 class Main extends React.Component {
   state = {
-    displayPage: 'payments',
+    displayPage: 'signIn',
     currentUser: '',
     users: allUsers,
     storeItems,
