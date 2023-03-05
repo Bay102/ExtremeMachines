@@ -14,6 +14,7 @@ const INIT_CARD = {
   card: '',
   cardHolder: '',
   securityCode: '',
+  promoCode: '',
 };
 
 class Payments extends React.Component {
@@ -103,7 +104,6 @@ class Payments extends React.Component {
     let errorValue = {};
     let isError = false;
     Object.keys(cardData).forEach((val) => {
-      console.log(Object.keys(cardData[val]));
       if (!cardData[val].length) {
         errorValue = { ...errorValue, [`${val}Error`]: 'Required' };
         isError = true;
@@ -116,7 +116,6 @@ class Payments extends React.Component {
   handleAddCard = (e) => {
     e.preventDefault();
     const errorCheck = this.checkErrorBeforeSave();
-    console.log(errorCheck);
     if (!errorCheck) {
       this.setState({
         cardData: INIT_CARD,
@@ -151,6 +150,13 @@ class Payments extends React.Component {
         label: 'CVV',
         name: 'securityCode',
         error: 'securityCodeError',
+      },
+      {
+        id: '5',
+        type: 'text',
+        label: 'PromoCode?',
+        name: 'promoCode',
+        error: 'PromoCodeError',
       },
     ];
     return (

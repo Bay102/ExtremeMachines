@@ -1,41 +1,40 @@
 body {
-    overflow-x:hidden;
+  overflow-x: hidden;
+}
 
-   }
-
-h2 { text-align: center }
+h2 {
+  text-align: center;
+}
 
 .headerWrapper {
-   display: flex;
-   align-items: center;
-   text-align: center;
-   margin-bottom: 20px ;
-   margin: auto;
-   justify-content: space-around;
-   background-color: rgb(128 127 127);
-   font-family: copperplate;
-   width: 100vw;
-   color: #e77c26;
-
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+  margin: auto;
+  justify-content: space-around;
+  background-color: rgb(231, 124, 38);
+  font-family: monospace;
+  width: 100vw;
+  color: black;
 }
 
 .headerWrapper div {
-   margin-bottom: 20px;
-   margin: auto;
+  margin-bottom: 20px;
+  margin: auto;
 }
 
 .headerWrapper label {
-   font-size: 20px;
+  font-size: 20px;
 }
 
 .headerWrapper img {
-   margin-right: auto;
+  margin-right: auto;
 }
 
 .mainContent {
-   margin: auto;
-   height: 105vh;
-   border: 1px solid black;
-   background-color: rgba(14, 11, 11, 0.877);
+  margin: auto;
+  height: 105vh;
+  border: 1px solid black;
+  background-color: rgba(14, 11, 11, 0.877);
 }
-

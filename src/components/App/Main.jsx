@@ -5,7 +5,7 @@ import Shipping from '../Shipping/Shipping';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import './Main.css';
-import logo from '../images/IMG_3558.jpeg';
+import logo from '../images/IMG_3565.PNG';
 import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
@@ -13,7 +13,7 @@ import { Confirmation } from '../Confirmation/Confirmation';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'cart',
+    displayPage: 'payments',
     currentUser: '',
     users: allUsers,
     storeItems,
@@ -28,13 +28,6 @@ class Main extends React.Component {
     this.setState({
       displayPage: value,
     });
-  };
-
-  updateState = (name, newState) => {
-    this.setState((prevState) => ({
-      ...prevState[name],
-      [name]: newState,
-    }));
   };
 
   updateSubSubState = (parent, name, sub, newState) => {
@@ -92,7 +85,6 @@ class Main extends React.Component {
     this.setState({ cartSubtotal: value });
   };
 
-  // ask how i can do this in the total cart price
   getCartFinalPrice = (cart) => {
     let totalPrice = 0;
     for (const item of Object.values(cart)) {
@@ -124,11 +116,6 @@ class Main extends React.Component {
     delete storeItemsCopy[itemName];
     this.enableCheckout();
     this.setState({ storeItems: storeItemsCopy });
-  };
-
-  updateUserCart = (users, buttonId) => {
-    const findUser = users.find((user) => user.user === buttonId);
-    console.log(findUser);
   };
 
   handleShippingChange = (event) => {
@@ -172,7 +159,6 @@ class Main extends React.Component {
               handleQuantityChange={this.handleQuantityChange}
               storeItems={this.state.storeItems}
               removeItem={this.removeItemFromCart}
-              updateUserCart={this.updateUserCart}
               changePage={this.changePage}
               updateState={this.updateState}
               updateItemPrice={this.updateItemPrice}
