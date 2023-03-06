@@ -20,12 +20,18 @@ export class Confirmation extends React.Component {
               className="animate__animated animate__backInUp orderPlaced"
               icon={faClipboardCheck}
             />
+          </div>
+          <div className="confirmationInfo">
+            {mainState.promoSuccess === false ? (
+              <div className="amountPaid">Paid: {mainState.cartFinalPrice} </div>
+            ) : null}
+            {mainState.promoSuccess === true ? (
+              <div>Paid After Promo: {mainState.cartFinalPrice} </div>
+            ) : undefined}
+            <div className="cardNum">
+              Payment Method: {mainState.currentUser.paymentMethod}
             </div>
-            <div className="confirmationInfo">
-              <div className="amountPaid">Paid: {mainState.cartFinalPrice}</div>
-              <div className="cardNum">Payment Method: {mainState.currentUser.paymentMethod}</div>
-            </div>
-          
+          </div>
         </div>
       </div>
     );

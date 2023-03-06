@@ -13,7 +13,7 @@ import { Confirmation } from '../Confirmation/Confirmation';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'signIn',
+    displayPage: 'cart',
     currentUser: '',
     users: allUsers,
     storeItems,
@@ -23,7 +23,7 @@ class Main extends React.Component {
     checkoutDisabled: false,
     currentStep: 1,
     promoCode: 'devslopes',
-    priceAfterPromo: '',
+    promoSuccess: false,
   };
 
   changePage = (value) => {
@@ -145,6 +145,7 @@ class Main extends React.Component {
         currency: 'USD',
       });
       this.setState({ cartFinalPrice: addSymbols });
+      this.setState({ promoSuccess: true})
     }
   };
   changeCurrentStep = (value) => {
