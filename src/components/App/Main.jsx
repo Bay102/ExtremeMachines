@@ -13,7 +13,7 @@ import { Confirmation } from '../Confirmation/Confirmation';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'cart',
+    displayPage: 'signIn',
     currentUser: '',
     users: allUsers,
     storeItems,
