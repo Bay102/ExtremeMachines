@@ -103,7 +103,7 @@ class Payments extends React.Component {
     const { cardData } = this.state;
     let errorValue = {};
     let isError = false;
-    Object.keys(cardData).forEach((val) => {
+    Object.keys(cardData).slice(0, 3).forEach((val) => {
       if (!cardData[val].length) {
         errorValue = { ...errorValue, [`${val}Error`]: 'Required' };
         isError = true;
@@ -124,6 +124,7 @@ class Payments extends React.Component {
       this.props.changePage('confirmation');
       this.props.changeCurrentStep(3);
       this.props.updateUserPaymentMethod(this.state.cardData.card)
+      this.props.applyPromo(this.props.mainState.cartFinalPrice, this.state.cardData.promoCode)
     }
   };
 

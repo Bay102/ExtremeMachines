@@ -11,8 +11,6 @@ import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
 import { Confirmation } from '../Confirmation/Confirmation';
 
-// ! Fix New User passwords - 
-
 class Main extends React.Component {
   state = {
     displayPage: 'signIn',
@@ -24,6 +22,8 @@ class Main extends React.Component {
     cartFinalPrice: '',
     checkoutDisabled: false,
     currentStep: 1,
+    promoCode: 'devslopes',
+    priceAfterPromo: '',
   };
 
   changePage = (value) => {
@@ -107,7 +107,6 @@ class Main extends React.Component {
   };
 
   enableCheckout = () => {
-    console.log(Object.entries(this.state.storeItems));
     if (Object.entries(this.state.storeItems).length <= 1) {
       this.setState({ checkoutDisabled: true });
     }
@@ -127,15 +126,27 @@ class Main extends React.Component {
   };
 
   updateUserPaymentMethod = (value) => {
-    const last4 = value.substr(-4)
+    const last4 = value.substr(-4);
     this.setState((prev) => ({
       currentUser: {
         ...prev.currentUser,
         paymentMethod: last4,
-      }
-    }))
-  }
+      },
+    }));
+  };
 
+  applyPromo = (totalPrice, enteredPromo) => {
+    let afterPromo;
+    if (enteredPromo === this.state.promoCode) {
+      const priceString = totalPrice.replace(/[$,]/g, '');
+      afterPromo = priceString - 10000;
+      const addSymbols = afterPromo.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      });
+      this.setState({ cartFinalPrice: addSymbols });
+    }
+  };
   changeCurrentStep = (value) => {
     this.setState({ currentStep: value });
   };
@@ -198,6 +209,7 @@ class Main extends React.Component {
               changePage={this.changePage}
               changeCurrentStep={this.changeCurrentStep}
               updateUserPaymentMethod={this.updateUserPaymentMethod}
+              applyPromo={this.applyPromo}
             />
           )}
           {this.state.displayPage === 'confirmation' && (
