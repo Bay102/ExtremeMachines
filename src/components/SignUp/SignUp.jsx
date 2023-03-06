@@ -11,8 +11,6 @@ import {
 } from '../validations';
 import { SignUpInputs } from './SignUpInputs';
 
-// Passwords must match | Reveal password with eye icon | Names no numbers
-
 class SignUp extends React.Component {
   state = {
     credentials: NEW_USER_DATA,
@@ -90,7 +88,6 @@ class SignUp extends React.Component {
           },
         }));
         break;
-      // add email already exists validation
       default:
         break;
     }
@@ -104,11 +101,10 @@ class SignUp extends React.Component {
     Object.keys(this.state.credentials)
       .slice(0, 6)
       .forEach((val) => {
-        //ask how to make other validations required
-        if (!this.state.credentials[val].length ) {
+        if (!this.state.credentials[val].length) {
           errorValue = { ...errorValue, [`${val}`]: 'Required' };
           isError = true;
-        } 
+        }
       });
     this.setState({ error: errorValue });
     return isError;
@@ -125,7 +121,7 @@ class SignUp extends React.Component {
       this.state.credentials.confirmPassword
     );
     if (!errorCheck && !userAlreadyExists && !matchingPassword) {
-      this.props.createNewUser(this.state.credentials); // why is index now user
+      this.props.createNewUser(this.state.credentials); 
       this.props.changePage('signIn');
     }
   };

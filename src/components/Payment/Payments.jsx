@@ -1,7 +1,6 @@
 import React from 'react';
 import { InputBase } from '../InputBase/InputBase';
 import { ProgressBar } from '../ProgressBar /ProgressBar';
-// import { BuildPaymentInputs } from './BuildPaymentInputs';
 import { OTHERCARDS } from './paymentData';
 import {
   cardNumberValidation,
@@ -103,12 +102,14 @@ class Payments extends React.Component {
     const { cardData } = this.state;
     let errorValue = {};
     let isError = false;
-    Object.keys(cardData).slice(0, 3).forEach((val) => {
-      if (!cardData[val].length) {
-        errorValue = { ...errorValue, [`${val}Error`]: 'Required' };
-        isError = true;
-      }
-    });
+    Object.keys(cardData)
+      .slice(0, 3)
+      .forEach((val) => {
+        if (!cardData[val].length) {
+          errorValue = { ...errorValue, [`${val}Error`]: 'Required' };
+          isError = true;
+        }
+      });
     this.setState({ error: errorValue });
     return isError;
   };
@@ -123,14 +124,17 @@ class Payments extends React.Component {
       });
       this.props.changePage('confirmation');
       this.props.changeCurrentStep(3);
-      this.props.updateUserPaymentMethod(this.state.cardData.card)
-      this.props.applyPromo(this.props.mainState.cartFinalPrice, this.state.cardData.promoCode)
+      this.props.updateUserPaymentMethod(this.state.cardData.card);
+      this.props.applyPromo(
+        this.props.mainState.cartFinalPrice,
+        this.state.cardData.promoCode
+      );
     }
   };
 
   render() {
     const { cardData, error, cardType, maxLength } = this.state;
-    const { mainState } = this.props
+    const { mainState } = this.props;
     const paymentInputs = [
       {
         id: '1',
@@ -162,9 +166,8 @@ class Payments extends React.Component {
       },
     ];
     return (
-   
       <div>
-        <ProgressBar mainState={mainState}/>
+        <ProgressBar mainState={mainState} />
         <div className=" inputsWrapper paymentsContainer">
           <h2>Payment</h2>
           {paymentInputs.length

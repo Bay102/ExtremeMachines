@@ -1,21 +1,18 @@
-import React from "react";
-import "./SignIn.css";
+import React from 'react';
+import './SignIn.css';
 import {
   emailContains,
   passwordLengthError,
   userValidation,
   userValidationError,
-} from "../validations";
-import { BuildSignInInputs } from "./BuildSignInInputs";
-
-// User can sign in | if password is incorrect prompt error |
-// Eye Icon on Password | if successful render Cart
+} from '../validations';
+import { BuildSignInInputs } from './BuildSignInInputs';
 
 class SignIn extends React.Component {
   state = {
     credentials: {
-      userEmail: "",
-      userPassword: "",
+      userEmail: '',
+      userPassword: '',
     },
     error: {},
   };
@@ -32,7 +29,7 @@ class SignIn extends React.Component {
   handleValidations = (type, value) => {
     let errorText;
     switch (type) {
-      case "userEmail":
+      case 'userEmail':
         errorText = emailContains(value);
         this.setState((prevState) => ({
           error: {
@@ -42,7 +39,7 @@ class SignIn extends React.Component {
         }));
         break;
       // add check if user exists here
-      case "userPassword":
+      case 'userPassword':
         errorText =
           passwordLengthError(value) ||
           userValidationError(
@@ -69,7 +66,7 @@ class SignIn extends React.Component {
     let isError = false;
     Object.keys(this.state.credentials).forEach((val) => {
       if (!this.state.credentials[val].length) {
-        errorValue = { ...errorValue, [`${val}`]: "Required" };
+        errorValue = { ...errorValue, [`${val}`]: 'Required' };
         isError = true;
       }
     });
@@ -93,20 +90,14 @@ class SignIn extends React.Component {
     const { userEmail, userPassword } = this.state.credentials;
     const requiredFieldErrorCheck = this.errorCheck();
     const emailContainsSymbolsRequirement = emailContains(userEmail);
-    const validateCredentials = userValidation(
-      mainState.users,
-      userEmail,
-      userPassword
-    );
+    const validateCredentials = userValidation(mainState.users, userEmail, userPassword);
     if (
       !requiredFieldErrorCheck &&
       !emailContainsSymbolsRequirement &&
       validateCredentials
     ) {
-      this.props.updateCurrentUser(
-        this.findUserToLogIn(mainState.users, userEmail)
-      );
-      this.props.changePage("cart");
+      this.props.updateCurrentUser(this.findUserToLogIn(mainState.users, userEmail));
+      this.props.changePage('cart');
     }
   };
 
