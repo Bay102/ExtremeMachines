@@ -29,8 +29,8 @@ export const InputBase = ({ type, errorM, error, isCard, cardType, ...props }) =
         style={{
           position: 'absolute',
           top: '-1px',
-          right: '25px',
-          width: '50px',
+          right: '30px',
+          width: '45px',
           height: '33px',
         }}
         src={CARDICON[cardType]}

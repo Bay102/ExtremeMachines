@@ -122,7 +122,8 @@ class Payments extends React.Component {
         cardType: null,
       });
       this.props.changePage('confirmation');
-      this.props.changeCurrentStep(3)
+      this.props.changeCurrentStep(3);
+      this.props.updateUserPaymentMethod(this.state.cardData.card)
     }
   };
 

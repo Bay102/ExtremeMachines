@@ -8,7 +8,7 @@ export const NEW_USER_DATA = {
   userZip: "",
   cart: undefined,
   shipping: undefined,
-  payment: undefined,
+  paymentMethod: undefined,
 };
 
 // new users get added to this array
@@ -19,7 +19,7 @@ export const allUsers = [
   password: "fake000",
   cart: undefined,
   shipping: undefined,
-  payment: undefined,
+  paymentMethod: undefined,
   firstName: "faker",
   lastName: "dummy",
   postCode: "48170",

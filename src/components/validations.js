@@ -1,7 +1,6 @@
-
 export const checkIfEmailAlreadyExists = (users, email) => {
   if (users.some((user) => user.userEmail === email)) {
-    return "Email already exists";
+    return 'Email already exists';
   } else return false;
 };
 
@@ -17,18 +16,21 @@ export const findExistingUser = (users, email) => {
 
 export const userValidationError = (users, email, password) => {
   const user = findExistingUser(users, email);
-  const values = user ? Object.values(user) : undefined ; 
-  if (user ? password === values[2] : undefined) {
-    return true;
-  } else return 'Incorrect Password';
+  const values = user ? Object.values(user) : undefined;
+  if (password) {
+    if (user ? password === values[2] : undefined) {
+      return true;
+    } else return 'Incorrect Password';
+  }
 };
 
 export const userValidation = (users, email, password) => {
   const user = findExistingUser(users, email);
-  const values = user ? Object.values(user): undefined;
+  const values = user ? Object.values(user) : undefined;
+
   if (password === values[2]) {
     return true;
-  } else return false ;
+  } else return false;
 };
 
 export const onlyTextValidation = (value) => {
@@ -36,7 +38,7 @@ export const onlyTextValidation = (value) => {
     if (/^[a-zA-Z ]*$/i.test(value)) {
       return undefined;
     } else {
-      return "Alphabetical letters only";
+      return 'Alphabetical letters only';
     }
   } else {
     return undefined;
@@ -45,13 +47,11 @@ export const onlyTextValidation = (value) => {
 
 export const passwordLengthError = (value) =>
   value.length < 7 && value.length >= 1
-    ? "Password must be at least 7 characters"
+    ? 'Password must be at least 7 characters'
     : undefined;
 
 export const matchingPasswords = (passwordState, confirmPasswordState) => {
-  return confirmPasswordState !== passwordState
-    ? "Passwords do not match"
-    : undefined;
+  return confirmPasswordState !== passwordState ? 'Passwords do not match' : undefined;
 };
 
 export const emailContains = (value) => {
@@ -60,7 +60,7 @@ export const emailContains = (value) => {
   if (value.length > 0) {
     if (regex.test(value)) {
       return undefined;
-    } else return "Invalid Email Format";
+    } else return 'Invalid Email Format';
   }
 };
 
@@ -69,6 +69,6 @@ export const onlyNumberValidation = (value) => {
   if (value.length > 0) {
     if (regex.test(value)) {
       return undefined;
-    } else return "Numbers Only";
+    } else return 'Numbers Only';
   }
 };

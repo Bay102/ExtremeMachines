@@ -1,6 +1,6 @@
-import React from "react";
-import "../SignUp/SignUp.css";
-import { NEW_USER_DATA } from "../stateData";
+import React from 'react';
+import '../SignUp/SignUp.css';
+import { NEW_USER_DATA } from '../stateData';
 import {
   onlyTextValidation,
   passwordLengthError,
@@ -8,8 +8,8 @@ import {
   onlyNumberValidation,
   emailContains,
   checkIfEmailAlreadyExists,
-} from "../validations";
-import { SignUpInputs } from "./SignUpInputs";
+} from '../validations';
+import { SignUpInputs } from './SignUpInputs';
 
 // Passwords must match | Reveal password with eye icon | Names no numbers
 
@@ -33,9 +33,8 @@ class SignUp extends React.Component {
     const { users } = this.props.state;
     let errorText;
     switch (type) {
-      case "userEmail":
-        errorText =
-          emailContains(value) || checkIfEmailAlreadyExists(users, userEmail);
+      case 'userEmail':
+        errorText = emailContains(value) || checkIfEmailAlreadyExists(users, userEmail);
         this.setState((prevState) => ({
           error: {
             ...prevState.error,
@@ -43,7 +42,7 @@ class SignUp extends React.Component {
           },
         }));
         break;
-      case "firstName":
+      case 'firstName':
         errorText = onlyTextValidation(value);
         this.setState((prevState) => ({
           error: {
@@ -52,7 +51,7 @@ class SignUp extends React.Component {
           },
         }));
         break;
-      case "lastName":
+      case 'lastName':
         errorText = onlyTextValidation(value);
         this.setState((prevState) => ({
           error: {
@@ -61,7 +60,7 @@ class SignUp extends React.Component {
           },
         }));
         break;
-      case "userPassword":
+      case 'userPassword':
         errorText = passwordLengthError(value);
         this.setState((prevState) => ({
           error: {
@@ -70,7 +69,7 @@ class SignUp extends React.Component {
           },
         }));
         break;
-      case "confirmPassword":
+      case 'confirmPassword':
         errorText = matchingPasswords(
           this.state.credentials.userPassword,
           this.state.credentials.confirmPassword
@@ -82,7 +81,7 @@ class SignUp extends React.Component {
           },
         }));
         break;
-      case "zip":
+      case 'zip':
         errorText = onlyNumberValidation(value);
         this.setState((prevState) => ({
           error: {
@@ -106,13 +105,12 @@ class SignUp extends React.Component {
       .slice(0, 6)
       .forEach((val) => {
         //ask how to make other validations required
-        if (!this.state.credentials[val].length) {
-          errorValue = { ...errorValue, [`${val}`]: "Required" };
+        if (!this.state.credentials[val].length ) {
+          errorValue = { ...errorValue, [`${val}`]: 'Required' };
           isError = true;
-        }
+        } 
       });
     this.setState({ error: errorValue });
-
     return isError;
   };
 
@@ -122,9 +120,13 @@ class SignUp extends React.Component {
     const { users } = this.props.state;
     const errorCheck = this.preSubmit();
     const userAlreadyExists = checkIfEmailAlreadyExists(users, userEmail);
-    if (!errorCheck && !userAlreadyExists) {
+    const matchingPassword = matchingPasswords(
+      this.state.credentials.userPassword,
+      this.state.credentials.confirmPassword
+    );
+    if (!errorCheck && !userAlreadyExists && !matchingPassword) {
       this.props.createNewUser(this.state.credentials); // why is index now user
-      this.props.changePage("signIn");
+      this.props.changePage('signIn');
     }
   };
 

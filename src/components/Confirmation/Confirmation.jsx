@@ -23,7 +23,7 @@ export class Confirmation extends React.Component {
             </div>
             <div className="confirmationInfo">
               <div className="amountPaid">Paid: {mainState.cartFinalPrice}</div>
-              <div className="cardNum">Payment Method:</div>
+              <div className="cardNum">Payment Method: {mainState.currentUser.paymentMethod}</div>
             </div>
           
         </div>

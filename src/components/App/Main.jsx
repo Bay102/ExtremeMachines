@@ -10,7 +10,9 @@ import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
 import { Confirmation } from '../Confirmation/Confirmation';
-///
+
+// ! Fix New User passwords - 
+
 class Main extends React.Component {
   state = {
     displayPage: 'signIn',
@@ -124,6 +126,16 @@ class Main extends React.Component {
     });
   };
 
+  updateUserPaymentMethod = (value) => {
+    const last4 = value.substr(-4)
+    this.setState((prev) => ({
+      currentUser: {
+        ...prev.currentUser,
+        paymentMethod: last4,
+      }
+    }))
+  }
+
   changeCurrentStep = (value) => {
     this.setState({ currentStep: value });
   };
@@ -185,6 +197,7 @@ class Main extends React.Component {
               mainState={this.state}
               changePage={this.changePage}
               changeCurrentStep={this.changeCurrentStep}
+              updateUserPaymentMethod={this.updateUserPaymentMethod}
             />
           )}
           {this.state.displayPage === 'confirmation' && (
