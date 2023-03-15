@@ -49,7 +49,7 @@ export class Cart extends React.Component {
           <div className="cartSummary">
             <CartSummary storeItems={storeItems} updateItemPrice={updateItemPrice} />
             <div className="totalCartPrice">
-              Cart Total: <br /> {totalCartPrice(mainState.storeItems)}
+              {/* Cart Total: <br /> {totalCartPrice(mainState.storeItems)} */}
               <button
                 disabled={mainState.checkoutDisabled}
                 className="checkoutButton"

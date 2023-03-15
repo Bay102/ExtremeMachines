@@ -11,7 +11,7 @@ export const CartSummary = (props) => {
                  Quantity: {item.quantity}
                </div>
                <div className="totalPrice">
-                 Total: {updateItemPrice(item.price, item.quantity)}
+                 {/* Total: {updateItemPrice(item.price, item.quantity)} */}
                </div>
              </div>
            ))

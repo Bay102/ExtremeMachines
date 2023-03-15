@@ -1,6 +1,5 @@
 import React from 'react';
 import { Cart } from '../Cart/Cart';
-import { storeItems } from '../storeItems';
 import Shipping from '../Shipping/Shipping';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
@@ -10,13 +9,14 @@ import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
 import { Confirmation } from '../Confirmation/Confirmation';
+import Products from '../Products/Products';
 
 class Main extends React.Component {
   state = {
     displayPage: 'signIn',
     currentUser: '',
     users: allUsers,
-    storeItems,
+    storeItems: [],
     cartSubtotal: '',
     shippingOption: 'standard',
     cartFinalPrice: '',
@@ -52,36 +52,41 @@ class Main extends React.Component {
     this.setState({ users: [...this.state.users, newUser] });
   };
 
+
+  setStoreItems = (products) => {
+    this.setState({storeItems: products})
+  }
+
   handleQuantityChange = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
 
-  updateItemPrice = (itemPrice, itemQuantity) => {
-    const priceString = itemPrice.replace(/[$,]/g, '');
-    const doMath = parseInt(priceString) * itemQuantity;
-    const formattedPrice = doMath.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-    return formattedPrice;
-  };
+  // updateItemPrice = (itemPrice, itemQuantity) => {
+  //   const priceString = itemPrice.replace(/[$,]/g, '');
+  //   const doMath = parseInt(priceString) * itemQuantity;
+  //   const formattedPrice = doMath.toLocaleString('en-US', {
+  //     style: 'currency',
+  //     currency: 'USD',
+  //   });
+  //   return formattedPrice;
+  // };
 
-  totalCartPrice = (cart) => {
-    let totalPrice = 0;
-    for (const item of Object.values(cart)) {
-      const priceString = item.price.replace(/[$,]/g, '');
-      let quantityPrices = parseInt(priceString * item.quantity);
-      totalPrice = totalPrice += quantityPrices;
-    }
-    if (this.state.shippingOption === 'express') {
-      totalPrice += 1500;
-    }
-    const formattedPrice = totalPrice.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
+  // totalCartPrice = (cart) => {
+  //   let totalPrice = 0;
+  //   for (const item of Object.values(cart)) {
+  //     const priceString = item.price.replace(/[$,]/g, '');
+  //     let quantityPrices = parseInt(priceString * item.quantity);
+  //     totalPrice = totalPrice += quantityPrices;
+  //   }
+  //   if (this.state.shippingOption === 'express') {
+  //     totalPrice += 1500;
+  //   }
+  //   const formattedPrice = totalPrice.toLocaleString('en-US', {
+  //     style: 'currency',
+  //     currency: 'USD',
+  //   });
 
-    return formattedPrice;
-  };
+  //   return formattedPrice;
+  // };
 
   getSubtotal = (value) => {
     this.setState({ cartSubtotal: value });
@@ -111,6 +116,8 @@ class Main extends React.Component {
       this.setState({ checkoutDisabled: true });
     }
   };
+
+ // ! ADD TO CART FUNCTION HERE
 
   removeItemFromCart = (itemName) => {
     const storeItemsCopy = { ...this.state.storeItems };
@@ -160,6 +167,7 @@ class Main extends React.Component {
           <BuildRadios changePage={this.changePage} />
         </div>
         <div className="mainContent">
+        
           {this.state.displayPage === 'signIn' && (
             <SignIn
               mainState={this.state}
@@ -177,6 +185,11 @@ class Main extends React.Component {
               createNewUser={this.createNewUser}
             />
           )}
+          {
+            this.state.displayPage === "store" && (
+            <Products changePage={this.changePage} setStoreItems={this.setStoreItems} />
+            )
+          }
           {this.state.displayPage === 'cart' && (
             <Cart
               mainState={this.state}

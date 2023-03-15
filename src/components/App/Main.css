@@ -37,4 +37,5 @@ h2 {
   height: 105vh;
   border: 1px solid black;
   background-color: rgba(14, 11, 11, 0.877);
+  overflow-y: scroll;
 }

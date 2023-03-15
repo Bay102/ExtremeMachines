@@ -97,7 +97,7 @@ class SignIn extends React.Component {
       validateCredentials
     ) {
       this.props.updateCurrentUser(this.findUserToLogIn(mainState.users, userEmail));
-      this.props.changePage('cart');
+      this.props.changePage('store');
     }
   };
 
