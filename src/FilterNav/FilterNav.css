@@ -10,16 +10,18 @@
    list-style: none;
 }
 
-.filterNav li {
+.filterNav button {
    border: 1px solid white;
+   background-color: rgba(221, 216, 216, 0.341);
    border-radius: 2px;
    width: 150px;
    text-align: center;
    margin: 10px 0;
    padding: 10px;
+   color: white;
 }
 
-.filterNav li:hover {
+.filterNav button:hover {
    background-color: rgb(241, 161, 11);
    color: black;
 }

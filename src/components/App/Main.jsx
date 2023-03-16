@@ -15,10 +15,11 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'signIn',
+    displayPage: 'store',
     currentUser: undefined,
     users: allUsers,
     storeItems: [],
+    filteredItems: [],
     cartSubtotal: '',
     showAdded: false,
     shippingOption: 'standard',
@@ -40,8 +41,7 @@ class Main extends React.Component {
     const isNotLoggedIn = this.state.currentUser === undefined;
     if (isNotLoggedIn) {
       this.changePage('signIn');
-    }
-    else if (!isNotLoggedIn) {
+    } else if (!isNotLoggedIn) {
       this.changePage('cart');
     }
   };
@@ -58,6 +58,17 @@ class Main extends React.Component {
     }));
   };
 
+  filterNav = (value) => {
+    const filteredItems = this.state.storeItems.filter((items) => {
+      return items.category[0].name === value;
+    });
+    console.log(filteredItems);
+
+    this.setState({
+      filteredItems: filteredItems,
+    });
+  };
+
   updateCurrentUser = (user) => {
     this.setState({ currentUser: user });
   };
@@ -71,22 +82,24 @@ class Main extends React.Component {
   };
 
   addToUserCart = (item) => {
-    const productData = this.state.storeItems.find((product) => {
-      return product.id === item;
-    });
-    this.setState((prev) => ({
-      showAdded: true,
-      currentUser: {
-        ...prev.currentUser,
-        cart: [...prev.currentUser.cart, productData],
-      },
-    }));
-    setTimeout(() => {
-      this.setState({ showAdded: false })
-    }, 2000)
+    if (this.state.currentUser) {
+      const productData = this.state.storeItems.find((product) => {
+        return product.id === item;
+      });
+      this.setState((prev) => ({
+        showAdded: true,
+        currentUser: {
+          ...prev.currentUser,
+          cart: [...prev.currentUser.cart, productData],
+        },
+      }));
+      setTimeout(() => {
+        this.setState({ showAdded: false });
+      }, 2000);
+    } else {
+      this.changePage('signIn');
+    }
   };
-
-
 
   handleQuantityChange = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
@@ -219,6 +232,7 @@ class Main extends React.Component {
       store: (
         <Products
           mainState={this.state}
+          filterNav={this.filterNav}
           addToUserCart={this.addToUserCart}
           changePage={this.changePage}
           setStoreItems={this.setStoreItems}

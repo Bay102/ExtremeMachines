@@ -3,6 +3,8 @@ import { ItemCard } from './ItemCard';
 import { ProductsService } from './ProductsServices';
 import './Products.css';
 import { FilterNav } from '../../FilterNav/FilterNav';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const products = new ProductsService();
 
@@ -40,25 +42,56 @@ class Products extends React.Component {
 
   render() {
     const { data, loading, error } = this.state;
-    const { mainState } = this.props;
+    const { mainState, filterNav } = this.props;
 
     return (
       <div className="products">
-        <FilterNav mainState={mainState} />
+        <FilterNav mainState={mainState} filterNav={filterNav} />
         <div className="productsContainer">
           <div className="itemsWrapper">
-            {!loading ? (
-              data.map((item) => (
-                <ItemCard
-                  key={item.id}
-                  mainState={mainState}
-                  data={item}
-                  addToUserCart={this.props.addToUserCart}
-                />
-              ))
-            ) : (
-              <div>Loading...</div>
-            )}
+            {!loading && !mainState.filteredItems.length
+              ? data.map((item) => (
+                  <ItemCard
+                    key={item.id}
+                    mainState={mainState}
+                    data={item}
+                    addToUserCart={this.props.addToUserCart}
+                  />
+                ))
+              : 
+              
+             mainState.filteredItems.map((item) => (
+                  <ItemCard
+                    key={item.id}
+                    mainState={mainState}
+                    data={item}
+                    addToUserCart={this.props.addToUserCart}
+                  />
+                ))
+              
+              
+              }
+
+
+
+            {loading ? (
+              <div className="loading">
+                <FontAwesomeIcon icon={faSpinner} /> Loading Awesome Machines...
+              </div>
+            ) : null}
+
+{/* 
+            {!loading && mainState.filteredItems.length
+              ? mainState.filteredItems.map((item) => (
+                  <ItemCard
+                    key={item.id}
+                    mainState={mainState}
+                    data={item}
+                    addToUserCart={this.props.addToUserCart}
+                  />
+                ))
+              : null} */}
+
             {error && <h3>Error Loading Data</h3>}
           </div>
         </div>
