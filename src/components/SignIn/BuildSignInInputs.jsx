@@ -20,7 +20,7 @@ const inputData = [
  ];
 
  export const BuildSignInInputs = (props) => {
-   const { signInState, handleInputChange, handleBlur } = props;
+   const { signInState, handleInputChange, handleBlur, changePage } = props;
  
    return (
      <div className="inputsWrapper">
@@ -52,6 +52,9 @@ const inputData = [
        <div className="signInSubmit">
          <button type="submit">Sign In</button>
        </div>
+       <div className="noAccount">
+          <button onClick={() => changePage('createAccount')}>New User? Create an account!</button>
+        </div>
      </div>
    );
  };

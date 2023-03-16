@@ -1,0 +1,25 @@
+.filterNav {
+   position: absolute;
+   right: 40px;
+   color: rgb(245, 243, 240);
+   margin: auto;
+   text-align: center;
+}
+
+.filterNav ul {
+   list-style: none;
+}
+
+.filterNav li {
+   border: 1px solid white;
+   border-radius: 2px;
+   width: 150px;
+   text-align: center;
+   margin: 10px 0;
+   padding: 10px;
+}
+
+.filterNav li:hover {
+   background-color: rgb(241, 161, 11);
+   color: black;
+}

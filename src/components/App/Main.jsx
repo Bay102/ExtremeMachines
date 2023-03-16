@@ -15,11 +15,12 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'store',
+    displayPage: 'signIn',
     currentUser: undefined,
     users: allUsers,
     storeItems: [],
     cartSubtotal: '',
+    showAdded: false,
     shippingOption: 'standard',
     cartFinalPrice: '',
     cartDisable: true,
@@ -37,11 +38,10 @@ class Main extends React.Component {
 
   enableCartButton = () => {
     const isNotLoggedIn = this.state.currentUser === undefined;
-    console.log(isNotLoggedIn);
     if (isNotLoggedIn) {
       this.changePage('signIn');
     }
-    if (!isNotLoggedIn) {
+    else if (!isNotLoggedIn) {
       this.changePage('cart');
     }
   };
@@ -75,12 +75,18 @@ class Main extends React.Component {
       return product.id === item;
     });
     this.setState((prev) => ({
+      showAdded: true,
       currentUser: {
         ...prev.currentUser,
         cart: [...prev.currentUser.cart, productData],
       },
     }));
+    setTimeout(() => {
+      this.setState({ showAdded: false })
+    }, 2000)
   };
+
+
 
   handleQuantityChange = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
@@ -89,8 +95,6 @@ class Main extends React.Component {
     const itemIndex = this.state.currentUser.cart.findIndex((item) => {
       return item.title === itemName;
     });
-    console.log(itemIndex);
-
     const newCart = [...this.state.currentUser.cart];
     newCart.splice(itemIndex, 1);
     this.enableCheckout();
@@ -126,7 +130,6 @@ class Main extends React.Component {
       style: 'currency',
       currency: 'USD',
     });
-
     return formattedPrice;
   };
 
@@ -154,7 +157,7 @@ class Main extends React.Component {
   };
 
   enableCheckout = () => {
-    if (Object.entries(this.state.storeItems).length <= 1) {
+    if (this.state.currentUser.cart.length <= 1) {
       this.setState({ checkoutDisabled: true });
     }
   };
@@ -184,8 +187,10 @@ class Main extends React.Component {
         style: 'currency',
         currency: 'USD',
       });
-      this.setState({ cartFinalPrice: addSymbols });
-      this.setState({ promoSuccess: true });
+      this.setState({
+        cartFinalPrice: addSymbols,
+        promoSuccess: true,
+      });
     }
   };
   changeCurrentStep = (value) => {
@@ -193,6 +198,77 @@ class Main extends React.Component {
   };
 
   render() {
+    const stateOptions = {
+      signIn: (
+        <SignIn
+          mainState={this.state}
+          changePage={this.changePage}
+          checkIfEmailExists={this.checkIfEmailExists}
+          updateCurrentUser={this.updateCurrentUser}
+        />
+      ),
+      createAccount: (
+        <SignUp
+          state={this.state}
+          changePage={this.changePage}
+          checkIfEmailExists={this.checkIfEmailExists}
+          updateState={this.updateState}
+          createNewUser={this.createNewUser}
+        />
+      ),
+      store: (
+        <Products
+          mainState={this.state}
+          addToUserCart={this.addToUserCart}
+          changePage={this.changePage}
+          setStoreItems={this.setStoreItems}
+        />
+      ),
+      cart: (
+        <Cart
+          mainState={this.state}
+          handleQuantityChange={this.handleQuantityChange}
+          storeItems={this.state.storeItems}
+          removeItem={this.removeItemFromCart}
+          changePage={this.changePage}
+          updateState={this.updateState}
+          updateItemPrice={this.updateItemPrice}
+          totalCartPrice={this.totalCartPrice}
+          getSubtotal={this.getSubtotal}
+        />
+      ),
+      shipping: (
+        <Shipping
+          mainState={this.state}
+          changePage={this.changePage}
+          updateState={this.updateState}
+          storeItems={this.state.storeItems}
+          updatePriceAfterShipping={this.updatePriceAfterShipping}
+          updateItemPrice={this.updateItemPrice}
+          totalCartPrice={this.totalCartPrice}
+          handleShippingChange={this.handleShippingChange}
+          changeCurrentStep={this.changeCurrentStep}
+          getCartFinalPrice={this.getCartFinalPrice}
+        />
+      ),
+      payments: (
+        <Payments
+          mainState={this.state}
+          changePage={this.changePage}
+          changeCurrentStep={this.changeCurrentStep}
+          updateUserPaymentMethod={this.updateUserPaymentMethod}
+          applyPromo={this.applyPromo}
+        />
+      ),
+      confirmation: (
+        <Confirmation
+          mainState={this.state}
+          changePage={this.changePage}
+          changeCurrentStep={this.changeCurrentStep}
+        />
+      ),
+    };
+
     return (
       <div>
         <div className="headerWrapper">
@@ -202,76 +278,7 @@ class Main extends React.Component {
             <FontAwesomeIcon icon={faCartShopping} />
           </button>
         </div>
-        <div className="mainContent">
-          {this.state.displayPage === 'signIn' && (
-            <SignIn
-              mainState={this.state}
-              changePage={this.changePage}
-              checkIfEmailExists={this.checkIfEmailExists}
-              updateCurrentUser={this.updateCurrentUser}
-            />
-          )}
-          {this.state.displayPage === 'createAccount' && (
-            <SignUp
-              state={this.state}
-              changePage={this.changePage}
-              checkIfEmailExists={this.checkIfEmailExists}
-              updateState={this.updateState}
-              createNewUser={this.createNewUser}
-            />
-          )}
-          {this.state.displayPage === 'store' && (
-            <Products
-              mainState={this.state}
-              addToUserCart={this.addToUserCart}
-              changePage={this.changePage}
-              setStoreItems={this.setStoreItems}
-            />
-          )}
-          {this.state.displayPage === 'cart' && (
-            <Cart
-              mainState={this.state}
-              handleQuantityChange={this.handleQuantityChange}
-              storeItems={this.state.storeItems}
-              removeItem={this.removeItemFromCart}
-              changePage={this.changePage}
-              updateState={this.updateState}
-              updateItemPrice={this.updateItemPrice}
-              totalCartPrice={this.totalCartPrice}
-              getSubtotal={this.getSubtotal}
-            />
-          )}
-          {this.state.displayPage === 'shipping' && (
-            <Shipping
-              mainState={this.state}
-              changePage={this.changePage}
-              updateState={this.updateState}
-              storeItems={this.state.storeItems}
-              updatePriceAfterShipping={this.updatePriceAfterShipping}
-              updateItemPrice={this.updateItemPrice}
-              totalCartPrice={this.totalCartPrice}
-              handleShippingChange={this.handleShippingChange}
-              changeCurrentStep={this.changeCurrentStep}
-              getCartFinalPrice={this.getCartFinalPrice}
-            />
-          )}
-          {this.state.displayPage === 'payments' && (
-            <Payments
-              mainState={this.state}
-              changePage={this.changePage}
-              changeCurrentStep={this.changeCurrentStep}
-              updateUserPaymentMethod={this.updateUserPaymentMethod}
-              applyPromo={this.applyPromo}
-            />
-          )}
-          {this.state.displayPage === 'confirmation' && (
-            <Confirmation
-              mainState={this.state}
-              changePage={this.changePage}
-              changeCurrentStep={this.changeCurrentStep}
-            />
-          )}
-        </div>
+        <div className="mainContent">{stateOptions[this.state.displayPage]}</div>
       </div>
     );
   }

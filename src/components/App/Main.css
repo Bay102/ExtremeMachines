@@ -1,5 +1,8 @@
 body {
   overflow-x: hidden;
+  background-image: url('/src/components/images/6191107.jpg');
+  background-size: contain;
+
 }
 
 h2 {
@@ -15,7 +18,6 @@ h2 {
   justify-content: space-around;
   background-color: rgb(231, 124, 38);
   font-family: monospace;
-  width: 100vw;
   color: black;
 }
 
@@ -48,7 +50,7 @@ h2 {
   height: 105vh;
   border: 1px solid black;
   background-color: rgba(14, 11, 11, 0.877);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 

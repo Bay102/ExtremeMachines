@@ -2,7 +2,7 @@ import React from 'react';
 import { ItemCard } from './ItemCard';
 import { ProductsService } from './ProductsServices';
 import './Products.css';
-import { FilterNav } from '../FilterNav';
+import { FilterNav } from '../../FilterNav/FilterNav';
 
 const products = new ProductsService();
 
@@ -40,15 +40,22 @@ class Products extends React.Component {
 
   render() {
     const { data, loading, error } = this.state;
-    const { mainState } = this.props
-  
+    const { mainState } = this.props;
+
     return (
       <div className="products">
-        <FilterNav mainState={mainState}/>
+        <FilterNav mainState={mainState} />
         <div className="productsContainer">
           <div className="itemsWrapper">
             {!loading ? (
-              data.map((item) => <ItemCard key={item.id} data={item} addToUserCart={this.props.addToUserCart}/>)
+              data.map((item) => (
+                <ItemCard
+                  key={item.id}
+                  mainState={mainState}
+                  data={item}
+                  addToUserCart={this.props.addToUserCart}
+                />
+              ))
             ) : (
               <div>Loading...</div>
             )}

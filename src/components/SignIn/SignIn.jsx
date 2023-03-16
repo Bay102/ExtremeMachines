@@ -108,6 +108,7 @@ class SignIn extends React.Component {
           signInState={this.state}
           handleInputChange={this.handleInputChange}
           handleBlur={this.handleBlur}
+          changePage={this.props.changePage}
         />
       </form>
     );

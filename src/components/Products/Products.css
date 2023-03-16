@@ -1,6 +1,6 @@
 .productsContainer {
   width: 80%;
-  margin: auto;
+  /* margin: auto; */
 }
 
 .itemsWrapper {
@@ -9,11 +9,6 @@
   flex-direction: column;
   gap: 10px;
 }
-
-/* .productTitle {
-   
- }
-  */
 
 .itemPrice {
   margin: 15px auto;
@@ -45,7 +40,7 @@
   padding: 20px;
   position: relative;
   margin-left: -30px;
-  background-color: lightgrey;
+  background-color: #939393b3;
 }
 
 .itemDescription {
@@ -67,4 +62,10 @@
 
 .addToCart:hover {
   background-color: lightblue;
+}
+
+.added {
+  position: absolute;
+  top: 60px;
+  right: 20px;
 }
