@@ -32,6 +32,17 @@ h2 {
   margin-right: auto;
 }
 
+.navCartIcon {
+  margin-right: 10px; 
+  height: 40px;
+  width: 40px; 
+  border-radius: 10px;
+}
+
+.navCartIcon:hover {
+  background-color: lightblue;
+}
+
 .mainContent {
   margin: auto;
   height: 105vh;
@@ -39,3 +50,5 @@ h2 {
   background-color: rgba(14, 11, 11, 0.877);
   overflow-y: scroll;
 }
+
+

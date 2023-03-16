@@ -28,7 +28,6 @@ export class ProductsService {
  
          if (response.ok) {
            const json = await response.json();
-           console.log(json);
            const wantedProductInfo = json.data.map((item) => ({
              category: item.categories,
              id: item.id,
@@ -38,6 +37,8 @@ export class ProductsService {
              price: item.price.formatted_with_symbol,
              description: item.description,
            }));
+
+          //  console.log(wantedProductInfo);
            success({ response, wantedProductInfo });
          } else {
            failure({ error: 'invalid http request' });

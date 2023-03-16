@@ -10,16 +10,19 @@ import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
 import { Confirmation } from '../Confirmation/Confirmation';
 import Products from '../Products/Products';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 class Main extends React.Component {
   state = {
-    displayPage: 'signIn',
-    currentUser: '',
+    displayPage: 'store',
+    currentUser: undefined,
     users: allUsers,
     storeItems: [],
     cartSubtotal: '',
     shippingOption: 'standard',
     cartFinalPrice: '',
+    cartDisable: true,
     checkoutDisabled: false,
     currentStep: 1,
     promoCode: 'devslopes',
@@ -30,6 +33,17 @@ class Main extends React.Component {
     this.setState({
       displayPage: value,
     });
+  };
+
+  enableCartButton = () => {
+    const isNotLoggedIn = this.state.currentUser === undefined;
+    console.log(isNotLoggedIn);
+    if (isNotLoggedIn) {
+      this.changePage('signIn');
+    }
+    if (!isNotLoggedIn) {
+      this.changePage('cart');
+    }
   };
 
   updateSubSubState = (parent, name, sub, newState) => {
@@ -44,6 +58,23 @@ class Main extends React.Component {
     }));
   };
 
+  //! make 'item' the object from state
+  addToUserCart = (item) => {
+    const productData = this.state.storeItems.find((product) => {
+      return product.id === item;
+    });
+
+    console.log(productData);
+
+    // const productCopy = item; // Create a copy of the item object
+    this.setState((prev) => ({
+      currentUser: {
+        ...prev.currentUser,
+        cart: [...prev.currentUser.cart, productData],
+      },
+    }));
+  };
+
   updateCurrentUser = (user) => {
     this.setState({ currentUser: user });
   };
@@ -52,10 +83,9 @@ class Main extends React.Component {
     this.setState({ users: [...this.state.users, newUser] });
   };
 
-
   setStoreItems = (products) => {
-    this.setState({storeItems: products})
-  }
+    this.setState({ storeItems: products });
+  };
 
   handleQuantityChange = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
@@ -117,7 +147,8 @@ class Main extends React.Component {
     }
   };
 
- // ! ADD TO CART FUNCTION HERE
+  // ! ADD TO CART FUNCTION HERE
+  // ? ASK MIKE FOR BEST WAY
 
   removeItemFromCart = (itemName) => {
     const storeItemsCopy = { ...this.state.storeItems };
@@ -152,7 +183,7 @@ class Main extends React.Component {
         currency: 'USD',
       });
       this.setState({ cartFinalPrice: addSymbols });
-      this.setState({ promoSuccess: true})
+      this.setState({ promoSuccess: true });
     }
   };
   changeCurrentStep = (value) => {
@@ -165,9 +196,11 @@ class Main extends React.Component {
         <div className="headerWrapper">
           <img style={{ width: '100px' }} src={logo} alt="" />
           <BuildRadios changePage={this.changePage} />
+          <button onClick={() => this.enableCartButton()} className="navCartIcon">
+            <FontAwesomeIcon icon={faCartShopping} />
+          </button>
         </div>
         <div className="mainContent">
-        
           {this.state.displayPage === 'signIn' && (
             <SignIn
               mainState={this.state}
@@ -185,11 +218,14 @@ class Main extends React.Component {
               createNewUser={this.createNewUser}
             />
           )}
-          {
-            this.state.displayPage === "store" && (
-            <Products changePage={this.changePage} setStoreItems={this.setStoreItems} />
-            )
-          }
+          {this.state.displayPage === 'store' && (
+            <Products
+              mainState={this.state}
+              addToUserCart={this.addToUserCart}
+              changePage={this.changePage}
+              setStoreItems={this.setStoreItems}
+            />
+          )}
           {this.state.displayPage === 'cart' && (
             <Cart
               mainState={this.state}

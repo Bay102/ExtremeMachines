@@ -6,7 +6,7 @@ export const NEW_USER_DATA = {
   firstName: "",
   lastName: "",
   userZip: "",
-  cart: undefined, 
+  cart:[], 
   shipping: undefined,
   paymentMethod: undefined,
 };
@@ -17,7 +17,7 @@ export const allUsers = [
   user: 'fake',
   userEmail: "fake@dev.com",
   password: "fake000",
-  cart: undefined,
+  cart: [],
   shipping: undefined,
   paymentMethod: undefined,
   firstName: "faker",
