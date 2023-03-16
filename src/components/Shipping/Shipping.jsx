@@ -161,7 +161,7 @@ class Shipping extends React.Component {
               </div>
               <div className="totalAfterShipping">
                 <div>Cart Subtotal: {mainState.cartSubtotal} </div>
-                <div>Final Price: {totalCartPrice(mainState.storeItems)} </div>
+                {/* <div>Final Price: {totalCartPrice(mainState.storeItems)} </div> */}
               </div>
               <div className="summaryButtons">
                 <button className="PayNowButton" onClick={this.backToCart}>

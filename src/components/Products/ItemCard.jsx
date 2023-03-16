@@ -7,8 +7,6 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 export const ItemCard = ({ data, addToUserCart }) => {
   const { category, id, title, imageUrl, quantity, price, description } = data;
 
-// const item = 
-
   return (
     <div className="cardContainer">
       <div className="left">

@@ -58,23 +58,6 @@ class Main extends React.Component {
     }));
   };
 
-  //! make 'item' the object from state
-  addToUserCart = (item) => {
-    const productData = this.state.storeItems.find((product) => {
-      return product.id === item;
-    });
-
-    console.log(productData);
-
-    // const productCopy = item; // Create a copy of the item object
-    this.setState((prev) => ({
-      currentUser: {
-        ...prev.currentUser,
-        cart: [...prev.currentUser.cart, productData],
-      },
-    }));
-  };
-
   updateCurrentUser = (user) => {
     this.setState({ currentUser: user });
   };
@@ -87,36 +70,65 @@ class Main extends React.Component {
     this.setState({ storeItems: products });
   };
 
+  addToUserCart = (item) => {
+    const productData = this.state.storeItems.find((product) => {
+      return product.id === item;
+    });
+    this.setState((prev) => ({
+      currentUser: {
+        ...prev.currentUser,
+        cart: [...prev.currentUser.cart, productData],
+      },
+    }));
+  };
+
   handleQuantityChange = (parent, name, sub, newState) =>
     this.updateSubSubState(parent, name, sub, newState);
 
-  // updateItemPrice = (itemPrice, itemQuantity) => {
-  //   const priceString = itemPrice.replace(/[$,]/g, '');
-  //   const doMath = parseInt(priceString) * itemQuantity;
-  //   const formattedPrice = doMath.toLocaleString('en-US', {
-  //     style: 'currency',
-  //     currency: 'USD',
-  //   });
-  //   return formattedPrice;
-  // };
+  removeItemFromCart = (itemName) => {
+    const itemIndex = this.state.currentUser.cart.findIndex((item) => {
+      return item.title === itemName;
+    });
+    console.log(itemIndex);
 
-  // totalCartPrice = (cart) => {
-  //   let totalPrice = 0;
-  //   for (const item of Object.values(cart)) {
-  //     const priceString = item.price.replace(/[$,]/g, '');
-  //     let quantityPrices = parseInt(priceString * item.quantity);
-  //     totalPrice = totalPrice += quantityPrices;
-  //   }
-  //   if (this.state.shippingOption === 'express') {
-  //     totalPrice += 1500;
-  //   }
-  //   const formattedPrice = totalPrice.toLocaleString('en-US', {
-  //     style: 'currency',
-  //     currency: 'USD',
-  //   });
+    const newCart = [...this.state.currentUser.cart];
+    newCart.splice(itemIndex, 1);
+    this.enableCheckout();
+    this.setState((prev) => ({
+      currentUser: {
+        ...prev.currentUser,
+        cart: newCart,
+      },
+    }));
+  };
 
-  //   return formattedPrice;
-  // };
+  updateItemPrice = (itemPrice, itemQuantity) => {
+    const priceString = itemPrice.replace(/[$,]/g, '');
+    const doMath = parseInt(priceString) * itemQuantity;
+    const formattedPrice = doMath.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+    return formattedPrice;
+  };
+
+  totalCartPrice = (cart) => {
+    let totalPrice = 0;
+    for (const item of Object.values(cart)) {
+      const priceString = item.price.replace(/[$,]/g, '');
+      let quantityPrices = parseInt(priceString * item.quantity);
+      totalPrice = totalPrice += quantityPrices;
+    }
+    if (this.state.shippingOption === 'express') {
+      totalPrice += 1500;
+    }
+    const formattedPrice = totalPrice.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+
+    return formattedPrice;
+  };
 
   getSubtotal = (value) => {
     this.setState({ cartSubtotal: value });
@@ -145,16 +157,6 @@ class Main extends React.Component {
     if (Object.entries(this.state.storeItems).length <= 1) {
       this.setState({ checkoutDisabled: true });
     }
-  };
-
-  // ! ADD TO CART FUNCTION HERE
-  // ? ASK MIKE FOR BEST WAY
-
-  removeItemFromCart = (itemName) => {
-    const storeItemsCopy = { ...this.state.storeItems };
-    delete storeItemsCopy[itemName];
-    this.enableCheckout();
-    this.setState({ storeItems: storeItemsCopy });
   };
 
   handleShippingChange = (event) => {

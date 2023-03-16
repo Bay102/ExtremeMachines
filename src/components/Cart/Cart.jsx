@@ -11,7 +11,7 @@ export class Cart extends React.Component {
 
   continueToShipping = (e) => {
     e.preventDefault();
-    this.props.getSubtotal(this.props.totalCartPrice(this.props.mainState.storeItems));
+    // this.props.getSubtotal(this.props.totalCartPrice(this.props.mainState.storeItems));
     this.props.changePage('shipping');
   };
 
@@ -29,6 +29,27 @@ export class Cart extends React.Component {
         <h2 className="cartH2">CART</h2>
         <div className="cartContainer">
 
+
+
+        {mainState.currentUser.cart.length
+            ? mainState.currentUser.cart.map((item) => (
+                <div key={item.id} className="itemWrapper">
+                  <CartItemBase
+                    state={mainState}
+                    handleQuantityChange={handleQuantityChange}
+                    name={item.title}
+                    quantity={item.quantity}
+                    price={item.price}
+                    image={item.imageUrl}
+                    removeItem={removeItem}
+                  />
+                </div>
+              ))
+            : null}
+
+
+
+{/* 
         {Object.values(mainState.currentUser.cart).length
             ? Object.entries(mainState.currentUser.cart).map(([key, value]) => (
                 <div key={key} className="itemWrapper">
@@ -43,12 +64,7 @@ export class Cart extends React.Component {
                   />
                 </div>
               ))
-            : null}
-
-
-
-
-
+            : null} */}
 
 
           {/* {Object.values(storeItems).length
@@ -72,7 +88,7 @@ export class Cart extends React.Component {
           <div className="cartSummary">
             {/* <CartSummary storeItems={storeItems} updateItemPrice={updateItemPrice} /> */}
             <div className="totalCartPrice">
-              {/* Cart Total: <br /> {totalCartPrice(mainState.storeItems)} */}
+              Cart Total: <br /> {totalCartPrice(mainState.currentUser.cart)}
               <button
                 disabled={mainState.checkoutDisabled}
                 className="checkoutButton"
