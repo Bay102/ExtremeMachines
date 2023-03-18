@@ -33,9 +33,10 @@ export class ProductsService {
              id: item.id,
              title: item.name,
              imageUrl: item.image.url,
-             quantity: item.inventory.available,
+             availQuantity: item.inventory.available,
              price: item.price.formatted_with_symbol,
              description: item.description,
+             quantity: 1,
            }));
 
           //  console.log(wantedProductInfo);

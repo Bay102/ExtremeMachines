@@ -130,7 +130,7 @@ class Shipping extends React.Component {
             <div className="shippingSummaryContainer">
               <h3 className="summaryTitle">Summary</h3>
               <div className="itemPrices">
-                <CartSummary storeItems={storeItems} updateItemPrice={updateItemPrice} />
+                <CartSummary mainState={mainState} storeItems={storeItems} updateItemPrice={updateItemPrice} />
               </div>
               <div className="summaryBox">
                 <h4><u>Shipping Method</u></h4>
