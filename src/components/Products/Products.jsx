@@ -58,40 +58,20 @@ class Products extends React.Component {
                     addToUserCart={this.props.addToUserCart}
                   />
                 ))
-              : 
-              
-             mainState.filteredItems.map((item) => (
+              : mainState.filteredItems.map((item) => (
                   <ItemCard
                     key={item.id}
                     mainState={mainState}
                     data={item}
                     addToUserCart={this.props.addToUserCart}
                   />
-                ))
-              
-              
-              }
-
-
+                ))}
 
             {loading ? (
               <div className="loading">
                 <FontAwesomeIcon icon={faSpinner} /> Loading Awesome Machines...
               </div>
             ) : null}
-
-{/* 
-            {!loading && mainState.filteredItems.length
-              ? mainState.filteredItems.map((item) => (
-                  <ItemCard
-                    key={item.id}
-                    mainState={mainState}
-                    data={item}
-                    addToUserCart={this.props.addToUserCart}
-                  />
-                ))
-              : null} */}
-
             {error && <h3>Error Loading Data</h3>}
           </div>
         </div>

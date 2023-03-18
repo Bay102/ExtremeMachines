@@ -1,5 +1,5 @@
 .filterNav {
-   position: absolute;
+   position: fixed;
    right: 40px;
    color: rgb(245, 243, 240);
    margin: auto;

@@ -86,9 +86,9 @@ export class Cart extends React.Component {
         <div className="continueToCheckout">
           <div className="boxTitle">Cart Summary</div>
           <div className="cartSummary">
-            {/* <CartSummary storeItems={storeItems} updateItemPrice={updateItemPrice} /> */}
+            <CartSummary mainState={this.props.mainState} storeItems={storeItems} updateItemPrice={updateItemPrice} />
             <div className="totalCartPrice">
-              Cart Total: <br /> {totalCartPrice(mainState.currentUser.cart)}
+              {/* Cart Total: <br /> {totalCartPrice(mainState.currentUser.cart)} */}
               <button
                 disabled={mainState.checkoutDisabled}
                 className="checkoutButton"

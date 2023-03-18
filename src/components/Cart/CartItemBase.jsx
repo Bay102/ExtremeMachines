@@ -21,7 +21,8 @@ removeItem,
         name={name}
         id={name}
         value={props.state.storeItems.quantity}
-        onChange={(e) => handleQuantityChange('currentUser', name ,'quantity' , e.target.value)}
+        // need to find index 
+        onChange={(e) => handleQuantityChange(e.target.value, `${name}`)}
          >
         <option value="1">1</option>
         <option value="2">2</option>
