@@ -11,7 +11,7 @@ export class Cart extends React.Component {
 
   continueToShipping = (e) => {
     e.preventDefault();
-    this.props.getSubtotal(this.props.totalCartPrice(this.props.mainState.storeItems));
+    this.props.getSubtotal(this.props.totalCartPrice(this.props.mainState.currentUser.cart));
     this.props.changePage('shipping');
   };
 

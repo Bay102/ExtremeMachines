@@ -67,11 +67,15 @@ class Main extends React.Component {
     this.setState({ storeItems: products });
   };
 
-  addToUserCart = (item) => {
+
+  // ?   Get Help With This
+
+  addToUserCart = (id) => {
     if (this.state.currentUser) {
       const productData = this.state.storeItems.find((product) => {
-        return product.id === item;
+        return product.id === id;
       });
+      console.log(productData);
       this.setState((prev) => ({
         showAdded: true,
         currentUser: {
@@ -85,24 +89,6 @@ class Main extends React.Component {
     } else {
       this.changePage('signIn');
     }
-  };
-
-  handleQuantityChange = (newState, buttonName) => {
-    const cartItemIndex = this.state.currentUser.cart.findIndex((item) => {
-      return item.title === buttonName;
-    });
-    this.setState((prev) => ({
-      currentUser: {
-        ...prev.currentUser,
-        cart: [
-          ...prev.currentUser.cart.slice(0, cartItemIndex),     {
-            ...prev.currentUser.cart[cartItemIndex],
-            quantity: +newState,
-          },
-          ...prev.currentUser.cart.slice(cartItemIndex + 1),
-        ],
-      },
-    }));
   };
 
   removeItemFromCart = (itemName) => {
@@ -120,6 +106,24 @@ class Main extends React.Component {
     }));
   };
 
+handleQuantityChange = (newState, buttonName) => {
+    const cartItemIndex = this.state.currentUser.cart.findIndex((item) => {
+      return item.title === buttonName;
+    });
+    this.setState((prev) => ({
+      currentUser: {
+        ...prev.currentUser,
+        cart: [
+          ...prev.currentUser.cart.slice(0, cartItemIndex),     {
+            ...prev.currentUser.cart[cartItemIndex],
+            quantity: +newState,
+          },
+          ...prev.currentUser.cart.slice(cartItemIndex + 1),
+        ],
+      },
+    }));
+  };
+
   updateItemPrice = (itemPrice, itemQuantity) => {
     const priceString = itemPrice.replace(/[$,]/g, '');
     const doMath = parseInt(priceString) * itemQuantity;
@@ -133,7 +137,6 @@ class Main extends React.Component {
   totalCartPrice = (cart) => {
     let totalPrice = 0;
     for (const item of Object.values(cart)) {
-      console.log(item.price);
       const priceString = item.price.replace(/[$,]/g, '');
       let quantityPrices = parseInt(priceString * item.quantity);
       totalPrice = totalPrice += quantityPrices;
@@ -145,7 +148,6 @@ class Main extends React.Component {
       style: 'currency',
       currency: 'USD',
     });
-    console.log(formattedPrice);
     return formattedPrice;
   };
 
@@ -292,6 +294,7 @@ class Main extends React.Component {
           <BuildRadios changePage={this.changePage} />
           <button onClick={() => this.enableCartButton()} className="navCartIcon">
             <FontAwesomeIcon icon={faCartShopping} />
+            {this.state.currentUser && <div className='count'>{this.state.currentUser.cart.length}</div>}
           </button>
         </div>
         <div className="mainContent">{stateOptions[this.state.displayPage]}</div>

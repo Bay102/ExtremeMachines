@@ -2,7 +2,7 @@ import React from 'react';
 import { ItemCard } from './ItemCard';
 import { ProductsService } from './ProductsServices';
 import './Products.css';
-import { FilterNav } from '../../FilterNav/FilterNav';
+import { FilterNav } from '../FilterNav/FilterNav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 

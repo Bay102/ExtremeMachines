@@ -26,17 +26,20 @@ class Shipping extends React.Component {
 
   enablePayButton = () => {
     const { shippingInfo } = this.state;
-    const hasEmptyField = Object.values(shippingInfo).some(field => field === '');
+    const hasEmptyField = Object.values(shippingInfo).some((field) => field === '');
     this.setState({ disabled: hasEmptyField });
-  }
+  };
 
   handleInputChange = (e) => {
-    this.setState((prevState) => ({
-      shippingInfo: {
-        ...prevState.shippingInfo,
-        [e.target.name]: e.target.value,
-      },
-    }), this.enablePayButton);
+    this.setState(
+      (prevState) => ({
+        shippingInfo: {
+          ...prevState.shippingInfo,
+          [e.target.name]: e.target.value,
+        },
+      }),
+      this.enablePayButton
+    );
   };
 
   handleValidations = (type, value) => {
@@ -101,20 +104,27 @@ class Shipping extends React.Component {
   };
 
   handleSubmit = (e) => {
+    const { changePage, changeCurrentStep, getCartFinalPrice } = this.props;
     e.preventDefault();
     const requiredFieldErrorCheck = this.errorCheck();
     if (!requiredFieldErrorCheck) {
-      this.props.changePage('payments');
-      this.props.changeCurrentStep(2)
-      this.props.getCartFinalPrice(this.props.mainState.storeItems)
+      changePage('payments');
+      changeCurrentStep(2);
+      getCartFinalPrice(this.props.mainState.currentUser.cart);
     }
   };
 
   render() {
-    const { storeItems, updateItemPrice, totalCartPrice, mainState , handleShippingChange} = this.props;
+    const {
+      storeItems,
+      updateItemPrice,
+      totalCartPrice,
+      mainState,
+      handleShippingChange,
+    } = this.props;
     return (
       <div>
-          <ProgressBar mainState={mainState} />
+        <ProgressBar mainState={mainState} />
         <form className="shippingForm" onSubmit={this.handleSubmit} action="">
           <div className="shippingInputsWrapper">
             <div className="shipInputs">
@@ -130,10 +140,16 @@ class Shipping extends React.Component {
             <div className="shippingSummaryContainer">
               <h3 className="summaryTitle">Summary</h3>
               <div className="itemPrices">
-                <CartSummary mainState={mainState} storeItems={storeItems} updateItemPrice={updateItemPrice} />
+                <CartSummary
+                  mainState={mainState}
+                  storeItems={storeItems}
+                  updateItemPrice={updateItemPrice}
+                />
               </div>
               <div className="summaryBox">
-                <h4><u>Shipping Method</u></h4>
+                <h4>
+                  <u>Shipping Method</u>
+                </h4>
                 <div className="shippingRadiosContainer">
                   <label htmlFor="standard">
                     <input
@@ -161,13 +177,15 @@ class Shipping extends React.Component {
               </div>
               <div className="totalAfterShipping">
                 <div>Cart Subtotal: {mainState.cartSubtotal} </div>
-                {/* <div>Final Price: {totalCartPrice(mainState.storeItems)} </div> */}
+                <div>Final Price: {totalCartPrice(mainState.currentUser.cart)} </div>
               </div>
               <div className="summaryButtons">
                 <button className="PayNowButton" onClick={this.backToCart}>
                   Back To Cart
                 </button>
-                <button disabled={this.state.disabled} className="PayNowButton">Pay Now</button>
+                <button disabled={this.state.disabled} className="PayNowButton">
+                  Pay Now
+                </button>
               </div>
             </div>
           </div>

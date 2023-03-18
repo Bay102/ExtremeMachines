@@ -1,6 +1,6 @@
 .filterNav {
    position: fixed;
-   right: 40px;
+   right: 93px;
    color: rgb(245, 243, 240);
    margin: auto;
    text-align: center;
@@ -11,10 +11,10 @@
 }
 
 .filterNav button {
-   border: 1px solid white;
-   background-color: rgba(221, 216, 216, 0.341);
+   border: 1px solid #e77c26;
+   background-color: rgb(50 48 48 / 99%);
    border-radius: 2px;
-   width: 150px;
+   width: 175px;
    text-align: center;
    margin: 10px 0;
    padding: 10px;
