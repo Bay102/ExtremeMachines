@@ -67,11 +67,11 @@ class Products extends React.Component {
                   />
                 ))}
 
-            {loading ? (
+            { loading ? (
               <div className="loading">
                 <FontAwesomeIcon icon={faSpinner} /> Loading Awesome Machines...
               </div>
-            ) : null}
+            ) : null }
             {error && <h3>Error Loading Data</h3>}
           </div>
         </div>

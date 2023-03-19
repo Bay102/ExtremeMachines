@@ -4,7 +4,7 @@ import Shipping from '../Shipping/Shipping';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import './Main.css';
-import logo from '../images/IMG_3565.PNG';
+import logo from '../images/IMG_3589.PNG';
 import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
@@ -75,7 +75,6 @@ class Main extends React.Component {
       const productData = this.state.storeItems.find((product) => {
         return product.id === id;
       });
-      console.log(productData);
       this.setState((prev) => ({
         showAdded: true,
         currentUser: {

@@ -1,6 +1,6 @@
 .productsContainer {
   width: 80%;
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .itemsWrapper {
@@ -21,7 +21,7 @@
   border: 2px solid black;
   border-radius: 8px;
   padding: 10px;
-  width: 90%;
+  width: 100%;
 }
 
 .itemImg {
@@ -46,6 +46,7 @@
 .itemDescription {
   width: 80%;
   margin: auto;
+  text-align: justify;
 }
 
 .addToCart {

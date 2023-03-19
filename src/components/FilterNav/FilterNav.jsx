@@ -7,6 +7,7 @@ export const FilterNav = ({ filterNav }) => {
     <>
       <div className="filterNav">
         <ul>
+          <input placeholder='Search...' type="text" />
           {navItems.map((item, index) => (
             <li key={index}>
               {' '}

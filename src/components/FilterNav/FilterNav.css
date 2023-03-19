@@ -1,6 +1,6 @@
 .filterNav {
    position: fixed;
-   right: 93px;
+   right: 30px;
    color: rgb(245, 243, 240);
    margin: auto;
    text-align: center;
@@ -8,6 +8,12 @@
 
 .filterNav ul {
    list-style: none;
+}
+
+.filterNav input {
+   width: 160px;
+   height: 25px;
+   padding: 2px 5px;
 }
 
 .filterNav button {
