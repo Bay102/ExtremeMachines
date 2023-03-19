@@ -15,6 +15,7 @@ export const ItemCard = ({ data, addToUserCart, mainState }) => {
         <h3 className="productTitle">{title}</h3>
         <div className="itemPrice">Starting at: {price}</div>
         <div className="itemDescription">{description.replace(/(<([^>]+)>)/gi, '')}</div>
+
         <button onClick={() => addToUserCart(id)} id={id} className="addToCart">
           <FontAwesomeIcon icon={faCartPlus} />
         </button>

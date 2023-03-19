@@ -20,6 +20,8 @@ class Main extends React.Component {
     users: allUsers,
     storeItems: [],
     filteredItems: [],
+    userSearch: '',
+    userSearchFiltered: [],
     cartSubtotal: '',
     showAdded: false,
     shippingOption: 'standard',
@@ -46,6 +48,17 @@ class Main extends React.Component {
     }
   };
 
+  updateUserSearch = (userQuery) => {
+    this.setState({ userSearch: userQuery });
+  };
+
+  handleUserSearch = (query) => {
+    console.log(query);
+    console.log(this.state.storeItems.filter((item) => item.title.includes(query)));
+    const filteredItems =  this.state.storeItems.filter((item) => item.title.includes(query))
+    this.setState({ userSearchFiltered : filteredItems})
+  };
+
   filterNav = (value) => {
     const filteredItems = this.state.storeItems.filter((items) => {
       return items.category[0].name === value;
@@ -66,7 +79,6 @@ class Main extends React.Component {
   setStoreItems = (products) => {
     this.setState({ storeItems: products });
   };
-
 
   // ?   Get Help With This
 
@@ -105,7 +117,7 @@ class Main extends React.Component {
     }));
   };
 
-handleQuantityChange = (newState, buttonName) => {
+  handleQuantityChange = (newState, buttonName) => {
     const cartItemIndex = this.state.currentUser.cart.findIndex((item) => {
       return item.title === buttonName;
     });
@@ -113,7 +125,8 @@ handleQuantityChange = (newState, buttonName) => {
       currentUser: {
         ...prev.currentUser,
         cart: [
-          ...prev.currentUser.cart.slice(0, cartItemIndex),     {
+          ...prev.currentUser.cart.slice(0, cartItemIndex),
+          {
             ...prev.currentUser.cart[cartItemIndex],
             quantity: +newState,
           },
@@ -239,6 +252,8 @@ handleQuantityChange = (newState, buttonName) => {
           addToUserCart={this.addToUserCart}
           changePage={this.changePage}
           setStoreItems={this.setStoreItems}
+          updateUserSearch={this.updateUserSearch}
+          handleUserSearch={this.handleUserSearch}
         />
       ),
       cart: (
@@ -293,7 +308,9 @@ handleQuantityChange = (newState, buttonName) => {
           <BuildRadios changePage={this.changePage} />
           <button onClick={() => this.enableCartButton()} className="navCartIcon">
             <FontAwesomeIcon icon={faCartShopping} />
-            {this.state.currentUser && <div className='count'>{this.state.currentUser.cart.length}</div>}
+            {this.state.currentUser && (
+              <div className="count">{this.state.currentUser.cart.length}</div>
+            )}
           </button>
         </div>
         <div className="mainContent">{stateOptions[this.state.displayPage]}</div>

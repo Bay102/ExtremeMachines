@@ -42,36 +42,35 @@ class Products extends React.Component {
 
   render() {
     const { data, loading, error } = this.state;
-    const { mainState, filterNav } = this.props;
+    const { mainState, filterNav, updateUserSearch , handleUserSearch} = this.props;
+
+    const renderItems = (items) => {
+      return items.map((item) => (
+        <ItemCard
+          key={item.id}
+          mainState={mainState}
+          data={item}
+          addToUserCart={this.props.addToUserCart}
+        />
+      ));
+    };
 
     return (
       <div className="products">
-        <FilterNav mainState={mainState} filterNav={filterNav} />
+        <FilterNav mainState={mainState} updateUserSearch={updateUserSearch} handleUserSearch={handleUserSearch} filterNav={filterNav} />
         <div className="productsContainer">
           <div className="itemsWrapper">
-            {!loading && !mainState.filteredItems.length
-              ? data.map((item) => (
-                  <ItemCard
-                    key={item.id}
-                    mainState={mainState}
-                    data={item}
-                    addToUserCart={this.props.addToUserCart}
-                  />
-                ))
-              : mainState.filteredItems.map((item) => (
-                  <ItemCard
-                    key={item.id}
-                    mainState={mainState}
-                    data={item}
-                    addToUserCart={this.props.addToUserCart}
-                  />
-                ))}
+            {!loading && !mainState.filteredItems.length && !mainState.userSearch
+              ? renderItems(data)
+              : renderItems(mainState.filteredItems)}
 
-            { loading ? (
+              {mainState.userSearch && renderItems(mainState.userSearchFiltered)}
+
+            {loading ? (
               <div className="loading">
                 <FontAwesomeIcon icon={faSpinner} /> Loading Awesome Machines...
               </div>
-            ) : null }
+            ) : null}
             {error && <h3>Error Loading Data</h3>}
           </div>
         </div>
