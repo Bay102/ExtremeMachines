@@ -53,10 +53,10 @@ class Main extends React.Component {
   };
 
   handleUserSearch = (query) => {
-    console.log(query);
-    console.log(this.state.storeItems.filter((item) => item.title.includes(query)));
-    const filteredItems =  this.state.storeItems.filter((item) => item.title.includes(query))
-    this.setState({ userSearchFiltered : filteredItems})
+    const filteredItems = this.state.storeItems.filter((item) =>
+      item.title.includes(query.toUpperCase())
+    );
+    this.setState({ userSearchFiltered: filteredItems });
   };
 
   filterNav = (value) => {
@@ -80,26 +80,38 @@ class Main extends React.Component {
     this.setState({ storeItems: products });
   };
 
-  // ?   Get Help With This
+  handleQuantityChange = (value, buttonId) => {
+    this.setState((prev) => ({
+      currentUser: {
+        ...prev.currentUser,
+        cart: prev.currentUser.cart.map((item) =>
+          item.id === buttonId ? { ...item, quantity: +value } : item
+        ),
+      },
+    }));
+  };
+
+  checkIfAlreadyInCart = (id) => {
+    return this.state.currentUser?.cart.some((item) => item.id === id);
+  };
 
   addToUserCart = (id) => {
-    if (this.state.currentUser) {
-      const productData = this.state.storeItems.find((product) => {
-        return product.id === id;
-      });
-      this.setState((prev) => ({
-        showAdded: true,
-        currentUser: {
-          ...prev.currentUser,
-          cart: [...prev.currentUser.cart, productData],
-        },
-      }));
-      setTimeout(() => {
-        this.setState({ showAdded: false });
-      }, 2000);
-    } else {
-      this.changePage('signIn');
+    if (this.checkIfAlreadyInCart(id)) {
+      return;
+    } else if (!this.state.currentUser) {
+      return this.changePage('signIn');
     }
+    const productData = this.state.storeItems.find((product) => product.id === id);
+    this.setState((prevState) => ({
+      currentUser: {
+        ...prevState.currentUser,
+        cart: [...prevState.currentUser.cart, productData],
+      },
+      showAdded: true,
+    }));
+    setTimeout(() => {
+      this.setState({ showAdded: false });
+    }, 2000);
   };
 
   removeItemFromCart = (itemName) => {
@@ -113,25 +125,6 @@ class Main extends React.Component {
       currentUser: {
         ...prev.currentUser,
         cart: newCart,
-      },
-    }));
-  };
-
-  handleQuantityChange = (newState, buttonName) => {
-    const cartItemIndex = this.state.currentUser.cart.findIndex((item) => {
-      return item.title === buttonName;
-    });
-    this.setState((prev) => ({
-      currentUser: {
-        ...prev.currentUser,
-        cart: [
-          ...prev.currentUser.cart.slice(0, cartItemIndex),
-          {
-            ...prev.currentUser.cart[cartItemIndex],
-            quantity: +newState,
-          },
-          ...prev.currentUser.cart.slice(cartItemIndex + 1),
-        ],
       },
     }));
   };
@@ -168,21 +161,21 @@ class Main extends React.Component {
   };
 
   getCartFinalPrice = (cart) => {
-    let totalPrice = 0;
-    for (const item of Object.values(cart)) {
+    const totalPrice = Object.values(cart).reduce((acc, item) => {
       const priceString = item.price.replace(/[$,]/g, '');
-      let quantityPrices = parseInt(priceString * item.quantity);
-      totalPrice = totalPrice += quantityPrices;
-    }
-    let formattedPrice;
-    if (this.state.shippingOption === 'express') {
-      formattedPrice = totalPrice + 1500;
-    } else formattedPrice = totalPrice;
-    const addSymbols = formattedPrice.toLocaleString('en-US', {
+      const quantityPrices = parseInt(priceString * item.quantity);
+      return acc + quantityPrices;
+    }, 0);
+
+    const shippingCost = this.state.shippingOption === 'express' ? 1500 : 0;
+    const totalPriceWithShipping = totalPrice + shippingCost;
+
+    const formattedPrice = totalPriceWithShipping.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
     });
-    this.setState({ cartFinalPrice: addSymbols });
+
+    this.setState({ cartFinalPrice: formattedPrice });
   };
 
   enableCheckout = () => {

@@ -38,6 +38,7 @@ export class Cart extends React.Component {
                     price={item.price}
                     image={item.imageUrl}
                     removeItem={removeItem}
+                    id={item.id}
                   />
                 </div>
               ))

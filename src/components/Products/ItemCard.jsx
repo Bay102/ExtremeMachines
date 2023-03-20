@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus, faPlus } from '@fortawesome/free-solid-svg-icons';
+
 
 export const ItemCard = ({ data, addToUserCart, mainState }) => {
   const { category, id, title, imageUrl, quantity, price, description } = data;

@@ -42,7 +42,7 @@ class Products extends React.Component {
 
   render() {
     const { data, loading, error } = this.state;
-    const { mainState, filterNav, updateUserSearch , handleUserSearch} = this.props;
+    const { mainState, filterNav, updateUserSearch, handleUserSearch, addToUserCart } = this.props;
 
     const renderItems = (items) => {
       return items.map((item) => (
@@ -50,21 +50,26 @@ class Products extends React.Component {
           key={item.id}
           mainState={mainState}
           data={item}
-          addToUserCart={this.props.addToUserCart}
+          addToUserCart={addToUserCart}
         />
       ));
     };
 
     return (
       <div className="products">
-        <FilterNav mainState={mainState} updateUserSearch={updateUserSearch} handleUserSearch={handleUserSearch} filterNav={filterNav} />
+        <FilterNav
+          mainState={mainState}
+          updateUserSearch={updateUserSearch}
+          handleUserSearch={handleUserSearch}
+          filterNav={filterNav}
+        />
         <div className="productsContainer">
           <div className="itemsWrapper">
             {!loading && !mainState.filteredItems.length && !mainState.userSearch
               ? renderItems(data)
               : renderItems(mainState.filteredItems)}
 
-              {mainState.userSearch && renderItems(mainState.userSearchFiltered)}
+            {mainState.userSearch && renderItems(mainState.userSearchFiltered)}
 
             {loading ? (
               <div className="loading">
