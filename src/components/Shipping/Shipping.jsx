@@ -121,6 +121,8 @@ class Shipping extends React.Component {
       totalCartPrice,
       mainState,
       handleShippingChange,
+      removeItem,
+      handleQuantityChange
     } = this.props;
     return (
       <div>
@@ -144,6 +146,8 @@ class Shipping extends React.Component {
                   mainState={mainState}
                   storeItems={storeItems}
                   updateItemPrice={updateItemPrice}
+                  handleQuantityChange={handleQuantityChange}
+                  removeItem={removeItem}
                 />
               </div>
               <div className="summaryBox">

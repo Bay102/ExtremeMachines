@@ -269,7 +269,9 @@ class Main extends React.Component {
           storeItems={this.state.storeItems}
           updatePriceAfterShipping={this.updatePriceAfterShipping}
           updateItemPrice={this.updateItemPrice}
+          handleQuantityChange={this.handleQuantityChange}
           totalCartPrice={this.totalCartPrice}
+          removeItem={this.removeItemFromCart}
           handleShippingChange={this.handleShippingChange}
           changeCurrentStep={this.changeCurrentStep}
           getCartFinalPrice={this.getCartFinalPrice}
@@ -297,38 +299,25 @@ class Main extends React.Component {
       <div>
         <div className="headerWrapper">
           <img style={{ width: '80px' }} src={logo} alt="" />
-          <button
-            className="navIcon"
-            type="button"
-            onClick={() => this.changePage('signIn')}
-          >
+          <button className="navIcon" type="button" onClick={() => this.changePage('signIn')}>
             Log In
           </button>
-          <button
-            className="navIcon"
-            type="button"
-            onClick={() => this.changePage('createAccount')}
-          >
+          <button className="navIcon" type="button" onClick={() => this.changePage('createAccount')}>
             Sign Up
           </button>
-          <button
-            className="navIcon"
-            type="button"
-            onClick={() => this.changePage('store')}
-          >
+          <button className="navIcon" type="button" onClick={() => this.changePage('store')}>
             <FontAwesomeIcon icon={faHouse} />
           </button>
-          {/* <BuildRadios changePage={this.changePage} /> */}
           <button onClick={() => this.enableCartButton()} className="navIcon">
             <FontAwesomeIcon icon={faCartShopping} />
-            {this.state.currentUser && (
-              <div className="count">{this.state.currentUser.cart.length}</div>
-            )}
+            {this.state.currentUser?.cart?.length > 0 && <div className="count">{this.state.currentUser.cart.length}</div>}
           </button>
         </div>
-        <div className="mainContent">{stateOptions[this.state.displayPage]}</div>
+        <div className="mainContent">
+          {stateOptions[this.state.displayPage]}
+        </div>
       </div>
-    );
+    );  
   }
 }
 

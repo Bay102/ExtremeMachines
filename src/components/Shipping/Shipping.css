@@ -28,7 +28,7 @@
    font-size: 12px;
    display: flex;
    flex-direction: column;
-   width: 250px;
+   width: max-content;
    height: max-content;
    justify-content: center;
    border-radius: 10px;
@@ -45,11 +45,6 @@
    text-align: center;
    margin: auto;   
    font-size: 18px;
-}
-
-.summaryWrapper {
-   width: 160px;
-   margin: auto;
 }
 
 

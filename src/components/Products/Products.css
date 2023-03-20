@@ -17,21 +17,24 @@
 
 .itemPrice {
   margin: 15px auto;
-  color: #e77b25;
+  /* color: #e77b25; */
   font-weight: 600;
 }
 
 .cardContainer {
   display: flex;
+  align-items: center;
   text-align: center;
   border: 1px solid #e77c26;
   border-radius: 10px;
   width: 100%;
+  border-color: #e77c26;
+  background-color: #939393d6;
 }
 
 .itemImg {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   border-radius: 35px;
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
@@ -47,7 +50,7 @@
   padding: 20px;
   position: relative;
   margin-left: -30px;
-  background-color: #939393d6;
+  background-color: #d4d4d4e3;
 }
 
 .itemDescription {
@@ -55,6 +58,7 @@
   margin: auto;
   text-align: justify;
   font-weight: 700;
+  font-size: 14px;
 }
 
 .addToCart {

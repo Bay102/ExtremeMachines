@@ -11,7 +11,9 @@ export class Cart extends React.Component {
 
   continueToShipping = (e) => {
     e.preventDefault();
-    this.props.getSubtotal(this.props.totalCartPrice(this.props.mainState.currentUser.cart));
+    this.props.getSubtotal(
+      this.props.totalCartPrice(this.props.mainState.currentUser.cart)
+    );
     this.props.changePage('shipping');
   };
 
@@ -26,28 +28,16 @@ export class Cart extends React.Component {
     return (
       <div>
         <h2 className="cartH2">CART</h2>
-        <div className="cartContainer">
-          {mainState.currentUser.cart.length
-            ? mainState.currentUser.cart.map((item) => (
-                <div key={item.id} className="itemWrapper">
-                  <CartItemBase
-                    state={mainState}
-                    handleQuantityChange={handleQuantityChange}
-                    name={item.title}
-                    quantity={item.quantity}
-                    price={item.price}
-                    image={item.imageUrl}
-                    removeItem={removeItem}
-                    id={item.id}
-                  />
-                </div>
-              ))
-            : null}
-        </div>
         <div className="continueToCheckout">
           <div className="boxTitle">Cart Summary</div>
           <div className="cartSummary">
-            <CartSummary mainState={mainState} updateItemPrice={updateItemPrice} />
+            <CartSummary
+              mainState={mainState}
+              updateItemPrice={updateItemPrice}
+              handleQuantityChange={handleQuantityChange}
+              removeItem={removeItem}
+            />
+          </div>
             <div className="totalCartPrice">
               Cart Total: <br /> {totalCartPrice(mainState.currentUser.cart)}
               <button
@@ -59,7 +49,6 @@ export class Cart extends React.Component {
                 Checkout
               </button>
             </div>
-          </div>
         </div>
       </div>
     );
