@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,13 +13,12 @@ export const ItemCard = ({ data, addToUserCart, mainState }) => {
       </div>
       <div className="right">
         <h3 className="productTitle">{title}</h3>
-        <div className="itemPrice">Starting at: {price}</div>
+        <h3 className="itemPrice">Starting at: {price}</h3>
         <div className="itemDescription">{description.replace(/(<([^>]+)>)/gi, '')}</div>
 
         <button onClick={() => addToUserCart(id)} id={id} className="addToCart">
-          <FontAwesomeIcon icon={faCartPlus} />
+         {mainState.showAdded === id ? <div className='toCart'>Added to Cart</div>: <FontAwesomeIcon icon={faCartPlus} />}
         </button>
-        {mainState.showAdded && <FontAwesomeIcon icon={faPlus} className="added" />}
       </div>
     </div>
   );

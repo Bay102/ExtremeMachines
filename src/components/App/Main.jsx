@@ -5,13 +5,12 @@ import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import './Main.css';
 import logo from '../images/IMG_3589.PNG';
-import { BuildRadios } from '../HomeScreenButtons/BuildRadios';
 import { allUsers } from '../stateData';
 import Payments from '../Payment/Payments';
 import { Confirmation } from '../Confirmation/Confirmation';
 import Products from '../Products/Products';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faHouse } from '@fortawesome/free-solid-svg-icons';
 
 class Main extends React.Component {
   state = {
@@ -23,7 +22,7 @@ class Main extends React.Component {
     userSearch: '',
     userSearchFiltered: [],
     cartSubtotal: '',
-    showAdded: false,
+    showAdded: '',
     shippingOption: 'standard',
     cartFinalPrice: '',
     cartDisable: true,
@@ -107,11 +106,11 @@ class Main extends React.Component {
         ...prevState.currentUser,
         cart: [...prevState.currentUser.cart, productData],
       },
-      showAdded: true,
+      showAdded: id,
     }));
     setTimeout(() => {
-      this.setState({ showAdded: false });
-    }, 2000);
+      this.setState({ showAdded: '' });
+    }, 1000);
   };
 
   removeItemFromCart = (itemName) => {
@@ -297,9 +296,30 @@ class Main extends React.Component {
     return (
       <div>
         <div className="headerWrapper">
-          <img style={{ width: '100px' }} src={logo} alt="" />
-          <BuildRadios changePage={this.changePage} />
-          <button onClick={() => this.enableCartButton()} className="navCartIcon">
+          <img style={{ width: '80px' }} src={logo} alt="" />
+          <button
+            className="navIcon"
+            type="button"
+            onClick={() => this.changePage('signIn')}
+          >
+            Log In
+          </button>
+          <button
+            className="navIcon"
+            type="button"
+            onClick={() => this.changePage('createAccount')}
+          >
+            Sign Up
+          </button>
+          <button
+            className="navIcon"
+            type="button"
+            onClick={() => this.changePage('store')}
+          >
+            <FontAwesomeIcon icon={faHouse} />
+          </button>
+          {/* <BuildRadios changePage={this.changePage} /> */}
+          <button onClick={() => this.enableCartButton()} className="navIcon">
             <FontAwesomeIcon icon={faCartShopping} />
             {this.state.currentUser && (
               <div className="count">{this.state.currentUser.cart.length}</div>

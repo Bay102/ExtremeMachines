@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import logo from '../images/IMG_3589.PNG';
 import './FilterNav.css';
 
 export const FilterNav = ({ filterNav, mainState, updateUserSearch, handleUserSearch }) => {
@@ -32,6 +33,7 @@ export const FilterNav = ({ filterNav, mainState, updateUserSearch, handleUserSe
             </li>
           ))}
         </ul>
+          {/* <img src={logo}  width='125px' alt="" /> */}
       </div>
     </>
   );

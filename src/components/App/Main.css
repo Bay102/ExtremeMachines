@@ -46,14 +46,15 @@ h2 {
   margin-right: auto;
 }
 
-.navCartIcon {
+.navIcon {
   margin-right: 10px; 
   height: 45px;
-  width: 45px; 
+  width: 50px; 
   border-radius: 10px;
+  font-family: copperplate;
 }
 
-.navCartIcon:hover {
+.navIcon:hover {
   background-color: lightblue;
 }
 
