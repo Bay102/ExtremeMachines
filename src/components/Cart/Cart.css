@@ -96,12 +96,13 @@ align-items: baseline;
    flex-direction: column;
    justify-content: space-around;
    font-weight: 500;
-   background-color: red;
    border: 1px inset black;
    border-radius: 7px;
    padding: 5px 10px;
    color: white;
    margin: auto;
+   align-items: center;
+   background-color: black;
 
 }
 

@@ -7,7 +7,6 @@ body {
 .count {
   position: absolute;
   top: 30px;
-  right: 15px;
  }
 
 ::-webkit-scrollbar {

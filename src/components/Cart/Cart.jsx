@@ -1,6 +1,5 @@
 import React from 'react';
 import './Cart.css';
-import { CartItemBase } from './CartItemBase';
 import { CartSummary } from './CartSummary';
 
 export class Cart extends React.Component {

@@ -52,16 +52,20 @@ class Main extends React.Component {
   };
 
   handleUserSearch = (query) => {
-    const filteredItems = this.state.storeItems.filter((item) =>
-      item.title.includes(query.toUpperCase())
+    const filteredProducts = this.state.storeItems.filter((item) =>
+      item.title.toLowerCase().includes(query.toLowerCase())
     );
-    this.setState({ userSearchFiltered: filteredItems });
+    console.log(filteredProducts);
+
+    this.setState({ filteredItems: filteredProducts });
   };
 
-  filterNav = (value) => {
+  filterNavCategory = (value) => {
     const filteredItems = this.state.storeItems.filter((items) => {
+      console.log(items.category[0].name === value);
       return items.category[0].name === value;
     });
+    console.log(filteredItems);
     this.setState({
       filteredItems: filteredItems,
     });
@@ -240,7 +244,7 @@ class Main extends React.Component {
       store: (
         <Products
           mainState={this.state}
-          filterNav={this.filterNav}
+          filterNavCategory={this.filterNavCategory}
           addToUserCart={this.addToUserCart}
           changePage={this.changePage}
           setStoreItems={this.setStoreItems}
@@ -299,25 +303,37 @@ class Main extends React.Component {
       <div>
         <div className="headerWrapper">
           <img style={{ width: '80px' }} src={logo} alt="" />
-          <button className="navIcon" type="button" onClick={() => this.changePage('store')}>
+          <button
+            className="navIcon"
+            type="button"
+            onClick={() => this.changePage('store')}
+          >
             <FontAwesomeIcon icon={faHouse} />
           </button>
           <button onClick={() => this.enableCartButton()} className="navIcon">
             <FontAwesomeIcon icon={faCartShopping} />
-            {this.state.currentUser?.cart?.length > 0 && <div className="count">{this.state.currentUser.cart.length}</div>}
+            {this.state.currentUser?.cart?.length > 0 && (
+              <div className="count">{this.state.currentUser.cart.length}</div>
+            )}
           </button>
-          <button className="navIcon" type="button" onClick={() => this.changePage('signIn')}>
+          <button
+            className="navIcon"
+            type="button"
+            onClick={() => this.changePage('signIn')}
+          >
             Log In
           </button>
-          <button className="navIcon" type="button" onClick={() => this.changePage('createAccount')}>
+          <button
+            className="navIcon"
+            type="button"
+            onClick={() => this.changePage('createAccount')}
+          >
             Sign Up
           </button>
         </div>
-        <div className="mainContent">
-          {stateOptions[this.state.displayPage]}
-        </div>
+        <div className="mainContent">{stateOptions[this.state.displayPage]}</div>
       </div>
-    );  
+    );
   }
 }
 

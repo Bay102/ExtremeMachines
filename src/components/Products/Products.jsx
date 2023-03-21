@@ -41,10 +41,19 @@ class Products extends React.Component {
   }
 
   render() {
-    const { data, loading, error } = this.state;
-    const { mainState, filterNav, updateUserSearch, handleUserSearch, addToUserCart } = this.props;
+    const { loading, error } = this.state;
+    
+    const {
+      mainState,
+      filterNavCategory,
+      updateUserSearch,
+      handleUserSearch,
+      addToUserCart,
+    } = this.props;
 
-    const renderItems = (items) => {
+    const { filteredItems, storeItems } = mainState;
+
+    const createCards = (items) => {
       return items.map((item) => (
         <ItemCard
           key={item.id}
@@ -61,16 +70,13 @@ class Products extends React.Component {
           mainState={mainState}
           updateUserSearch={updateUserSearch}
           handleUserSearch={handleUserSearch}
-          filterNav={filterNav}
+          filterNavCategory={filterNavCategory}
         />
         <div className="productsContainer">
           <div className="itemsWrapper">
-            {!loading && !mainState.filteredItems.length && !mainState.userSearch
-              ? renderItems(data)
-              : renderItems(mainState.filteredItems)}
-
-            {mainState.userSearch && renderItems(mainState.userSearchFiltered)}
-
+            {!loading && !filteredItems.length
+              ? createCards(storeItems)
+              : createCards(filteredItems)}
             {loading ? (
               <div className="loading">
                 <FontAwesomeIcon icon={faSpinner} /> Loading Awesome Machines...
