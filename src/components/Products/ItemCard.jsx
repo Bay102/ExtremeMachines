@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 export const ItemCard = ({ data, addToUserCart, mainState }) => {
-  const { category, id, title, imageUrl, quantity, price, description } = data;
+  const { id, title, imageUrl, price, description } = data;
 
   return (
     <div className="cardContainer">

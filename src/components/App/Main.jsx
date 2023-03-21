@@ -26,7 +26,7 @@ class Main extends React.Component {
     shippingOption: 'standard',
     cartFinalPrice: '',
     cartDisable: true,
-    checkoutDisabled: false,
+    checkoutDisabled: true,
     currentStep: 1,
     promoCode: 'devslopes',
     promoSuccess: false,
@@ -42,9 +42,8 @@ class Main extends React.Component {
     const isNotLoggedIn = this.state.currentUser === undefined;
     if (isNotLoggedIn) {
       this.changePage('signIn');
-    } else if (!isNotLoggedIn) {
+    } else 
       this.changePage('cart');
-    }
   };
 
   updateUserSearch = (userQuery) => {
@@ -115,6 +114,7 @@ class Main extends React.Component {
     setTimeout(() => {
       this.setState({ showAdded: '' });
     }, 1000);
+    this.enableCheckout()
   };
 
   removeItemFromCart = (itemName) => {
@@ -130,6 +130,7 @@ class Main extends React.Component {
         cart: newCart,
       },
     }));
+    this.enableCheckout();
   };
 
   updateItemPrice = (itemPrice, itemQuantity) => {
@@ -169,10 +170,8 @@ class Main extends React.Component {
       const quantityPrices = parseInt(priceString * item.quantity);
       return acc + quantityPrices;
     }, 0);
-
     const shippingCost = this.state.shippingOption === 'express' ? 1500 : 0;
     const totalPriceWithShipping = totalPrice + shippingCost;
-
     const formattedPrice = totalPriceWithShipping.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -182,9 +181,9 @@ class Main extends React.Component {
   };
 
   enableCheckout = () => {
-    if (this.state.currentUser.cart.length <= 1) {
-      this.setState({ checkoutDisabled: true });
-    }
+    if (this.state.currentUser?.cart) {
+      this.setState({ checkoutDisabled: false });
+    } else this.setState({ checkoutDisabled: true })
   };
 
   handleShippingChange = (event) => {

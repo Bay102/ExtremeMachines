@@ -45,7 +45,7 @@
 }
 
 .continueToCheckout {
-   width: max-content;
+   width: 90%;
    margin: 20px auto;
    padding: 0px 15px;
    border: 3px solid rgba(255, 132, 31, 0.876);
@@ -73,9 +73,12 @@
 }
 
 .cartSummary {
-   /* display: flex; */
-   gap: 20px;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
    margin-bottom: 10px;
+   align-items: center;
+   justify-content: space-evenly;
 }
 
 .checkoutButton {
@@ -99,6 +102,7 @@ align-items: baseline;
    border: 1px inset black;
    border-radius: 7px;
    padding: 5px 10px;
+   width: 200px;
    color: white;
    margin: auto;
    align-items: center;
@@ -112,7 +116,7 @@ align-items: baseline;
    border-radius: 7px;
    padding: 5px 10px;
    width: 410px;
-   height: max-content;
+   height: fit-content;
    background-color: #e4e4e4;
    align-items: center;
    justify-content: space-between;

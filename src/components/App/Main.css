@@ -6,7 +6,7 @@ body {
 
 .count {
   position: absolute;
-  top: 30px;
+  top: 25px;
  }
 
 ::-webkit-scrollbar {
@@ -46,9 +46,9 @@ h2 {
 }
 
 .navIcon {
-  margin-right: 5px; 
-  height: 45px;
-  width: 50px; 
+  margin-right: 5px;
+  height: 30px;
+  width: 70px;
   border-radius: 10px;
   font-family: copperplate;
 }

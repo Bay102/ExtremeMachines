@@ -20,7 +20,7 @@ export const CartSummary = ({
           </button>
           <div className="imageTitle">
             <div>{item.title}</div>
-            <img style={{ width: '100px' }} src={item.imageUrl} alt="" />
+            <img style={{ width: '80px' }} src={item.imageUrl} alt="" />
           </div>
           <div className="quantityAndSelect">
             <div className="summaryItemQuantity">
