@@ -20,7 +20,7 @@ h2 {
 .headerWrapper {
   display: flex;
   position: fixed;
-  width: 100%;
+  width: 100vw;
   align-items: center;
   text-align: center;
   z-index: 10;
@@ -65,4 +65,6 @@ h2 {
   overflow-y: auto;
 }
 
+@media screen and (max-width: 600px) {
 
+}
