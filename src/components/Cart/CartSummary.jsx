@@ -12,6 +12,7 @@ export const CartSummary = ({
     ? mainState.currentUser.cart.map((item, index) => (
         <div key={index} className="summaryWrapper">
           <button
+            type="button"
             id={item.name}
             onClick={() => removeItem(item.title)}
             className="removeFromCart"

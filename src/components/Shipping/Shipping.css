@@ -37,7 +37,6 @@
    background: whitesmoke;
 }
 
-
 .summaryTitle {
    color: black;
    width: 125px;
@@ -46,7 +45,6 @@
    margin: auto;   
    font-size: 18px;
 }
-
 
 .PayNowButton { 
    width: max-content;
@@ -68,6 +66,7 @@
    display: flex;
    height: 50px;
    text-align: left;
+   gap: 10px;
 }
 
 .totalAfterShipping div {

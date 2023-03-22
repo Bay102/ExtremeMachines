@@ -104,8 +104,8 @@ class Shipping extends React.Component {
   };
 
   handleSubmit = (e) => {
-    const { changePage, changeCurrentStep, getCartFinalPrice } = this.props;
     e.preventDefault();
+    const { changePage, changeCurrentStep, getCartFinalPrice } = this.props;
     const requiredFieldErrorCheck = this.errorCheck();
     if (!requiredFieldErrorCheck) {
       changePage('payments');

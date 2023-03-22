@@ -11,7 +11,7 @@ const products = new ProductsService();
 class Products extends React.Component {
   state = {
     data: [],
-    loading: false, //!!! ALWAYS NEED A VISUAL TO DISPLAY TO USER EITHER LOADING OR ERROR !!!! //
+    loading: false,
     error: false,
   };
 
